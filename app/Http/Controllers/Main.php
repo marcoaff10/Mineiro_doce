@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 class Main extends Controller
 {
+    //=========================================================================================================
+    // Autenticação
+    //=========================================================================================================
     public function login()
     {
 
@@ -13,9 +16,21 @@ class Main extends Controller
         return view('auth.login');
     }
 
+    //=========================================================================================================
+    // Dashbord
+    //=========================================================================================================
     public function dashboard()
     {
 
-        return view('dashboard');
+        return view('auth.dashboard.home');
+    }
+
+    //============================================ Compras ====================================================
+    public function compras()
+    {
+
+
+
+        return view('auth.dashboard.compras.visao_geral');
     }
 }
