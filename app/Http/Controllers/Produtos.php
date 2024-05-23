@@ -4,25 +4,25 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Main extends Controller
+class Produtos extends Controller
 {
     //=========================================================================================================
-    // Autenticação
+    // Produtos
     //=========================================================================================================
-    public function login()
+    public function show()
     {
 
 
-        return view('auth.login');
+
+        return view('auth.dashboard.produdos.show_produto');
     }
 
     //=========================================================================================================
-    // Dashbord
-    //=========================================================================================================
-    public function dashboard()
+    public function create()
     {
 
-        return view('auth.dashboard.home');
-    }
+        
 
+        return view('auth.dashboard.produdos.create_produtos');
+    }
 }

@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\Compras;
 use App\Http\Controllers\Main;
+use App\Http\Controllers\Pedidos;
+use App\Http\Controllers\Produtos;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,8 +13,18 @@ Route::middleware('auth')->group(function () {
 
     // dashbord
     Route::get('/dashboard', [Main::class, 'dashboard'])->name('dashboard');
+
     // Compras
-    Route::get('/compras', [Main::class, 'compras'])->name('compras');
+    Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
+    Route::get('/create_compras', [Compras::class, 'create'])->name('create.compras');
+
+    // Pedidos
+    Route::get('/show_pedidos', [Pedidos::class, 'show'])->name('show.pedidos');
+    Route::get('/create_pedidos', [Pedidos::class, 'create'])->name('create.pedidos');
+
+    // Produtos
+    Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
+    Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -19,4 +32,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
