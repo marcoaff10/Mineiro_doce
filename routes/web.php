@@ -7,12 +7,11 @@ use App\Http\Controllers\Produtos;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [Main::class, 'login'])->name('auth.login');
 
 Route::middleware('auth')->group(function () {
 
     // dashbord
-    Route::get('/dashboard', [Main::class, 'dashboard'])->name('dashboard');
+    Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
@@ -25,6 +24,7 @@ Route::middleware('auth')->group(function () {
     // Produtos
     Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
+    Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

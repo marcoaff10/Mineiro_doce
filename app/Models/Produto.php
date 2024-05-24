@@ -13,8 +13,8 @@ class Produto extends Model
     protected $table = 'produtos';
 
     protected $fillable = [
+        'id_categoria',
         'produto',
-        'peso',
-        'minimo'
+        'peso'
     ];
 }
