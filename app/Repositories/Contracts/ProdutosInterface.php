@@ -8,7 +8,7 @@ use stdClass;
 
 interface ProdutosInterface
 {
-    public function getAll(string $filter = null): array;
+    public function getAll(): array;
     public function findOne(string $id): stdClass|null;
     public function store(CreateProdutos $dto): void;
     public function update(UpdateProdutos $dto): stdClass|null;

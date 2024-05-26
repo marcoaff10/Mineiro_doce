@@ -14,7 +14,7 @@ class Compras extends Controller
 
 
 
-        return view('auth.dashboard.compras.show_compras');
+        return view('dashboard.compras.show_compras');
     }
 
     //=========================================================================================================
@@ -23,6 +23,6 @@ class Compras extends Controller
 
 
 
-        return view('auth.dashboard.compras.create_compras');
+        return view('dashboard.compras.create_compras');
     }
 }

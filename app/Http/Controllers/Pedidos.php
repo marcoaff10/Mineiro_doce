@@ -14,7 +14,7 @@ class Pedidos extends Controller
 
 
 
-        return view('auth.dashboard.pedidos.show_pedidos');
+        return view('dashboard.pedidos.show_pedidos');
     }
 
     //=========================================================================================================
@@ -23,6 +23,6 @@ class Pedidos extends Controller
 
 
 
-        return view('auth.dashboard.pedidos.create_pedidos');
+        return view('dashboard.pedidos.create_pedidos');
     }
 }

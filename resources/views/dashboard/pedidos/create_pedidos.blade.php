@@ -1,4 +1,4 @@
-@extends('auth.dashboard.dashboard')
+@extends('dashboard.dashboard')
 @section('content')
     [Novo Pedido]
 @endsection

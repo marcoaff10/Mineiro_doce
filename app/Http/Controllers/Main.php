@@ -12,7 +12,7 @@ class Main extends Controller
     public function dashboard()
     {
 
-        return view('auth.dashboard.home');
+        return view('dashboard.home');
     }
 
 }

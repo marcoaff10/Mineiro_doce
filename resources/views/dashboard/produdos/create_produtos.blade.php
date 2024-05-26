@@ -1,4 +1,4 @@
-@extends('auth.dashboard.dashboard')
+@extends('dashboard.dashboard')
 @section('content')
     <div class="row justify-content-center align-items-center p-3">
         <div class="col-lg-12 p-2">

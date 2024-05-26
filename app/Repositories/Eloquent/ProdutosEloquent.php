@@ -15,16 +15,12 @@ class ProdutosEloquent implements ProdutosInterface
     }
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function getAll(): array
     {
         // verificando se há filtro para devolver os resultados
-        return $this->model
-            ->where(function ($query) use ($filter) {
-                if ($filter) {
-                    $query->where('produto', 'like', "%$filter%");
-                }
-            })
-            ->get()->toArray();
+        $resultado = $this->model->leftJoin('categorias', 'produtos.id_categoria', '=', 'categorias.id_categoria')->get();
+
+        return $resultado->toArray();
     }
 
     //=====================================================================
@@ -54,8 +50,6 @@ class ProdutosEloquent implements ProdutosInterface
             ]
 
         );
-
-       
     }
 
     //=====================================================================

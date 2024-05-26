@@ -13,9 +13,9 @@ class ProdutoService
     public function __construct(protected ProdutosInterface $produto_interface){}
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function getAll(): array
     {
-        return $this->produto_interface->getAll($filter);
+        return $this->produto_interface->getAll();
     }
 
     //=====================================================================
