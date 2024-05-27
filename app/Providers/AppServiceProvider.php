@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
-use App\Repositories\Contracts\ProdutosInterface;
-use App\Repositories\Eloquent\ProdutosEloquent;
+use App\Repositories\Contracts\Fornecedores\FornecedoresInterface;
+use App\Repositories\Contracts\Produtos\ProdutosInterface;
+use App\Repositories\Eloquent\Fornecedores\FornecedoresEloquent;
+use App\Repositories\Eloquent\Produtos\ProdutosEloquent;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -14,6 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->bind(ProdutosInterface::class, ProdutosEloquent::class);
+        $this->app->bind(FornecedoresInterface::class, FornecedoresEloquent::class);
     }
 
     /**

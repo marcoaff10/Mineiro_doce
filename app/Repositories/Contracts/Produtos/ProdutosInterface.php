@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Contracts;
+namespace App\Repositories\Contracts\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;

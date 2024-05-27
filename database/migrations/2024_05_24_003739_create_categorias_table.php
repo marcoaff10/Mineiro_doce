@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('categorias', function (Blueprint $table) {
-            $table->uuid('id_categoria')->primary()->autoIncrement();
+            $table->id('id_categoria');
             $table->string('categoria');
             $table->timestamps();
             $table->softDeletes();

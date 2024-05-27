@@ -6,7 +6,7 @@ use App\DTO\Produtos\CreateProdutos;
 use App\Http\Requests\RequestProdutos;
 use App\Models\Categoria;
 use App\Models\Produto;
-use App\Services\ProdutoService;
+use App\Services\Produtos\ProdutoService;
 use Illuminate\Http\Request;
 
 class Produtos extends Controller

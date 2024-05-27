@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="mb-3 text-center ">
-                    <a href="" class="btn btn-secondary me-2">Cancelar</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-2">Cadastrar</button>
                 </div>
 

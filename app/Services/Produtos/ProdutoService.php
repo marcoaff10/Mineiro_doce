@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services;
+namespace App\Services\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
-use App\Repositories\Contracts\ProdutosInterface;
+use App\Repositories\Contracts\Produtos\ProdutosInterface;
 use stdClass;
 
 class ProdutoService

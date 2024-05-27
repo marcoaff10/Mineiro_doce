@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Repositories\Eloquent;
+namespace App\Repositories\Eloquent\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
 use App\Models\Produto;
-use App\Repositories\Contracts\ProdutosInterface;
+use App\Repositories\Contracts\Produtos\ProdutosInterface;
 use stdClass;
 
 class ProdutosEloquent implements ProdutosInterface
@@ -17,7 +17,7 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function getAll(): array
     {
-        // verificando se há filtro para devolver os resultados
+
         $resultado = $this->model->leftJoin('categorias', 'produtos.id_categoria', '=', 'categorias.id_categoria')->get();
 
         return $resultado->toArray();
@@ -40,7 +40,7 @@ class ProdutosEloquent implements ProdutosInterface
     public function store(CreateProdutos $dto): void
     {
         // Salvando as informações no banco
-        $produto = $this->model->insert(
+        $this->model->insert(
             [
                 'id_categoria' => $dto->categoria,
                 'produto' => $dto->produto,
@@ -59,7 +59,12 @@ class ProdutosEloquent implements ProdutosInterface
         if (!$produto) return null;
 
         $produto->update(
-            (array) $dto
+            [
+                'id_categoria' => $dto->categoria,
+                'produto' => $dto->produto,
+                'peso' => $dto->peso,
+                'updated_at' => date('Y-m-d H:i:s')
+            ]
         );
 
         return (object) $produto->toArray();
