@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categorias', function (Blueprint $table) {
-            $table->uuid('id_categoria')->primary()->autoIncrement();
-            $table->string('categoria');
+        Schema::create('entradas', function (Blueprint $table) {
+            $table->uuid('id_entrada')->primary();
+            $table->dateTime('data_pedido');
+            $table->dateTime('data_entrada');
+            $table->float('total');
+            $table->float('frete');
             $table->timestamps();
-            $table->softDeletes();
+
         });
     }
 
@@ -24,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categorias');
+        Schema::dropIfExists('entradas');
     }
 };

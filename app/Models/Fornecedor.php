@@ -15,5 +15,10 @@ class Fornecedor extends Model
         'email',
         'cnpj',
         'telefone',
+        'cidade',
+        'cep',
+        'endereco',
+        'bairro',
+        'num'
     ];
 }

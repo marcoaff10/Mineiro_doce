@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Compras;
+use App\Http\Controllers\Fornecedores;
 use App\Http\Controllers\Main;
 use App\Http\Controllers\Pedidos;
 use App\Http\Controllers\Produtos;
@@ -12,6 +13,10 @@ Route::middleware('auth')->group(function () {
 
     // dashbord
     Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
+
+    // Fornecedores
+    Route::get('/show_fornecedores', [Fornecedores::class, 'show'])->name('show.fornecedores');
+    Route::get('/create_fornecedores', [Fornecedores::class, 'create'])->name('create.fornecedores');
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
@@ -25,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
+
+
 
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

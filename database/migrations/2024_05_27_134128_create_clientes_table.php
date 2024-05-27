@@ -11,10 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fornecedores', function (Blueprint $table) {
-            $table->uuid('id_fornecedor')->primary()->autoIncrement();
-            $table->string('fornecedor');
-            $table->string('email');
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->uuid('id_cliente')->primary();
+            $table->string('cliente');
             $table->string('cnpj')->unique();
             $table->string('telefone');
             $table->string('cidade');
@@ -23,7 +22,6 @@ return new class extends Migration
             $table->string('bairro');
             $table->integer('num');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fornecedores');
+        Schema::dropIfExists('clientes');
     }
 };

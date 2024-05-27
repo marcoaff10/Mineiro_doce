@@ -12,14 +12,18 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id('id_produto')->primary();
-            $table->unsignedBigInteger('id_categoria');
-            $table->uuid('produto');
+            $table->uuid('id_produto')->primary();
+            $table->uuid('id_categoria');
+            $table->uuid('id_fornecedor');
+            $table->string('produto');
             $table->float('peso');
+            $table->boolean('controlado');
+            $table->integer('minimo');
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('id_categoria')->references('id_categoria')->on('categorias')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('id_fornecedor')->references('id_fornecedor')->on('fornecedores')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
