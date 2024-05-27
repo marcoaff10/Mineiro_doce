@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CnpjController;
 use App\Http\Controllers\Compras;
 use App\Http\Controllers\Fornecedores;
 use App\Http\Controllers\Main;
@@ -17,6 +18,8 @@ Route::middleware('auth')->group(function () {
     // Fornecedores
     Route::get('/show_fornecedores', [Fornecedores::class, 'show'])->name('show.fornecedores');
     Route::get('/create_fornecedores', [Fornecedores::class, 'create'])->name('create.fornecedores');
+
+    
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');

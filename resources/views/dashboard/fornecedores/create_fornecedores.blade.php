@@ -8,7 +8,18 @@
 
                 <div class="mb-4 d-lg-flex justify-content-between">
 
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3" id="div_cnpj">
+                        <label for="cnpj" class="form-label">CNPJ</label>
+                        <input type="text" name="cnpj" id="cnpj" class="form-control" placeholder="CNPJ..."
+                            value="{{ old('cnpj') }}">
+                        @error('cnpj')
+                            <div class=" text-danger alert-danger mt-2">
+                                {{ $errors->get('cnpj')[0] }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
                         <label for="fornecedor" class="form-label">Fornecedor</label>
                         <input type="text" name="fornecedor" id="fornecedor" class="form-control"
                             placeholder="Fornecedor..." value="{{ old('fornecedor') }}">
@@ -19,7 +30,23 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
+
+
+                </div>
+
+                <div class="mb-4 d-lg-flex justify-content-between">
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
+                        <label for="telefone" class="form-label">Telefone</label>
+                        <input type="number" name="telefone" id="telefone" class="form-control" placeholder="Telefone..."
+                            value="{{ old('telefone') }}">
+                        @error('telefone')
+                            <div class=" text-danger alert-danger mt-2">
+                                {{ $errors->get('telefone')[0] }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="text" name="email" id="email" class="form-control" placeholder="Email..."
                             value="{{ old('email') }}">
@@ -36,35 +63,18 @@
 
                 <div class="mb-4 d-lg-flex justify-content-between">
 
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
-                        <label for="cnpj" class="form-label">CNPJ</label>
-                        <input type="number" name="cnpj" id="cnpj" class="form-control" placeholder="CNPJ..."
-                            value="{{ old('cnpj') }}">
-                        @error('cnpj')
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
+                        <label for="cep" class="form-label">CEP</label>
+                        <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP..."
+                            value="{{ old('cep') }}">
+                        @error('cep')
                             <div class=" text-danger alert-danger mt-2">
-                                {{ $errors->get('cnpj')[0] }}
+                                {{ $errors->get('cep')[0] }}
                             </div>
                         @enderror
                     </div>
 
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                        <input type="number" name="telefone" id="telefone" class="form-control" placeholder="Telefone..."
-                            value="{{ old('telefone') }}">
-                        @error('telefone')
-                            <div class=" text-danger alert-danger mt-2">
-                                {{ $errors->get('telefone')[0] }}
-                            </div>
-                        @enderror
-                    </div>
-
-                </div>
-
-
-
-                <div class="mb-4 d-lg-flex justify-content-between">
-
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
+                    <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
                         <label for="cidade" class="form-label">Cidade</label>
                         <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade..."
                             value="{{ old('cidade') }}">
@@ -75,13 +85,13 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
-                        <label for="cep" class="form-label">CEP</label>
-                        <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP..."
-                            value="{{ old('cep') }}">
-                        @error('cep')
+                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
+                        <label for="uf" class="form-label">UF</label>
+                        <input type="text" name="uf" id="uf" class="form-control" placeholder="UF..."
+                            value="{{ old('cidade') }}">
+                        @error('cidade')
                             <div class=" text-danger alert-danger mt-2">
-                                {{ $errors->get('cep')[0] }}
+                                {{ $errors->get('cidade')[0] }}
                             </div>
                         @enderror
                     </div>

@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Http;
 
 class CnpjController extends Controller
 {
-    public function cnpj($cnpj)
+    public function __invoke()
     {
-       return Http::get("https://api-publica.speedio.com.br/buscarcnpj?cnpj=$cnpj")->json();
+        return Http::get('https://publica.cnpj.ws/cnpj/06947284000104')->json();
     }
 }

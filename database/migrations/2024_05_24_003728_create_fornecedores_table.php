@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('cnpj')->unique();
             $table->string('telefone');
             $table->string('cidade');
+            $table->string('uf');
             $table->string('cep');
             $table->string('endereco');
             $table->string('bairro');
