@@ -1,5 +1,4 @@
 @extends('dashboard.dashboard')
-@section('title', 'Novo Fornecedor')
 @section('content')
     <div class="row justify-content-center align-items-center p-3">
         <div class="col-lg-12 p-2">

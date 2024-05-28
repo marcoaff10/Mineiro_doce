@@ -69,11 +69,11 @@ class RequestFornededores extends FormRequest
             'bairro' => [
                 'required',
                 'min:3',
-                'max:15'
+                'max:50'
             ],
 
             'num' => [
-                'required',
+                'nullable',
                 'numeric',
                 'min_digits:1',
                 'max_digits:100000'
@@ -86,7 +86,7 @@ class RequestFornededores extends FormRequest
         return [
             
             'cnpj.required' => 'O campo CNPJ é obrigátorio.',
-            'cnpj.unique' => 'Já existe um registro com esse número de CNPJ',
+            'cnpj.unique' => 'Já existe um registro com esse número de CNPJ.',
             'cnpj.numeric' => 'O campo CNPJ deve conter apenas números.',
             
             'fornecedor.required' => 'O campo fornecedor é obrigátorio.',
@@ -108,17 +108,16 @@ class RequestFornededores extends FormRequest
 
             'cidade.required' => 'O campo cidade é obrigátorio.',
             'cidade.min' => 'O campo cidade deve conter no mínimo :min caracteres.',
-            'cidade.min' => 'O campo cidade deve conter no máximo :max caracteres.',
+            'cidade.max' => 'O campo cidade deve conter no máximo :max caracteres.',
 
             'endereco.required' => 'O campo endereco é obrigátorio.',
             'endereco.min' => 'O campo endereco deve conter no mínimo :min caracteres.',
-            'endereco.min' => 'O campo endereco deve conter no máximo :max caracteres.',
+            'endereco.max' => 'O campo endereco deve conter no máximo :max caracteres.',
 
             'bairro.required' => 'O campo bairro é obrigátorio.',
             'bairro.min' => 'O campo bairro deve conter no mínimo :min caracteres.',
-            'bairro.min' => 'O campo bairro deve conter no máximo :max caracteres.',
+            'bairro.max' => 'O campo bairro deve conter no máximo :max caracteres.',
 
-            'num.required' => 'O campo N° é obrigátorio.',
             'num.numeric' => 'O campo N° deve conter apenas números.',
             'num.min_digits' => 'O campo N° deve conter no mínimo :min_digits caracteres.',
             'num.max_digits' => 'O campo N° deve conter no máximo :max_digits caracteres.',

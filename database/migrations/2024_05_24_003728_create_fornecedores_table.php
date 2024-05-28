@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id('id_fornecedor');
             $table->string('fornecedor');
             $table->string('email');
-            $table->string('cnpj')->unique();
+            $table->string('cnpj');
             $table->string('telefone');
             $table->string('cidade');
             $table->string('uf');
             $table->string('cep');
             $table->string('endereco');
             $table->string('bairro');
-            $table->integer('num');
+            $table->integer('num')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

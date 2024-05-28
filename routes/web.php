@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/show_fornecedores', [Fornecedores::class, 'show'])->name('show.fornecedores');
     Route::get('/create_fornecedores', [Fornecedores::class, 'create'])->name('create.fornecedores');
     Route::post('/store_fornecedores', [Fornecedores::class, 'store'])->name('store.fornecedores');
+    Route::get('/detalhes_fornecedor/{id}', [Fornecedores::class, 'detalhes'])->name('detalhes.fornecedores');
     
 
     // Compras

@@ -17,7 +17,7 @@ class CreateFornecedores
         public string $uf,
         public string $endereco,
         public string $bairro,
-        public int $num
+        public int|null $num
     ) {}
 
     //=====================================================================

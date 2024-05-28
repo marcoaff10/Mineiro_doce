@@ -22,19 +22,18 @@ class FornecedoresEloquent implements FornecedoresInterface
 
         return $resultado;
     }
-    
+
     //=====================================================================
     public function findOne(string $id): stdClass|null
     {
 
-        $fornecedor = $this->model->find($id);
+        $fornecedor = $this->model->where('id_fornecedor',$id)->first();
 
         if (!$fornecedor) return null;
 
         return (object) $fornecedor->toArray();
-
     }
-    
+
     //=====================================================================
     public function store(CreateFornecedores $dto): void
     {
@@ -53,7 +52,7 @@ class FornecedoresEloquent implements FornecedoresInterface
             'updated_at' => date('Y-m-d H:i:s')
         ]);
     }
-    
+
     //=====================================================================
     public function update(UpdateFornecedores $dto): stdClass|null
     {
@@ -78,7 +77,7 @@ class FornecedoresEloquent implements FornecedoresInterface
 
         return (object) $fornecedor->toArray();
     }
-    
+
     //=====================================================================
     public function delete(string $id): void
     {
