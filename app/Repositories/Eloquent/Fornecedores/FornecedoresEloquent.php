@@ -6,6 +6,8 @@ use App\Repositories\Contracts\Fornecedores\FornecedoresInterface;
 use App\DTO\Fornecedores\CreateFornecedores;
 use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Models\Fornecedor;
+use App\Repositories\Contracts\PaginationInterface;
+use App\Repositories\Contracts\PaginationPresenter;
 use stdClass;
 
 class FornecedoresEloquent implements FornecedoresInterface
@@ -16,18 +18,50 @@ class FornecedoresEloquent implements FornecedoresInterface
     }
 
     //=====================================================================
-    public function getAll(): array
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        $resultado = $this->model->get()->toArray();
+        $result = $this->model
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('fornecedor', 'like', "%$filter%");
+                    $query->orWhere('email', 'like', "%$filter%");
+                    $query->orWhere('cnpj', 'like', "%$filter%");
+                    $query->orWhere('telefone', 'like', "%$filter%");
+                    $query->orWhere('cidade', 'like', "%$filter%");
+                    $query->orWhere('uf', 'like', "%$filter%");
+                    $query->orWhere('cep', 'like', "%$filter%");
+                    $query->orWhere('body', 'like', "%$filter%");
+                }
+            })
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+            return new PaginationPresenter($result);
 
-        return $resultado;
+    }
+    //=====================================================================
+    public function getAll(string $filter = null): array
+    {
+        return $this->model
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('fornecedor', 'like', "%$filter%");
+                    $query->orWhere('email', 'like', "%$filter%");
+                    $query->orWhere('cnpj', 'like', "%$filter%");
+                    $query->orWhere('telefone', 'like', "%$filter%");
+                    $query->orWhere('cidade', 'like', "%$filter%");
+                    $query->orWhere('uf', 'like', "%$filter%");
+                    $query->orWhere('cep', 'like', "%$filter%");
+                    $query->orWhere('body', 'like', "%$filter%");
+                }
+            })
+            ->get()
+            ->toArray();
     }
 
     //=====================================================================
     public function findOne(string $id): stdClass|null
     {
 
-        $fornecedor = $this->model->where('id_fornecedor',$id)->first();
+        $fornecedor = $this->model->where('id_fornecedor', $id)->first();
 
         if (!$fornecedor) return null;
 

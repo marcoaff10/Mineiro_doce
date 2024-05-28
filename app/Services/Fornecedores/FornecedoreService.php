@@ -5,6 +5,7 @@ namespace App\Services\Fornecedores;
 use App\DTO\Fornecedores\CreateFornecedores;
 use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Repositories\Contracts\Fornecedores\FornecedoresInterface;
+use App\Repositories\Contracts\PaginationInterface;
 use stdClass;
 
 class FornecedoreService
@@ -14,7 +15,16 @@ class FornecedoreService
     }
 
     //=====================================================================
-    public function getAll(): array
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->fornecedor_interface->paginate(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+    //=====================================================================
+    public function getAll(string $filter = null): array
     {
         return $this->fornecedor_interface->getAll();
     }

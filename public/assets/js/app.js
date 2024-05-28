@@ -65,7 +65,6 @@ cnpj.addEventListener('change', () => {
 
         })
         .then(data => {
-            console.log(data)
             if (data.estabelecimento.nome_fantasia === null) {
                 fornecedor.value = data.razao_social
             } else {

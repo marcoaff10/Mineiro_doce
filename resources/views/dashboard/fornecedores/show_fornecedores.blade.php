@@ -1,4 +1,5 @@
 @extends('dashboard.dashboard')
+@section('title', 'Fornecedores')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
@@ -8,7 +9,8 @@
                 </div>
 
                 <div class="col text-end">
-                    <a href=" {{ route('create.fornecedores')}} " class="btn btn-primary"><i class="bi bi-plus-circle-dotted"></i></a>
+                    <a href=" {{ route('create.fornecedores') }} " class="btn btn-primary"><i
+                            class="bi bi-plus-circle-dotted"></i></a>
                 </div>
             </div>
             @if (count($fornecedores) > 0)
@@ -59,7 +61,8 @@
                                 <td> {{ $fornecedor['fornecedor'] }} </td>
                                 <td class="text-center"> {{ cnpj($fornecedor['cnpj']) }} </td>
                                 <td class="text-center">
-                                    <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor['id_fornecedor'])]) }} " class="text-decoration-none text-success">
+                                    <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor['id_fornecedor'])]) }} "
+                                        class="text-decoration-none text-success">
                                         <i class="bi bi-arrow-right-circle-fill"></i>
                                     </a>
                                 </td>
@@ -82,7 +85,8 @@
                                 <td class="text-center"> {{ cod($fornecedor['id_fornecedor']) }} </td>
                                 <td class="w-25"> {{ primeiro_nome($fornecedor['fornecedor']) }} </td>
                                 <td class="text-center">
-                                    <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor['id_fornecedor'])]) }} " class="text-decoration-none text-success">
+                                    <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor['id_fornecedor'])]) }} "
+                                        class="text-decoration-none text-success">
                                         <i class="bi bi-arrow-right-circle-fill"></i>
                                     </a>
                                 </td>

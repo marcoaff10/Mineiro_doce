@@ -20,9 +20,13 @@ class Fornecedores extends Controller
     //=========================================================================================================
     // Fornecedores
     //=========================================================================================================
-    public function show()
+    public function show(Request $request)
     {
-        $fornecedores = $this->service->getAll();
+        $fornecedores = $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
 
         return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores'));
     }
