@@ -20,6 +20,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/create_fornecedores', [Fornecedores::class, 'create'])->name('create.fornecedores');
     Route::post('/store_fornecedores', [Fornecedores::class, 'store'])->name('store.fornecedores');
     Route::get('/detalhes_fornecedor/{id}', [Fornecedores::class, 'detalhes'])->name('detalhes.fornecedores');
+    Route::get('/update_fornecedor/{id}', [Fornecedores::class, 'update'])->name('update.fornecedores');
+    Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
     
 
     // Compras

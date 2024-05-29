@@ -25,7 +25,6 @@ class RequestFornededores extends FormRequest
             
             'cnpj' => [
                 'required',
-                'unique:fornecedores,cnpj',
                 'numeric'
             ],
 
@@ -86,7 +85,6 @@ class RequestFornededores extends FormRequest
         return [
             
             'cnpj.required' => 'O campo CNPJ é obrigátorio.',
-            'cnpj.unique' => 'Já existe um registro com esse número de CNPJ.',
             'cnpj.numeric' => 'O campo CNPJ deve conter apenas números.',
             
             'fornecedor.required' => 'O campo fornecedor é obrigátorio.',

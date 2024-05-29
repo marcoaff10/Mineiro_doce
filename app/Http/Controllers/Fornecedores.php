@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use AnourValar\EloquentSerialize\Service;
 use App\DTO\Fornecedores\CreateFornecedores;
+use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Http\Requests\RequestFornededores;
 use App\Models\Fornecedor;
 use App\Services\Fornecedores\FornecedoreService;
@@ -29,7 +30,7 @@ class Fornecedores extends Controller
         );
 
         $filters = ['filter' => $request->get('filter', '')];
-        
+
         return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores', 'filters'));
     }
 
@@ -63,7 +64,11 @@ class Fornecedores extends Controller
     //=========================================================================================================
     public function store(RequestFornededores $request)
     {
-        $cnpj = substr($request->cnpj, 1, 13);
+        if (substr($request->cnpj, 0, 1) == 0) {
+            $cnpj = substr($request->cnpj, 1, 13);
+        } else {
+            $cnpj = $request->cnpj;
+        }
 
         if ($this->model->where('cnpj', $cnpj)->first()) {
             return redirect()->route('create.fornecedores')
@@ -78,5 +83,38 @@ class Fornecedores extends Controller
         
         return redirect()->route('show.fornecedores');
 
+    }
+
+    //=========================================================================================================
+    public function update($id)
+    {
+        try{
+            $id = Crypt::decrypt($id);
+        } catch (\Exception $e) {
+            return redirect()->route('detalhes.fornecedores', ['id' => Crypt::encrypt($id)]);
+        }
+
+        $fornecedor = $this->service->findOne($id);
+
+        return view('dashboard.fornecedores.update_fornecedores', compact('fornecedor'));
+
+    }
+
+    public function update_submit(RequestFornededores $request)
+    {
+        try {
+
+            $id = Crypt::decrypt($request->id);
+
+        } catch(\Exception $e) {
+
+            return redirect()->back();
+        }
+
+        $this->service->update(
+            UpdateFornecedores::makeFromRequest($request)
+        );
+
+        return redirect()->route('detalhes.fornecedores', ['id' => Crypt::encrypt($id)]);
     }
 }

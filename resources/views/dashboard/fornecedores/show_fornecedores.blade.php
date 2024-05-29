@@ -73,6 +73,7 @@
                     </table>
                     <x-pagination :paginator="$fornecedores" :appends="$filters" />
                 </div>
+                
                 <!--===============================================MD===================================================================================== -->
                 <div class="d-none d-md-block d-lg-none">
                     <table class="table table-striped table-bordered " id="datatables">
@@ -100,6 +101,7 @@
                     </table>
                     <x-pagination :paginator="$fornecedores" :appends="$filters" />
                 </div>
+               
                 <!--================================================SM==================================================================================== -->
                 <div class="d-lg-none d-md-none d-xl-none d-xxl-none d-block">
                     <table class="table table-striped table-bordered" id="datatables">

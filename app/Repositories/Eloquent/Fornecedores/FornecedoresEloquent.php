@@ -8,6 +8,7 @@ use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Models\Fornecedor;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\PaginationPresenter;
+use Illuminate\Support\Facades\Crypt;
 use stdClass;
 
 class FornecedoresEloquent implements FornecedoresInterface
@@ -88,7 +89,13 @@ class FornecedoresEloquent implements FornecedoresInterface
     //=====================================================================
     public function update(UpdateFornecedores $dto): stdClass|null
     {
-        $fornecedor = $this->model->find($dto->id);
+        try {
+            $id = Crypt::decrypt($dto->id);
+        }catch(\Exception) {
+            return redirect()->back();
+        }
+
+        $fornecedor = $this->model->where('id_fornecedor', $id)->first();
         if (!$fornecedor) return null;
 
         $fornecedor->update(

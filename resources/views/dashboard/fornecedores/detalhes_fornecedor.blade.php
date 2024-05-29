@@ -1,7 +1,18 @@
 @extends('dashboard.dashboard')
+@section('title', 'Detalhes do Fornecedor')
 @section('content')
     <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
-        <h1 class="mb-3 fs-4 d-block">Detalhes <i class="bi bi-box ms-1"></i></h1>
+        <div class="row my-2">
+            <div class="col">
+                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+            </div>
+
+            {{-- <div class="col text-end">
+                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
+                    <i class="bi bi-skip-backward-fill"></i>
+                </a>
+            </div> --}}
+        </div>
         <div class="col card p-3">
             <div class="row p-2">
                 <strong class="fs-5 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
@@ -38,8 +49,8 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <a href="" class="btn btn-secondary">Inativar</a>
-                        <a href="" class="btn btn-primary">Editar</a>
+                        <a href="" class="btn btn-danger">Inativar</a>
+                        <a href="{{ route('update.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)])}}" class="btn btn-primary">Editar</a>
                         
                     </div>
 

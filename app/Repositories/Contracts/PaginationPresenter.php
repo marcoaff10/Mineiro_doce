@@ -52,6 +52,12 @@ class PaginationPresenter implements PaginationInterface
     }
 
     //=====================================================================
+    public function perPage(): int
+    {
+        return $this->paginator->perPage();
+    }
+
+    //=====================================================================
     public function getNumberNextPage(): int
     {
         return $this->paginator->currentPage() + 1;
