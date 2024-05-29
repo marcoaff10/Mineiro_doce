@@ -8,7 +8,6 @@ use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Models\Fornecedor;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\PaginationPresenter;
-use Illuminate\Support\Facades\Crypt;
 use stdClass;
 
 class FornecedoresEloquent implements FornecedoresInterface
@@ -34,8 +33,7 @@ class FornecedoresEloquent implements FornecedoresInterface
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
-            return new PaginationPresenter($result);
-
+        return new PaginationPresenter($result);
     }
     //=====================================================================
     public function getAll(string $filter = null): array
@@ -94,10 +92,7 @@ class FornecedoresEloquent implements FornecedoresInterface
     //=====================================================================
     public function delete(string $id): void
     {
-        $fornecedor = $this->model->findOrFail($id);
 
-        $fornecedor->update([
-            'deleted_at' => date('Y-m-d H:i:s')
-        ]);
+        $this->model->findOrFail($id)->delete();
     }
 }

@@ -49,13 +49,43 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <a href="" class="btn btn-danger">Inativar</a>
-                        <a href="{{ route('update.fornecedores', ['id' => $fornecedor->id])}}" class="btn btn-primary">Editar</a>
-                        
+                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                            data-bs-toggle="modal">Inativar</a>
+                        <a href="{{ route('update.fornecedores', ['id' => $fornecedor->id]) }}"
+                            class="btn btn-primary">Editar</a>
+
                     </div>
 
                 </div>
             </div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="confirmDelete" aria-hidden="true" aria-labelledby="confirmDeleteLabel" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 text-danger text-center" id="confirmDeleteLabel">Atenção <i
+                            class="bi bi-exclamation-triangle-fill"></i></h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Deseja inativar o fornecedor <strong>{{ $fornecedor->fornecedor }}</strong> ?
+                </div>
+                <div class="modal-footer">
+                    <form action="{{ route('delete.fornecedores') }}" method="POST">
+                        @method('PUT')
+                        @csrf
+                        <input type="hidden" name="id" value="{{$fornecedor->id}}">
+                        <button type="submit" class="btn btn-danger">
+                            confirmar
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection

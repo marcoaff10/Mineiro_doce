@@ -35,7 +35,7 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function detalhes($id)
+    public function detalhes(string $id)
     {
         
         $fornecedor = $this->service->findOne($id);
@@ -75,7 +75,7 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function update($id)
+    public function update(string $id)
     {
 
         $fornecedor = $this->service->findOne($id);
@@ -84,6 +84,7 @@ class Fornecedores extends Controller
 
     }
 
+    //=========================================================================================================
     public function update_submit(RequestFornededores $request)
     {
 
@@ -92,5 +93,14 @@ class Fornecedores extends Controller
         );
 
         return redirect()->route('detalhes.fornecedores', ['id' => $request->id]);
+    }
+
+    //=========================================================================================================
+    public function delete(Request $request)
+    {
+
+        $this->service->delete($request->id);
+
+        return redirect()->route('show.fornecedores');
     }
 }

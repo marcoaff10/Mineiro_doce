@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/detalhes_fornecedor/{id}', [Fornecedores::class, 'detalhes'])->name('detalhes.fornecedores');
     Route::get('/update_fornecedor/{id}', [Fornecedores::class, 'update'])->name('update.fornecedores');
     Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
+    Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
     
 
     // Compras
