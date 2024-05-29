@@ -101,6 +101,21 @@
 
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#categorias-collapse" aria-expanded="false">
+                            <i class="bi bi-bookmark"></i>
+                            Categorias
+                            <i class="bi bi-caret-down align-middle "></i>
+                        </button>
+                        <div class="collapse" id="categorias-collapse" style="">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="ms-4"><a href="{{ route('show.categorias') }}" class="link-dark rounded">Visão Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('create.categorias') }}" class="link-dark rounded">Novo</a></li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#relatorios-collapse" aria-expanded="false">
                             <i class="bi bi-file-earmark-medical"></i>
                             Relatórios

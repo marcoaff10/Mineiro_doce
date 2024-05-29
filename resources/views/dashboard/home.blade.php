@@ -1,4 +1,5 @@
 @extends('dashboard.dashboard')
+@section('title', 'Home')
 @section('content')
     <div class="row align-items-center justify-content-evenly">
 

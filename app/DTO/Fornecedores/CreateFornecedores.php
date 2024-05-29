@@ -2,7 +2,8 @@
 
 namespace App\DTO\Fornecedores;
 
-use App\Http\Requests\RequestFornededores;
+use App\Http\Requests\RequestCreateFornededores;
+
 
 class CreateFornecedores
 {
@@ -21,7 +22,7 @@ class CreateFornecedores
     ) {}
 
     //=====================================================================
-    public static function makeFromRequest(RequestFornededores $request)
+    public static function makeFromRequest(RequestCreateFornededores $request)
     {
         return new self(
             $request->cnpj,

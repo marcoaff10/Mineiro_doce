@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestFornededores extends FormRequest
+class RequestCreateFornededores extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,6 +25,7 @@ class RequestFornededores extends FormRequest
             
             'cnpj' => [
                 'required',
+                'unique:fornecedores,cnpj',
                 'numeric'
             ],
 
@@ -56,19 +57,19 @@ class RequestFornededores extends FormRequest
             'cidade' => [
                 'required',
                 'min:3',
-                'max:20',
+                'max:255',
             ],
 
             'endereco' => [
                 'required',
                 'min:3',
-                'max:80'
+                'max:255'
             ],
 
             'bairro' => [
                 'required',
                 'min:3',
-                'max:50'
+                'max:255'
             ],
 
             'num' => [
@@ -85,6 +86,7 @@ class RequestFornededores extends FormRequest
         return [
             
             'cnpj.required' => 'O campo CNPJ é obrigátorio.',
+            'cnpj.unique' => 'Já existe um registro com esse CNPJ.',
             'cnpj.numeric' => 'O campo CNPJ deve conter apenas números.',
             
             'fornecedor.required' => 'O campo fornecedor é obrigátorio.',
@@ -93,16 +95,16 @@ class RequestFornededores extends FormRequest
 
             'telefone.required' => 'O campo telefone é obrogátorio.',
             'telefone.numeric' => 'O campo telefone deve conter apenas números.',
-            'telefone.min_digits' => 'O campo telefone deve conter no mínimo :min_digits caracteres.', 
-            'telefone.max_digits' => 'O campo telefone deve conter no máximo :max_digits caracteres.', 
+            'telefone.min_digits' => 'O campo telefone deve conter no mínimo :min caracteres.', 
+            'telefone.max_digits' => 'O campo telefone deve conter no máximo :max caracteres.', 
 
             'email.required' => 'O campo email é obrogátorio.',
             'email.email' => 'O campo email deve ser um email válido.',
 
             'cep.required' => 'O campo CEP é obrigátorio.',
             'cep.numeric' => 'O campo CEP deve conter apenas números.',
-            'cep.min_digits' => 'O campo CEP deve conter no mínimo :min_digits caracteres.',
-            'cep.max_digits' => 'O campo CEP deve conter no máximo :max_digits caracteres.',
+            'cep.min_digits' => 'O campo CEP deve conter no mínimo :min caracteres.',
+            'cep.max_digits' => 'O campo CEP deve conter no máximo :max caracteres.',
 
             'cidade.required' => 'O campo cidade é obrigátorio.',
             'cidade.min' => 'O campo cidade deve conter no mínimo :min caracteres.',
@@ -117,8 +119,8 @@ class RequestFornededores extends FormRequest
             'bairro.max' => 'O campo bairro deve conter no máximo :max caracteres.',
 
             'num.numeric' => 'O campo N° deve conter apenas números.',
-            'num.min_digits' => 'O campo N° deve conter no mínimo :min_digits caracteres.',
-            'num.max_digits' => 'O campo N° deve conter no máximo :max_digits caracteres.',
+            'num.min_digits' => 'O campo N° deve conter no mínimo :min caracteres.',
+            'num.max_digits' => 'O campo N° deve conter no máximo :max caracteres.',
 
         ];
     }

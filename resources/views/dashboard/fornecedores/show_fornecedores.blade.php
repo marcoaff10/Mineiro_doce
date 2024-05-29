@@ -108,7 +108,7 @@
                         <tbody>
                             @foreach ($fornecedores->items() as $fornecedor)
                                 <tr>
-                                    <td class="w-75 align-middle"> {{ primeiro_nome($fornecedor->fornecedor) }} </td>
+                                    <td class="w-75 align-middle"> {{ (strlen($fornecedor->fornecedor) > 30 ? primeiro_nome($fornecedor->fornecedor) : $fornecedor->fornecedor) }} </td>
                                     <td class="text-center align-middle">
                                         <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
                                             class="text-decoration-none text-success">
@@ -122,7 +122,7 @@
                     <x-pagination :paginator="$fornecedores" :appends="$filters" />
                 </div>
             @else
-                <p class=" text-center opacity-50">Sem fornecedores cadastrados.</p>
+                <p class=" text-center opacity-50 mt-5">Sem fornecedores cadastrados.</p>
             @endif
         </div>
     </div>

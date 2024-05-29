@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use AnourValar\EloquentSerialize\Service;
 use App\DTO\Fornecedores\CreateFornecedores;
 use App\DTO\Fornecedores\UpdateFornecedores;
-use App\Http\Requests\RequestFornededores;
+use App\Http\Requests\RequestCreateFornededores;
+use App\Http\Requests\RequestUpdateFornecedores;
 use App\Models\Fornecedor;
 use App\Services\Fornecedores\FornecedoreService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Crypt;
 
 class Fornecedores extends Controller
 {
@@ -51,7 +50,7 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function store(RequestFornededores $request)
+    public function store(RequestCreateFornededores $request)
     {
         if (substr($request->cnpj, 0, 1) == 0) {
             $cnpj = substr($request->cnpj, 1, 13);
@@ -78,6 +77,7 @@ class Fornecedores extends Controller
     public function update(string $id)
     {
 
+
         $fornecedor = $this->service->findOne($id);
 
         return view('dashboard.fornecedores.update_fornecedores', compact('fornecedor'));
@@ -85,8 +85,19 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function update_submit(RequestFornededores $request)
+    public function update_submit(RequestUpdateFornecedores $request)
     {
+        if (substr($request->cnpj, 0, 1) == 0) {
+            $cnpj = substr($request->cnpj, 1, 13);
+        } else {
+            $cnpj = $request->cnpj;
+        }
+
+        if ($this->model->where('cnpj', $cnpj)->where('id', '!=', $request->id)->first()) {
+            return redirect()->route('update.fornecedores', ['id' => $request->id])
+                ->withInput()
+                ->with('error_create', 'Já existe um registro com esse número de CNPJ.');
+        }
 
         $this->service->update(
             UpdateFornecedores::makeFromRequest($request)

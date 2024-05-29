@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CnpjController;
+use App\Http\Controllers\Categorias;
 use App\Http\Controllers\Compras;
 use App\Http\Controllers\Fornecedores;
 use App\Http\Controllers\Main;
@@ -24,6 +25,15 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
     Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
     
+    //  Categorias
+    Route::get('/show_categorias', [Categorias::class, 'show'])->name('show.categorias');
+    Route::get('/create_categorias', [Categorias::class, 'create'])->name('create.categorias');
+    Route::post('/store_categorias', [Categorias::class, 'store'])->name('store.categorias');
+    Route::get('/detalhes_categorias/{id}', [Categorias::class, 'detalhes'])->name('detalhes.categorias');
+    Route::get('/update_categorias/{id}', [Categorias::class, 'update'])->name('update.categorias');
+    Route::put('/update_categorias', [Categorias::class, 'update_submit'])->name('update.submit.categorias');
+    Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
+
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');

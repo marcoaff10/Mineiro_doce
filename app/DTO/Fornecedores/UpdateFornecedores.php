@@ -2,7 +2,8 @@
 
 namespace App\DTO\Fornecedores;
 
-use App\Http\Requests\RequestFornededores;
+
+use App\Http\Requests\RequestUpdateFornecedores;
 
 class UpdateFornecedores
 {
@@ -21,7 +22,7 @@ class UpdateFornecedores
         ){}
 
     //=====================================================================
-    public static function makeFromRequest(RequestFornededores $request, string $id = null)
+    public static function makeFromRequest(RequestUpdateFornecedores $request, string $id = null)
     {
         return new self(
             $id ?? $request->id,

@@ -34,7 +34,7 @@
                             <li>Cidade: {{ $fornecedor->cidade }}</li>
                             <li>Estado: {{ $fornecedor->uf }}</li>
                             <li>CEP: {{ $fornecedor->cep }}</li>
-                            <li>Logradouro: {{ $fornecedor->endereco . ', ' . $fornecedor->num }}</li>
+                            <li>Logradouro: {{ $fornecedor->endereco . ', ' . ($fornecedor->num == '' ? 'S/N' : $fornecedor->num) }}</li>
                             <li>Bairro: {{ $fornecedor->bairro }}</li>
                         </ul>
                     </div>
