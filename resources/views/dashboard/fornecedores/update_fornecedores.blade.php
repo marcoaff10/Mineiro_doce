@@ -7,7 +7,7 @@
                 @method('PUT')
                 @csrf
                 <h3 class="text-center mb-3 fw-bold fs-4">Editar Fornecedor <i class="bi bi-shop"></i></h3>
-                <input type="hidden" name="id" value="{{ Crypt::encrypt($fornecedor->id_fornecedor) }}">
+                <input type="hidden" name="id" value="{{ $fornecedor->id }}">
                 <div class="mb-4 d-lg-flex justify-content-between">
 
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3" id="div_cnpj">
@@ -140,7 +140,7 @@
                 </div>
 
                 <div class="mb-3 text-center ">
-                    <a href="{{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)]) }}" class="btn btn-secondary me-2">Cancelar</a>
+                    <a href="{{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-2">Editar</button>
                 </div>
 

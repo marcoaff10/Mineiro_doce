@@ -50,7 +50,7 @@
                     <div class="col-12 text-center mt-4">
 
                         <a href="" class="btn btn-danger">Inativar</a>
-                        <a href="{{ route('update.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)])}}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('update.fornecedores', ['id' => $fornecedor->id])}}" class="btn btn-primary">Editar</a>
                         
                     </div>
 

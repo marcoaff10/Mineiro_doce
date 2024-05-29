@@ -60,7 +60,7 @@ class FornecedoresEloquent implements FornecedoresInterface
     public function findOne(string $id): stdClass|null
     {
 
-        $fornecedor = $this->model->where('id_fornecedor', $id)->first();
+        $fornecedor = $this->model->where('id', $id)->first();
 
         if (!$fornecedor) return null;
 
@@ -68,50 +68,24 @@ class FornecedoresEloquent implements FornecedoresInterface
     }
 
     //=====================================================================
-    public function store(CreateFornecedores $dto): void
+    public function store(CreateFornecedores $dto): stdClass
     {
-        $this->model->insert([
-            'fornecedor' => $dto->fornecedor,
-            'email' => $dto->email,
-            'cnpj' => $dto->cnpj,
-            'telefone' => $dto->telefone,
-            'cidade' => $dto->cidade,
-            'uf' => $dto->uf,
-            'cep' => $dto->cep,
-            'endereco' => $dto->endereco,
-            'bairro' => $dto->bairro,
-            'num' => $dto->num,
-            'created_at' => date('Y-m-d H:i:s'),
-            'updated_at' => date('Y-m-d H:i:s')
-        ]);
+        $fornecedor = $this->model->create(
+            (array) $dto
+        );
+
+        return (object) $fornecedor->toArray();
     }
 
     //=====================================================================
     public function update(UpdateFornecedores $dto): stdClass|null
     {
-        try {
-            $id = Crypt::decrypt($dto->id);
-        }catch(\Exception) {
-            return redirect()->back();
-        }
 
-        $fornecedor = $this->model->where('id_fornecedor', $id)->first();
+        $fornecedor = $this->model->where('id', $dto->id)->first();
         if (!$fornecedor) return null;
 
         $fornecedor->update(
-            [
-                'fornecedor' => $dto->fornecedor,
-                'email' => $dto->email,
-                'cnpj' => $dto->cnpj,
-                'telefone' => $dto->telefone,
-                'cidade' => $dto->cidade,
-                'uf' => $dto->uf,
-                'cep' => $dto->cep,
-                'endereco' => $dto->endereco,
-                'bairro' => $dto->bairro,
-                'num' => $dto->num,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
+            (array) $dto
         );
 
         return (object) $fornecedor->toArray();

@@ -1,41 +1,5 @@
 <?php
 
-function cod($codigo)
-{
-    // retorna o código com 7 digitos
-    if (strlen($codigo) == 1) {
-
-        return '000000' . $codigo;
-
-    } elseif (strlen($codigo) == 2) {
-        
-        return '00000' . $codigo;
-
-    } elseif (strlen($codigo) == 3) {
-        
-        return '0000' . $codigo;
-
-    } elseif (strlen($codigo) == 4) {
-        
-        return '000' . $codigo;
-
-    } elseif (strlen($codigo) == 5) {
-        
-        return '00' . $codigo;
-
-    } elseif (strlen($codigo) == 6) {
-        
-        return '0' . $codigo;
-
-    } elseif (strlen($codigo) == 7) {
-        
-        return $codigo;
-
-    }
-
-}
-
-//=========================================================================================================
 function cnpj($cnpj)
 {
     // retorna o cnpj formatado
@@ -84,5 +48,5 @@ function primeiro_nome($nome)
     // retorna o primeiro nome de uma string
     $primeiro = explode(' ', $nome);
 
-    return $primeiro[0];
+    return $primeiro[0]. ' ' .$primeiro[1];
 }

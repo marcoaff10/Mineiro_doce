@@ -36,9 +36,9 @@ class FornecedoreService
     }
 
     //=====================================================================
-    public function store(CreateFornecedores $dto): void
+    public function store(CreateFornecedores $dto): stdClass
     {
-        $this->fornecedor_interface->store($dto);
+        return $this->fornecedor_interface->store($dto);
     }
 
     //=====================================================================

@@ -21,10 +21,10 @@ class UpdateFornecedores
         ){}
 
     //=====================================================================
-    public static function makeFromRequest(RequestFornededores $request)
+    public static function makeFromRequest(RequestFornededores $request, string $id = null)
     {
         return new self(
-            $request->id,
+            $id ?? $request->id,
             $request->cnpj,
             $request->fornecedor, 
             $request->telefone,

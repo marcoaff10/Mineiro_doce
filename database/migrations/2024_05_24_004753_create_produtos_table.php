@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('produtos', function (Blueprint $table) {
-            $table->id('id_produto');
-            $table->unsignedBigInteger('id_categoria');
-            $table->unsignedBigInteger('id_fornecedor');
+            $table->uuid('id')->primary();
+            $table->uuid('categoria_id')->index();
+            $table->uuid('fornecedor_id')->index();
             $table->string('produto');
             $table->float('peso');
             $table->boolean('controlado');
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('id_categoria')->references('id_categoria')->on('categorias');
-            $table->foreign('id_fornecedor')->references('id_fornecedor')->on('fornecedores');
+            $table->foreign('categoria_id')->references('id')->on('categorias');
+            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
         });
     }
 

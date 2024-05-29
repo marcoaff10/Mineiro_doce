@@ -38,15 +38,6 @@ class Fornecedores extends Controller
     public function detalhes($id)
     {
         
-        try {
-
-            $id = Crypt::decrypt($id);
-
-        } catch (\Exception $e)
-        {
-            return redirect()->route('show.fornecedores');
-        }
-
         $fornecedor = $this->service->findOne($id);
 
 
@@ -56,8 +47,6 @@ class Fornecedores extends Controller
     //=========================================================================================================
     public function create()
     {
-
-
         return view('dashboard.fornecedores.create_fornecedores');
     }
 
@@ -88,11 +77,6 @@ class Fornecedores extends Controller
     //=========================================================================================================
     public function update($id)
     {
-        try{
-            $id = Crypt::decrypt($id);
-        } catch (\Exception $e) {
-            return redirect()->route('detalhes.fornecedores', ['id' => Crypt::encrypt($id)]);
-        }
 
         $fornecedor = $this->service->findOne($id);
 
@@ -102,19 +86,11 @@ class Fornecedores extends Controller
 
     public function update_submit(RequestFornededores $request)
     {
-        try {
-
-            $id = Crypt::decrypt($request->id);
-
-        } catch(\Exception $e) {
-
-            return redirect()->back();
-        }
 
         $this->service->update(
             UpdateFornecedores::makeFromRequest($request)
         );
 
-        return redirect()->route('detalhes.fornecedores', ['id' => Crypt::encrypt($id)]);
+        return redirect()->route('detalhes.fornecedores', ['id' => $request->id]);
     }
 }

@@ -42,7 +42,6 @@
                 <div class="d-none d-lg-block d-xl-block d-xxl-block w-100 col-12">
                     <table class="table table-striped table-bordered " id="datatables">
                         <thead class="table-dark">
-                            <th class="text-center">COD.</th>
                             <th class="text-center">Fornecedor</th>
                             <th class="text-center">CNPJ</th>
                             <th class="text-center">Telefone</th>
@@ -54,7 +53,6 @@
                         <tbody>
                             @foreach ($fornecedores->items() as $fornecedor)
                                 <tr>
-                                    <td class="text-center align-middle"> {{ cod($fornecedor->id_fornecedor) }} </td>
                                     <td class="w-25 align-middle"> {{ $fornecedor->fornecedor }} </td>
                                     <td class="text-center align-middle"> {{ cnpj($fornecedor->cnpj) }} </td>
                                     <td class="text-center align-middle"> {{ telefone($fornecedor->telefone) }} </td>
@@ -62,7 +60,7 @@
                                     <td class=" align-middle"> {{ $fornecedor->cidade . ', ' . uf($fornecedor->uf) }} </td>
                                     <td class="text-center align-middle"> {{ cep($fornecedor->cep) }} </td>
                                     <td class="text-center align-middle">
-                                        <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)]) }} "
+                                        <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
                                             class="text-decoration-none text-success">
                                             <i class="bi bi-arrow-right-circle-fill"></i>
                                         </a>
@@ -78,7 +76,6 @@
                 <div class="d-none d-md-block d-lg-none">
                     <table class="table table-striped table-bordered " id="datatables">
                         <thead class="table-dark">
-                            <th class="text-center ">COD.</th>
                             <th class="text-center">Fornecedor</th>
                             <th class="text-center">CNPJ</th>
                             <th class="text-center">Detalhes</th>
@@ -86,11 +83,10 @@
                         <tbody>
                             @foreach ($fornecedores->items() as $fornecedor)
                                 <tr>
-                                    <td class="text-center align-middle"> {{ cod($fornecedor->id_fornecedor) }} </td>
                                     <td class=" align-middle"> {{ $fornecedor->fornecedor }} </td>
                                     <td class="text-center align-middle"> {{ cnpj($fornecedor->cnpj) }} </td>
                                     <td class="text-center align-middle">
-                                        <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)]) }} "
+                                        <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
                                             class="text-decoration-none text-success">
                                             <i class="bi bi-arrow-right-circle-fill"></i>
                                         </a>
@@ -106,17 +102,15 @@
                 <div class="d-lg-none d-md-none d-xl-none d-xxl-none d-block">
                     <table class="table table-striped table-bordered" id="datatables">
                         <thead class="table-dark">
-                            <th class="text-center">COD.</th>
                             <th class="text-center">Fornecedor</th>
                             <th class="text-center">Detalhes</th>
                         </thead>
                         <tbody>
                             @foreach ($fornecedores->items() as $fornecedor)
                                 <tr>
-                                    <td class="text-center align-middle"> {{ cod($fornecedor->id_fornecedor) }} </td>
-                                    <td class="w-25 align-middle"> {{ primeiro_nome($fornecedor->fornecedor) }} </td>
+                                    <td class="w-75 align-middle"> {{ primeiro_nome($fornecedor->fornecedor) }} </td>
                                     <td class="text-center align-middle">
-                                        <a href=" {{ route('detalhes.fornecedores', ['id' => Crypt::encrypt($fornecedor->id_fornecedor)]) }} "
+                                        <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
                                             class="text-decoration-none text-success">
                                             <i class="bi bi-arrow-right-circle-fill"></i>
                                         </a>
