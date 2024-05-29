@@ -30,7 +30,6 @@ class FornecedoresEloquent implements FornecedoresInterface
                     $query->orWhere('cidade', 'like', "%$filter%");
                     $query->orWhere('uf', 'like', "%$filter%");
                     $query->orWhere('cep', 'like', "%$filter%");
-                    $query->orWhere('body', 'like', "%$filter%");
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
@@ -50,7 +49,6 @@ class FornecedoresEloquent implements FornecedoresInterface
                     $query->orWhere('cidade', 'like', "%$filter%");
                     $query->orWhere('uf', 'like', "%$filter%");
                     $query->orWhere('cep', 'like', "%$filter%");
-                    $query->orWhere('body', 'like', "%$filter%");
                 }
             })
             ->get()

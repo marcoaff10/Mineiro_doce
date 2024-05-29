@@ -28,7 +28,9 @@ class Fornecedores extends Controller
             filter: $request->filter
         );
 
-        return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores'));
+        $filters = ['filter' => $request->get('filter', '')];
+        
+        return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores', 'filters'));
     }
 
     //=========================================================================================================
