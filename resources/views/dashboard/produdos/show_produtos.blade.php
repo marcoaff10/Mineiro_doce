@@ -54,11 +54,19 @@
                             @foreach ($produtos->items() as $produto)
                                 <tr>
                                     <td class="w-25 align-middle"> {{ $produto->produto }} </td>
-                                    <td class="text-center align-middle"> {{ $produto->categoria }} </td>
+                                    <td class="align-middle"> {{ $produto->categoria }} </td>
                                     <td class="align-middle"> {{ $produto->fornecedor }} </td>
-                                    <td class="text-center align-middle"> {{ $produto->peso }} </td>
-                                    <td class="text-center align-middle"> {{ $produto->minimo }} </td>
-                                    <td class="text-center align-middle">  </td>
+                                    <td class="text-center align-middle"> 
+                                        {{ $produto->peso >= 1000 ? $produto->peso / 1000 . 'kg' : $produto->peso. 'g'}} 
+                                    </td>
+                                    <td class="text-center align-middle"> 
+                                        {{ $produto->minimo }} uni. 
+                                    </td>
+                                    <td class="text-center align-middle"> 
+                                        <a href="">
+                                            [Estoque]
+                                        </a>
+                                    </td>
                                     <td class="text-center align-middle">
                                         <a href=" {{ route('detalhes.produtos', ['id' => $produto->id]) }} "
                                             class="text-decoration-none text-success">
@@ -89,8 +97,12 @@
                                     <td class=" align-middle"> {{ $produto->produto }} </td>
                                     <td class=" align-middle"> {{ $produto->categoria }} </td>
                                     <td class=" align-middle"> {{ $produto->fornecedor }} </td>
-                                    <td class="text-center align-middle"> {{ $produto->minimo }} </td>
-                                    <td class="text-center align-middle">  </td>
+                                    <td class="text-center align-middle"> {{ $produto->minimo }} uni. </td>
+                                    <td class="text-center align-middle">
+                                        <a href="">
+                                            [Estoque]
+                                        </a>
+                                    </td>
                                     <td class="text-center align-middle">
                                         <a href=" {{ route('detalhes.produtos', ['id' => $produto->id]) }} "
                                             class="text-decoration-none text-success">
@@ -117,8 +129,12 @@
                             @foreach ($produtos->items() as $produto)
                                 <tr>
                                     <td class="text-center align-middle"> {{ $produto->produto }} </td>
-                                    <td class="text-center align-middle"> {{ $produto->minimo }} </td>
-                                    <td class="text-center align-middle">  </td>
+                                    <td class="text-center align-middle"> {{ $produto->minimo }} uni. </td>
+                                    <td class="text-center align-middle">
+                                        <a href="">
+                                            [Estoque]
+                                        </a>
+                                    </td>
                                     <td class="text-center align-middle">
                                         <a href=" {{ route('detalhes.produtos', ['id' => $produto->id]) }} "
                                             class="text-decoration-none text-success">

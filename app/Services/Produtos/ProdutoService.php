@@ -23,9 +23,9 @@ class ProdutoService
         );
     }
     //=====================================================================
-    public function getAll(): array
+    public function getAll(string $filter = null): array
     {
-        return $this->produto_interface->getAll();
+        return $this->produto_interface->getAll($filter);
     }
 
     //=====================================================================

@@ -21,7 +21,7 @@ class ProdutosEloquent implements ProdutosInterface
     {
         $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
             ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
-            ->select('produtos.*', 'categorias.*', 'fornecedores.fornecedor')
+            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
@@ -29,29 +29,46 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('fornecedor', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
-
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
 
-            return new PaginationPresenter($result);
+        return new PaginationPresenter($result);
     }
 
     //=====================================================================
-    public function getAll(): array
+    public function getAll(string $filter = null): array
     {
 
-        $resultado = $this->model->leftJoin('categorias', 'produtos.id_categoria', '=', 'categorias.id_categoria')->get();
+        $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
+            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
+            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('produto', 'like', "%$filter%");
+                    $query->orWhere('categoria', 'like', "%$filter%");
+                    $query->orWhere('fornecedor', 'like', "%$filter%");
+                    $query->orWhere('peso', 'like', "%$filter%");
+                    $query->orWhere('minimo', 'like', "%$filter%");
+                }
+            })
+            ->get();
 
-        return $resultado->toArray();
+        return $result->toArray();
     }
 
     //=====================================================================
     public function findOne(string $id): stdClass|null
     {
-        // buscando linha no banco que corresponde com o id informado
-        $produto = $this->model->find($id);
 
+        
+        // buscando linha no banco que corresponde com o id informado
+        $produto = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
+            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
+            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
+            ->where('produtos.id', $id)->first();
+
+            
         // caso não encontre informações com o id informado retorna null
         if (!$produto) return null;
 
@@ -62,6 +79,8 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function store(CreateProdutos $dto): stdClass
     {
+
+        
         // Salvando as informações no banco
         $produto = $this->model->create(
             (array) $dto
@@ -74,16 +93,11 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function update(UpdateProdutos $dto): stdClass|null
     {
-        $produto = $this->model->find($dto->id);
+        $produto = $this->model->where('id', $dto->id)->first();
         if (!$produto) return null;
 
         $produto->update(
-            [
-                'id_categoria' => $dto->categoria,
-                'produto' => $dto->produto,
-                'peso' => $dto->peso,
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
+            (array) $dto
         );
 
         return (object) $produto->toArray();
@@ -92,10 +106,6 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function delete(string $id): void
     {
-        $produto = $this->model->findOrFail($id);
-
-        $produto->update([
-            'deleted_at' => date('Y-m-d H:i:s')
-        ]);
+        $this->model->findOrFail($id)->delete();
     }
 }

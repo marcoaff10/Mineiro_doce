@@ -39,6 +39,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
     Route::get('/detalhes_produtos/{id}', [Produtos::class, 'detalhes'])->name('detalhes.produtos');
+    Route::get('/update_produtos/{id}', [Produtos::class, 'update'])->name('update.produtos');
+    Route::put('/update_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
+    Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
