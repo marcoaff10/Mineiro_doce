@@ -5,6 +5,8 @@ namespace App\Repositories\Eloquent\Produtos;
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
 use App\Models\Produto;
+use App\Repositories\Contracts\PaginationInterface;
+use App\Repositories\Contracts\PaginationPresenter;
 use App\Repositories\Contracts\Produtos\ProdutosInterface;
 use stdClass;
 
@@ -12,6 +14,27 @@ class ProdutosEloquent implements ProdutosInterface
 {
     public function __construct(protected Produto $model)
     {
+    }
+
+    //=====================================================================
+    public function paginate(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
+    {
+        $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
+            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
+            ->select('produtos.*', 'categorias.*', 'fornecedores.fornecedor')
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('produto', 'like', "%$filter%");
+                    $query->orWhere('categoria', 'like', "%$filter%");
+                    $query->orWhere('fornecedor', 'like', "%$filter%");
+                    $query->orWhere('peso', 'like', "%$filter%");
+                    $query->orWhere('minimo', 'like', "%$filter%");
+
+                }
+            })
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+
+            return new PaginationPresenter($result);
     }
 
     //=====================================================================
@@ -37,19 +60,15 @@ class ProdutosEloquent implements ProdutosInterface
     }
 
     //=====================================================================
-    public function store(CreateProdutos $dto): void
+    public function store(CreateProdutos $dto): stdClass
     {
         // Salvando as informações no banco
-        $this->model->insert(
-            [
-                'id_categoria' => $dto->categoria,
-                'produto' => $dto->produto,
-                'peso' => $dto->peso,
-                'created_at' => date('Y-m-d H:i:s'),
-                'updated_at' => date('Y-m-d H:i:s')
-            ]
+        $produto = $this->model->create(
+            (array) $dto
 
         );
+
+        return (object) $produto->toArray();
     }
 
     //=====================================================================

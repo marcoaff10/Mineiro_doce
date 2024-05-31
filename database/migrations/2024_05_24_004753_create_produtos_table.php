@@ -17,7 +17,6 @@ return new class extends Migration
             $table->uuid('fornecedor_id')->index();
             $table->string('produto');
             $table->float('peso');
-            $table->boolean('controlado');
             $table->integer('minimo');
             $table->timestamps();
             $table->softDeletes();

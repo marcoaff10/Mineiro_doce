@@ -4,6 +4,7 @@ namespace App\Services\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
+use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\Produtos\ProdutosInterface;
 use stdClass;
 
@@ -12,6 +13,15 @@ class ProdutoService
 
     public function __construct(protected ProdutosInterface $produto_interface){}
 
+    //=====================================================================
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->produto_interface->paginate(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
     //=====================================================================
     public function getAll(): array
     {
@@ -25,9 +35,9 @@ class ProdutoService
     }
 
     //=====================================================================
-    public function store(CreateProdutos $dto):void
+    public function store(CreateProdutos $dto):stdClass
     {
-        $this->produto_interface->store($dto);
+        return $this->produto_interface->store($dto);
     }
 
     //=====================================================================

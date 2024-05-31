@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/update_fornecedor/{id}', [Fornecedores::class, 'update'])->name('update.fornecedores');
     Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
     Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
-    
+
     //  Categorias
     Route::get('/show_categorias', [Categorias::class, 'show'])->name('show.categorias');
     Route::get('/create_categorias', [Categorias::class, 'create'])->name('create.categorias');
@@ -34,6 +34,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_categorias', [Categorias::class, 'update_submit'])->name('update.submit.categorias');
     Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
 
+    // Produtos
+    Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
+    Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
+    Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
+    Route::get('/detalhes_produtos/{id}', [Produtos::class, 'detalhes'])->name('detalhes.produtos');
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
@@ -43,10 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/show_pedidos', [Pedidos::class, 'show'])->name('show.pedidos');
     Route::get('/create_pedidos', [Pedidos::class, 'create'])->name('create.pedidos');
 
-    // Produtos
-    Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
-    Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
-    Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
+
 
 
 

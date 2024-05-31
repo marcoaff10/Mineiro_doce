@@ -77,7 +77,7 @@ class Categorias extends Controller
     {
         if ($this->model->where('id', '!=', $request->id)->where('categoria', $request->categoria)->first())
         {
-            return redirect()->back()->withInput()->with('error_create', 'Já existe essa categoria;');
+            return redirect()->back()->withInput()->with('error_create', 'Já existe essa categoria.');
         }
 
         $this->service->update(

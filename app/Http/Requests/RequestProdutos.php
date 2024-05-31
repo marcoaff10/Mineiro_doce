@@ -26,17 +26,28 @@ class RequestProdutos extends FormRequest
                 'required',
                 'string',
                 'min:3',
-                'max:100'
+                'max:255'
             ],
 
             'categoria' => [
                 'required'
             ],
 
+            'fornecedor' => [
+                'required',
+            ],
+
             'peso' => [
                 'required',
                 'numeric',
-                'min_digits:0'
+                'min:0'
+            ],
+            
+            'minimo' => [
+                'required',
+                'numeric',
+                'min:0'
+
             ]
         ];
     }
@@ -52,9 +63,16 @@ class RequestProdutos extends FormRequest
 
             'categoria.required' => 'O campo categoria é obrigátorio.',
 
+            'fornecedor.required' => 'O campo fornecedor é obrigátorio.',
+
+
             'peso.required' => 'O campo peso é obrigátorio.',
             'peso.numeric' => 'O campo peso deve ser um valor numérico.',
-            'peso.min_digits' => 'O peso não pode ser menor do que 0.'
+            'peso.min' => 'O peso não pode ser menor do que :min.',
+
+            'minimo.required' => 'O campo minimo é obrigátorio.',
+            'minimo.numeric' => 'O campo minimo deve ser um valor numérico.',
+            'minimo.min' => 'O minimo não pode ser menor do que :min.'
 
         ];
     }
