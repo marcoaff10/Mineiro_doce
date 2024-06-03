@@ -8,16 +8,7 @@
                 @csrf
                 <h3 class="text-center mb-3 fw-bold fs-4">Editar Produto <i class="bi bi-box"></i></h3>
                 <input type="hidden" name="id" value="{{ $produto->id }}">
-                <div class="mb-4">
-                    <label for="produto" class="form-label">Produto</label>
-                    <input type="text" name="produto" id="produto" class="form-control" placeholder="Produto..."
-                        value="{{ $produto->produto }}">
-                    @error('produto')
-                        <div class=" text-danger alert-danger mt-2">
-                            {{ $errors->get('produto')[0] }}
-                        </div>
-                    @enderror
-                </div>
+
 
                 <div class="mb-3 d-lg-flex justify-content-between">
 
@@ -39,18 +30,12 @@
                     </div>
 
                     <div class="col-lg-5 col-sm-12 mb-3">
-                        <label for="fornecedor" class="form-label">Fornecedor</label>
-                        <select name="fornecedor" id="fornecedor" class="form-select">
-                            <option value="" selected>Selecione uma Fornecedor</option>
-                            @foreach ($fornecedores as $fornecedor)
-                                <option value="{{ $fornecedor->id }}" {{$produto->fornecedor_id == $fornecedor->id ? 'selected' : ''}}>
-                                    {{ $fornecedor->fornecedor }}
-                                </option>
-                            @endforeach
-                        </select>
-                        @error('fornecedor')
+                        <label for="produto" class="form-label">Produto</label>
+                        <input type="text" name="produto" id="produto" class="form-control" placeholder="Produto..."
+                            value="{{ $produto->produto }}">
+                        @error('produto')
                             <div class=" text-danger alert-danger mt-2">
-                                {{ $errors->get('fornecedor')[0] }}
+                                {{ $errors->get('produto')[0] }}
                             </div>
                         @enderror
                     </div>

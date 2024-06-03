@@ -24,8 +24,6 @@
                         <ul>
                             <li>Produto: {{ $produto->produto }}</li>
                             <li>Categoria: {{ $produto->categoria }}</li>
-                            <li>Fornecedor: {{ $produto->fornecedor }}</li>
-
 
                             <li>Peso:
                                 {{ $produto->peso >= 1000 ? $produto->peso / 1000 . 'kg' : $produto->peso . 'g' }}

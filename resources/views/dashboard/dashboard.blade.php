@@ -36,41 +36,6 @@
 
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#compras-collapse" aria-expanded="false">
-                            <i class="bi bi-bag"></i>
-                            Compras
-                            <i class="bi bi-caret-down align-middle "></i>
-                        </button>
-                        <div class="collapse" id="compras-collapse">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.compras') }}" class="link-dark rounded">Visão
-                                        Geral</a></li>
-                                <li class="ms-4"><a href="{{ route('create.compras') }}"
-                                        class="link-dark rounded">Nova</a></li>
-
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#pedidos-collapse" aria-expanded="false">
-                            <i class="bi bi-cart"></i>
-                            Pedidos
-                            <i class="bi bi-caret-down align-middle "></i>
-                        </button>
-                        <div class="collapse" id="pedidos-collapse" style="">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.pedidos') }}" class="link-dark rounded">Visão
-                                        Geral</a></li>
-                                <li class="ms-4"><a href="{{ route('create.pedidos') }}"
-                                        class="link-dark rounded">Novo</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#clientes-collapse" aria-expanded="false">
                             <i class="bi bi-people"></i>
                             Clientes

@@ -16,10 +16,14 @@ class Produto extends Model
 
     protected $fillable = [
         'categoria_id',
-        'fornecedor_id',
         'produto',
         'peso',
         'minimo'
     ];
+
+    public function categoria(): BelongsTo
+    {
+        return $this->belongsTo(Categoria::class);
+    }
 
 }

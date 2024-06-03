@@ -33,10 +33,6 @@ class RequestProdutos extends FormRequest
                 'required'
             ],
 
-            'fornecedor' => [
-                'required',
-            ],
-
             'peso' => [
                 'required',
                 'numeric',
@@ -62,9 +58,6 @@ class RequestProdutos extends FormRequest
             'produto.max' => 'O campo produto deve conter no máximo :max caracteres.',
 
             'categoria.required' => 'O campo categoria é obrigátorio.',
-
-            'fornecedor.required' => 'O campo fornecedor é obrigátorio.',
-
 
             'peso.required' => 'O campo peso é obrigátorio.',
             'peso.numeric' => 'O campo peso deve ser um valor numérico.',

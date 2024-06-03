@@ -7,17 +7,6 @@
                 @csrf
                 <h3 class="text-center mb-3 fw-bold fs-4">Novo Produto <i class="bi bi-box"></i></h3>
 
-                <div class="mb-4">
-                    <label for="produto" class="form-label">Produto</label>
-                    <input type="text" name="produto" id="produto" class="form-control" placeholder="Produto..."
-                        value="{{ old('produto') }}">
-                    @error('produto')
-                        <div class=" text-danger alert-danger mt-2">
-                            {{ $errors->get('produto')[0] }}
-                        </div>
-                    @enderror
-                </div>
-
                 <div class="mb-3 d-lg-flex justify-content-between">
 
                     <div class="col-lg-5 col-sm-12 mb-3">
@@ -36,16 +25,12 @@
                     </div>
 
                     <div class="col-lg-5 col-sm-12 mb-3">
-                        <label for="fornecedor" class="form-label">Fornecedor</label>
-                        <select name="fornecedor" id="fornecedor" class="form-select">
-                            <option value="" selected>Selecione uma Fornecedor</option>
-                            @foreach ($fornecedores as $fornecedor)
-                                <option value="{{ $fornecedor->id }}">{{ $fornecedor->fornecedor }}</option>
-                            @endforeach
-                        </select>
-                        @error('fornecedor')
+                        <label for="produto" class="form-label">Produto</label>
+                        <input type="text" name="produto" id="produto" class="form-control" placeholder="Produto..."
+                            value="{{ old('produto') }}">
+                        @error('produto')
                             <div class=" text-danger alert-danger mt-2">
-                                {{ $errors->get('fornecedor')[0] }}
+                                {{ $errors->get('produto')[0] }}
                             </div>
                         @enderror
                     </div>
@@ -65,7 +50,7 @@
                     </div>
 
                     <div class="col-5">
-                        <label for="minimo" class="form-label">Mínina</label>
+                        <label for="minimo" class="form-label">Mínino</label>
                         <input type="number" name="minimo" id="minimo" class="form-control" placeholder="Mínimo..."
                             value="{{ old('minimo') }}">
                         @error('minimo')

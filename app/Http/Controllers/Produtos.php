@@ -30,10 +30,12 @@ class Produtos extends Controller
             filter: $request->filter
         );
 
+        $fornecedores = Fornecedor::all();
+
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters'));
+        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores'));
     }
 
     //=========================================================================================================
@@ -41,7 +43,7 @@ class Produtos extends Controller
     {
         $produto = $this->service->findOne($id);
 
-
+        dd($produto);
         return view('dashboard.produdos.detalhes_produtos', compact('produto'));
     }
 
@@ -65,16 +67,10 @@ class Produtos extends Controller
                 ->with('error_create', 'Categoria inválida');
         }
 
-        if (!Fornecedor::where('id', $request->fornecedor)->first()) {
+        if ($this->model->where('produto', $request->produto)->where('categoria_id', $request->categoria)->first()) {
             return redirect()->route('create.produtos')
                 ->withInput()
-                ->with('error_create', 'Fornecedor inválida');
-        }
-
-        if ($this->model->where('produto', $request->produto)->where('categoria_id', $request->categoria)->where('fornecedor_id', $request->fornecedor)->first()) {
-            return redirect()->route('create.produtos')
-                ->withInput()
-                ->with('error_create', 'Já existe um registro desse produto com o mesmo fornecedor e categoria.');
+                ->with('error_create', 'Já existe um registro desse produto com a mesma categoria.');
         }
 
         $this->service->store(
@@ -104,16 +100,10 @@ class Produtos extends Controller
                 ->with('error_create', 'Categoria inválida');
         }
 
-        if (!Fornecedor::where('id', $request->fornecedor)->first()) {
-            return redirect()->route('create.produtos')
+        if ($this->model->where('id', '!=', $request->id)->where('produto', $request->produto)->where('categoria_id', $request->categoria)->first()) {
+            return redirect()->route('update.produtos', ['id' => $request->id])
                 ->withInput()
-                ->with('error_create', 'Fornecedor inválida');
-        }
-
-        if ($this->model->where('produto', $request->produto)->where('categoria_id', $request->categoria)->where('fornecedor_id', $request->fornecedor)->where('id', '!=', $request->id)->first()) {
-            return redirect()->route('create.produtos')
-                ->withInput()
-                ->with('error_create', 'Já existe um registro desse produto com o mesmo fornecedor e categoria.');
+                ->with('error_create', 'Já existe outro produto igual registrado na mesma categoria.');
         }
 
         $this->service->update(

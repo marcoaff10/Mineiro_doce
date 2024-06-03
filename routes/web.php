@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\CnpjController;
 use App\Http\Controllers\Categorias;
 use App\Http\Controllers\Compras;
+use App\Http\Controllers\Entradas;
 use App\Http\Controllers\Fornecedores;
 use App\Http\Controllers\Main;
 use App\Http\Controllers\Pedidos;
@@ -43,16 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
-    // Compras
-    Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
-    Route::get('/create_compras', [Compras::class, 'create'])->name('create.compras');
-
-    // Pedidos
-    Route::get('/show_pedidos', [Pedidos::class, 'show'])->name('show.pedidos');
-    Route::get('/create_pedidos', [Pedidos::class, 'create'])->name('create.pedidos');
-
-
-
+    // Entradas Produtos
+    Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
 
 
     // Perfil

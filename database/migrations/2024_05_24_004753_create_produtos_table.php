@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->uuid('categoria_id')->index();
-            $table->uuid('fornecedor_id')->index();
             $table->string('produto');
             $table->float('peso');
             $table->integer('minimo');
@@ -22,7 +21,6 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->foreign('categoria_id')->references('id')->on('categorias');
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
         });
     }
 

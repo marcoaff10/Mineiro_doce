@@ -20,15 +20,15 @@ class ProdutosEloquent implements ProdutosInterface
     public function paginate(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
     {
         $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
-            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
-            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
+            ->leftJoin('entradas', 'produtos.id', '=', 'entradas.produto_id')
+            ->select('produtos.*', 'categorias.categoria', 'entradas.quantidade')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
                     $query->orWhere('categoria', 'like', "%$filter%");
-                    $query->orWhere('fornecedor', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
+                    $query->orWhere('quantidade', 'like', "%$filter%");
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
@@ -41,13 +41,12 @@ class ProdutosEloquent implements ProdutosInterface
     {
 
         $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
-            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
-            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
+            ->leftJoin('entradas', 'produtos.id', '=', 'entradas.produto_id')
+            ->select('produtos.*', 'categorias.categoria', 'entradas.quantidade')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
                     $query->orWhere('categoria', 'like', "%$filter%");
-                    $query->orWhere('fornecedor', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
                 }
@@ -61,14 +60,13 @@ class ProdutosEloquent implements ProdutosInterface
     public function findOne(string $id): stdClass|null
     {
 
-        
         // buscando linha no banco que corresponde com o id informado
         $produto = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
-            ->leftJoin('fornecedores', 'produtos.fornecedor_id', '=', 'fornecedores.id')
-            ->select('produtos.*', 'categorias.categoria', 'fornecedores.fornecedor')
+            ->leftJoin('entradas', 'produtos.id', '=', 'entradas.produto_id')
+            ->select('produtos.*', 'categorias.categoria', 'entradas.motivo', 'entradas.quantidade.')
             ->where('produtos.id', $id)->first();
 
-            
+
         // caso não encontre informações com o id informado retorna null
         if (!$produto) return null;
 
@@ -80,7 +78,6 @@ class ProdutosEloquent implements ProdutosInterface
     public function store(CreateProdutos $dto): stdClass
     {
 
-        
         // Salvando as informações no banco
         $produto = $this->model->create(
             (array) $dto
