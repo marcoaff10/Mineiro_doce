@@ -43,8 +43,8 @@
                         </button>
                         <div class="collapse" id="clientes-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Visão Geral</a></li>
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Novo</a></li>
+                                <li class="ms-4"><a href="{{ route('show.clientes') }}" class="link-dark rounded">Visão Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('create.clientes') }}" class="link-dark rounded">Novo</a></li>
                             </ul>
                         </div>
                     </li>

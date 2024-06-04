@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RequestCreateFornededores extends FormRequest
+class RequestUpdateClientes extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,18 +21,19 @@ class RequestCreateFornededores extends FormRequest
      */
     public function rules(): array
     {
+        
         return [
             
             'cnpj' => [
                 'required',
-                'unique:fornecedores,cnpj',
+                "unique:clientes,cnpj,{$this->id},id",
                 'numeric'
             ],
 
-            'fornecedor' => [
+            'cliente' => [
                 'required',
                 'min:3',
-                'max:255',
+                'max:80',
             ],
 
             'telefone' => [
@@ -89,9 +90,9 @@ class RequestCreateFornededores extends FormRequest
             'cnpj.unique' => 'Já existe um registro com esse CNPJ.',
             'cnpj.numeric' => 'O campo CNPJ deve conter apenas números.',
             
-            'fornecedor.required' => 'O campo fornecedor é obrigátorio.',
-            'fornecedor.min' => 'O campo fornecedor deve conter no mínimo :min caracteres.',
-            'fornecedor.max' => 'O campo fornecedor deve conter no máximo :max caracteres.',
+            'cliente.required' => 'O campo cliente é obrigátorio.',
+            'cliente.min' => 'O campo cliente deve conter no mínimo :min caracteres.',
+            'cliente.max' => 'O campo cliente deve conter no máximo :max caracteres.',
 
             'telefone.required' => 'O campo telefone é obrogátorio.',
             'telefone.numeric' => 'O campo telefone deve conter apenas números.',

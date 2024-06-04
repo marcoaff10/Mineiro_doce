@@ -14,14 +14,17 @@ return new class extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('cliente');
+            $table->string('email');
             $table->string('cnpj');
             $table->string('telefone');
             $table->string('cidade');
             $table->string('cep');
+            $table->string('uf');
             $table->string('endereco');
             $table->string('bairro');
             $table->integer('num');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

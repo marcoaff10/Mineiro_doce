@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CnpjController;
 use App\Http\Controllers\Categorias;
+use App\Http\Controllers\Clientes;
 use App\Http\Controllers\Compras;
 use App\Http\Controllers\Entradas;
 use App\Http\Controllers\Fornecedores;
@@ -41,11 +42,21 @@ Route::middleware('auth')->group(function () {
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
     Route::get('/detalhes_produtos/{id}', [Produtos::class, 'detalhes'])->name('detalhes.produtos');
     Route::get('/update_produtos/{id}', [Produtos::class, 'update'])->name('update.produtos');
-    Route::put('/update_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
+    Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
     // Entradas Produtos
     Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
+
+
+    // Clientes
+    Route::get('/show_clientes', [Clientes::class, 'show'])->name('show.clientes');
+    Route::get('/create_clientes', [Clientes::class, 'create'])->name('create.clientes');
+    Route::post('/store_clientes', [Clientes::class, 'store'])->name('store.clientes');
+    Route::get('/detalhes_clientes/{id}', [Clientes::class, 'detalhes'])->name('detalhes.clientes');
+    Route::get('/update_cliente/{id}', [Clientes::class, 'update'])->name('update.clientes');
+    Route::put('/update_submit_clientes', [Clientes::class, 'update_submit'])->name('update.submit.clientes');
+    Route::put('/delete_clientes', [Clientes::class, 'delete'])->name('delete.clientes');
 
 
     // Perfil

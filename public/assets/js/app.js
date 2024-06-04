@@ -12,6 +12,7 @@ const endereco = document.querySelector('#endereco');
 const numero = document.querySelector('#num');
 
 const cnpj = document.querySelector('#cnpj');
+
 cnpj.addEventListener('change', () => {
     const valor_cnpj = cnpj.value;
     const url = 'https://publica.cnpj.ws/cnpj/' + valor_cnpj
