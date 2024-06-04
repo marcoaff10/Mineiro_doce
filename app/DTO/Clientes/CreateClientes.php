@@ -10,8 +10,8 @@ class CreateClientes
     public function __construct(
         public int $cnpj,
         public string $cliente,
-        public int $telefone,
         public string $email,
+        public int $telefone,
         public int $cep,
         public string $cidade,
         public string $uf,
@@ -26,8 +26,8 @@ class CreateClientes
         return new self(
             $request->cnpj,
             $request->cliente, 
-            $request->telefone,
             $request->email,
+            $request->telefone,
             $request->cep,
             $request->cidade,
             $request->uf,

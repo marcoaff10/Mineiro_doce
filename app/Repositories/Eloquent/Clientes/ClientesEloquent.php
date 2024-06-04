@@ -67,7 +67,7 @@ class ClientesEloquent implements ClientesInterface
     //=====================================================================
     public function store(CreateClientes $dto): stdClass
     {
-
+        
         $cliente = $this->model->create(
             (array) $dto
         );

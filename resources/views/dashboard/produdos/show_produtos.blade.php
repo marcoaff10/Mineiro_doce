@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                    <a href="" class="btn btn-secondary w-100">
+                    <a href="" class="btn btn-secondary w-100" data-bs-target="#saida" data-bs-toggle="modal">
                         Saida
                         <i class="bi bi-dash-circle-fill ms-1"></i>
                     </a>
@@ -54,6 +54,10 @@
             <!--===============================================Modal Entrada===================================================================================== -->
             <x-modal-entrada :produtos="$produtos" :fornecedores="$fornecedores" />
             <!--===============================================Fim Modal Entrada===================================================================================== -->
+
+            <!--===============================================Modal Saida===================================================================================== -->
+            <x-modal-saida :produtos="$produtos" :clientes="$clientes" />
+            <!--===============================================Fim Modal Saida===================================================================================== -->
 
             @if (count($produtos->items()) > 0)
                 <x-produtosLg :produtos="$produtos" :filters="$filters" />

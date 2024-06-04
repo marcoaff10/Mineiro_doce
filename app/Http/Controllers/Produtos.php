@@ -6,6 +6,7 @@ use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
 use App\Http\Requests\RequestProdutos;
 use App\Models\Categoria;
+use App\Models\Cliente;
 use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Services\Produtos\ProdutoService;
@@ -33,10 +34,11 @@ class Produtos extends Controller
         
         $fornecedores = Fornecedor::all();
 
+        $clientes = Cliente::all();
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores'));
+        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes'));
     }
 
     //=========================================================================================================

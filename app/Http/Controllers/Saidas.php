@@ -2,25 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use App\DTO\EntradaProdutos\CreateEntradaProdutos;
-use App\Http\Requests\RequestEntradaProdutos;
-use App\Services\EntradaProdutos\EntradaProdutoService;
+use App\DTO\SaidaProdutos\CreateSaidaProdutos;
+use App\Http\Requests\RequestSaidaProduto;
+use App\Services\SaidaProdutos\SaidaProdutoService;
 use Illuminate\Http\Request;
 
-class Entradas extends Controller
+class Saidas extends Controller
 {
-
-    public function __construct(protected EntradaProdutoService $service)
+    public function __construct(protected SaidaProdutoService $service)
     {
         
     }
+
+
     //=========================================================================================================
-    // Entradas
+    // Saidas
     //=========================================================================================================
-    public function store(RequestEntradaProdutos $request)
+    public function store(RequestSaidaProduto $request)
     {
         $this->service->store(
-            CreateEntradaProdutos::makeFromRequest($request)
+            CreateSaidaProdutos::makeFromRequest($request)
         );
 
         return redirect()->route('show.produtos');

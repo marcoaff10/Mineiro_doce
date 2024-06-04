@@ -10,6 +10,7 @@ use App\Http\Controllers\Main;
 use App\Http\Controllers\Pedidos;
 use App\Http\Controllers\Produtos;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Saidas;
 use Illuminate\Support\Facades\Route;
 
 
@@ -47,6 +48,7 @@ Route::middleware('auth')->group(function () {
 
     // Entradas Produtos
     Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
+    Route::post('/saida_produtos', [Saidas::class, 'store'])->name('saida.produtos');
 
 
     // Clientes
