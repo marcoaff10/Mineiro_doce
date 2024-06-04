@@ -3,13 +3,14 @@
 namespace App\DTO\EntradaProdutos;
 
 use App\Http\Requests\RequestEntradaProdutos;
+use App\Models\Entrada;
 
 class CreateEntradaProdutos
 {
     public function __construct(
         public string $motivo, 
+        public string $produto_id,
         public string|null $fornecedor_id, 
-        public string $produto_id, 
         public int $quantidade,
         public int $valor_unidade,
         public int $frete,
@@ -21,12 +22,12 @@ class CreateEntradaProdutos
     {
         return new self(
             $request->motivo,
-            $request->fornecedor,
             $request->produto,
+            $request->fornecedor,
             $request->quantidade,
             $request->valor_unidade,
             $request->frete,
-            $request->valor_total,
+            $request->valor_total
         );
     }    
 }

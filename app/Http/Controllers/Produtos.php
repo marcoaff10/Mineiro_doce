@@ -30,6 +30,7 @@ class Produtos extends Controller
             filter: $request->filter
         );
 
+        
         $fornecedores = Fornecedor::all();
 
 

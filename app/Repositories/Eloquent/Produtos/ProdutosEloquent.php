@@ -4,6 +4,7 @@ namespace App\Repositories\Eloquent\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
+use App\Models\Entrada_produto;
 use App\Models\Produto;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\PaginationPresenter;
@@ -19,19 +20,22 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function paginate(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
     {
-        $result = $this->model->leftJoin('categorias', 'produtos.categoria_id', '=', 'categorias.id')
-            ->leftJoin('entradas', 'produtos.id', '=', 'entradas.produto_id')
-            ->select('produtos.*', 'categorias.categoria', 'entradas.quantidade')
+        $result = $this->model->leftJoin('entradas_produtos', 'produtos.id', 'entradas_produtos.produto_id')
+            ->leftJoin('categorias', 'produtos.categoria_id', 'categorias.id')
+            ->select('produtos.id', Entrada_produto::raw("SUM(entradas_produtos.quantidade) as quantidade"), 'produtos.produto', 'produtos.peso', 'produtos.minimo', 'categorias.categoria')
+            ->groupBy('produtos.id')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
                     $query->orWhere('categoria', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
-                    $query->orWhere('minimo', 'like', "%$filter%");
                     $query->orWhere('quantidade', 'like', "%$filter%");
+                    $query->orWhere('minimo', 'like', "%$filter%");
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
+
+
 
         return new PaginationPresenter($result);
     }

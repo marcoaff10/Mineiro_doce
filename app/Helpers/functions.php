@@ -50,3 +50,16 @@ function primeiro_nome($nome)
 
     return $primeiro[0]. ' ' .$primeiro[1];
 }
+
+//=========================================================================================================
+function min_estoque($minimo, $quantidade)
+{
+    // função apra mostrar os niveis de estoque e alertar o usuário
+
+    $comprar = $minimo - ($minimo * 0.4);
+
+    if ($quantidade < $minimo) return 'text-danger';
+    elseif ($quantidade - $minimo <= $comprar) return 'text-warning';
+    else return 'text-success';
+    
+}
