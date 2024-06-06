@@ -22,6 +22,7 @@ class ProdutoService
             filter: $filter
         );
     }
+    
     //=====================================================================
     public function getAll(string $filter = null): array
     {

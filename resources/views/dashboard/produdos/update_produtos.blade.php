@@ -43,10 +43,10 @@
                 </div>
 
                 <div class="mb-4 d-flex justify-content-between">
-                    <div class="col-5">
+                    <div class="col-3">
                         <label for="peso" class="form-label">Peso</label>
                         <input type="number" name="peso" id="peso" class="form-control" placeholder="Peso..."
-                            value="{{ $produto->peso }}">
+                            value="{{ $produto->peso }}" required>
                         @error('peso')
                             <div class=" text-danger alert-danger mt-2">
                                 {{ $errors->get('peso')[0] }}
@@ -54,13 +54,24 @@
                         @enderror
                     </div>
 
-                    <div class="col-5">
-                        <label for="minimo" class="form-label">Mínina</label>
-                        <input type="number" name="minimo" id="minimo" class="form-control" placeholder="Mínimo..."
-                            value="{{ $produto->minimo }}">
+                    <div class="col-3">
+                        <label for="minimo" class="form-label">Mínino</label>
+                        <input type="number" name="minimo" id="minimo" class="form-control" placeholder="Mín..."
+                            value="{{ $produto->minimo }}" required>
                         @error('minimo')
                             <div class=" text-danger alert-danger mt-2">
                                 {{ $errors->get('minimo')[0] }}
+                            </div>
+                        @enderror
+                    </div>
+
+                    <div class="col-3">
+                        <label for="maximo" class="form-label">Máximo</label>
+                        <input type="number" name="maximo" id="maximo" class="form-control" placeholder="Máx..."
+                            value="{{ $produto->maximo }}" required>
+                        @error('maximo')
+                            <div class=" text-danger alert-danger mt-2">
+                                {{ $errors->get('maximo')[0] }}
                             </div>
                         @enderror
                     </div>

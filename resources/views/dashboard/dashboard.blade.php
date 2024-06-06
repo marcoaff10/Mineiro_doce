@@ -25,7 +25,7 @@
                         </button>
                         <div class="collapse" id="compras-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.produtos') }}" class="link-dark rounded">Visão
+                                <li class="ms-4"><a href="{{ route('estoque.produtos') }}" class="link-dark rounded">Visão
                                         Geral</a></li>
                                 <li class="ms-4"><a href="{{ route('create.produtos') }}"
                                         class="link-dark rounded">Novo</a></li>

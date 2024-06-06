@@ -24,6 +24,6 @@ class Entradas extends Controller
             CreateEntradaProdutos::makeFromRequest($request)
         );
 
-        return redirect()->route('show.produtos');
+        return redirect()->route('estoque.produtos');
     }
 }

@@ -53,13 +53,13 @@
 
                             <div class="col-3">
                                 <label for="valor_unidade" class="form-label">Valor Uni.</label>
-                                <input type="number" name="valor_unidade" id="valor_unidade" class="form-control"
+                                <input type="text" name="valor_unidade" id="valor_unidade" class="form-control"
                                     required>
                             </div>
 
                             <div class="col-3">
                                 <label for="frete" class="form-label">Frete</label>
-                                <input type="number" name="frete" id="frete" class="form-control" required>
+                                <input type="text" name="frete" id="frete" class="form-control" required>
                             </div>
                         </div>
 

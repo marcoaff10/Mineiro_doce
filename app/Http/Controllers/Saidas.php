@@ -25,7 +25,7 @@ class Saidas extends Controller
             CreateSaidaProdutos::makeFromRequest($request)
         );
 
-        return redirect()->route('show.produtos');
+        return redirect()->route('estoque.produtos');
     }
 
     //=========================================================================================================

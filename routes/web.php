@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
 
     // Produtos
     Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
+    Route::get('/estoque_produtos', [Produtos::class, 'estoque'])->name('estoque.produtos');
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
     Route::get('/detalhes_produtos/{id}', [Produtos::class, 'detalhes'])->name('detalhes.produtos');

@@ -1,12 +1,12 @@
 @extends('dashboard.dashboard')
-@section('title', 'Produtos')
+@section('title', 'Estoque')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Produtos <i class="bi bi-box ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block">Estoque <i class="bi bi-box ms-1 align-middle"></i></h1>
                 </div>
             </div>
             <div class="row py-3">
@@ -31,22 +31,23 @@
 
             <div class="row p-2 justify-content-between p-1">
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                    <a href=" {{ route('create.produtos') }} " class="btn btn-primary w-100">
-                        Cadastrar Produto
+                    <a href=" {{ route('show.produtos') }} " class="btn btn-primary w-100">
+                        Cadastrar Produto 
+                        <i class="bi bi-plus-circle ms-1"></i>
                     </a>
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                     <a href="" class="btn btn-success w-100" data-bs-target="#entrada" data-bs-toggle="modal">
                         Entrada
-                        <i class="bi bi-plus-circle-fill ms-1"></i>
+                        <i class="bi bi-plus-circle ms-1"></i>
                     </a>
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                     <a href="" class="btn btn-secondary w-100" data-bs-target="#saida" data-bs-toggle="modal">
                         Saida
-                        <i class="bi bi-dash-circle-fill ms-1"></i>
+                        <i class="bi bi-dash-circle ms-1"></i>
                     </a>
                 </div>
             </div>
@@ -60,11 +61,11 @@
             <!--===============================================Fim Modal Saida===================================================================================== -->
 
             @if (count($produtos->items()) > 0)
-                <x-produtosLg :produtos="$produtos" :filters="$filters" />
+                <x-produtoEstoqueLg :produtos="$produtos" :filters="$filters" />
                 <!--===============================================MD===================================================================================== -->
-                <x-produtosMd :produtos="$produtos" :filters="$filters" />
+                <x-produtoEstoqueMd :produtos="$produtos" :filters="$filters" />
                 <!--================================================SM==================================================================================== -->
-                <x-produtosSm :produtos="$produtos" :filters="$filters" />
+                <x-produtoEstoqueSm :produtos="$produtos" :filters="$filters" />
             @else
                 <p class=" text-center opacity-50 mt-5">Sem produtos cadastrados.</p>
             @endif

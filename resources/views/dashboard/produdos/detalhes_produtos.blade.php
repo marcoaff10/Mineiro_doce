@@ -27,7 +27,7 @@
 
                     <div class="col-12 text-center mt-4">
                         {{$produto->entrada->quantidade}}
-                        <button class="btn btn-danger"data-bs-target="#confirmDelete" 
+                        <button class="btn btn-danger" data-bs-target="#confirmDelete" 
                             data-bs-toggle="modal" 
                             @if (!is_null($produto->saida) && $produto->entrada->quantidade - $produto->saida->quantidade <= 0)
                                 disabled

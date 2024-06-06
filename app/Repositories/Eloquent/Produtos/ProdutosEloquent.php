@@ -24,7 +24,7 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function paginate(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
     {
-        $result = Estoque::leftJoin('produtos', 'produtos.id', 'estoque.produto_id')
+        $result = $this->model->leftJoin('estoque', 'produtos.id', 'estoque.produto_id')
             ->join('categorias', 'categorias.id', 'produtos.categoria_id')
             ->select(
                 'produtos.id',
@@ -33,10 +33,11 @@ class ProdutosEloquent implements ProdutosInterface
                 'produtos.minimo',
                 'produtos.maximo',
                 'categorias.categoria',
-                Estoque::raw('SUM(estoque.qtde_entrada) AS entrada'),
-                Estoque::raw('SUM(estoque.qtde_saida) AS saida'),
-                Estoque::raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
+                $this->model->raw('SUM(estoque.qtde_entrada) AS entrada'),
+                $this->model->raw('SUM(estoque.qtde_saida) AS saida'),
+                $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
             )
+            ->orderByRaw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) DESC')
             ->groupBy('produtos.id')
             ->where(function ($query) use ($filter) {
                 if ($filter) {
@@ -45,15 +46,16 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
                     $query->orWhere('maximo', 'like', "%$filter%");
-                    $query->orWhere('entrada', 'like', "%$filter%");
-                    $query->orWhere('saida', 'like', "%$filter%");
-                    $query->orWhere('estoque', 'like', "%$filter%");
+                    $query->orHavingRaw(
+                        "CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) like %$filter%"
+                    );
+
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
-    }
+    }  
 
     //=====================================================================
     public function getAll(string $filter = null): array
@@ -78,6 +80,8 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('categoria', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
+                    $query->orWhere('maximo', 'like', "%$filter%");
+
                 }
             })
             ->get();

@@ -22,7 +22,7 @@ class Produtos extends Controller
     //=========================================================================================================
     // Produtos
     //=========================================================================================================
-    public function show(Request $request)
+    public function estoque(Request $request)
     {
 
         $produtos = $this->service->paginate(
@@ -39,7 +39,7 @@ class Produtos extends Controller
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes','produtosEstoque'));
+        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes','produtosEstoque'));
     }
 
     //=========================================================================================================
@@ -111,7 +111,7 @@ class Produtos extends Controller
             UpdateProdutos::makeFromRequest($request)
         );
 
-        return redirect()->route('detalhes.produtos', ['id' => $request->id]);
+        return redirect()->route('show.produtos');
     }
 
     //=========================================================================================================

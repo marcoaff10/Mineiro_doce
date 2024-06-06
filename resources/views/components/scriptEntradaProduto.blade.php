@@ -62,6 +62,7 @@
                     if (data.estoque === null) {
                         var semEstoque = 0;
                         $('#estoque').html(semEstoque);
+                        $('#estoqueHidden').val(semEstoque)
                     } else {
                         $('#estoque').html(data.estoque);
                         $('#estoqueHidden').val(data.estoque)
@@ -75,7 +76,7 @@
         quantidade.addEventListener('focusout', () => {
             var estoque = document.querySelector('#estoqueHidden');
 
-            if (parseInt(quantidade.value) > estoque.value) {
+            if (parseInt(quantidade.value) > estoque.value || estoque.value == 0) {
                 let error = document.querySelector('#error');
                 error.classList.remove('d-none');
                 let baixar = document.querySelector('#baixar');
