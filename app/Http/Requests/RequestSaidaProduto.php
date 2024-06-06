@@ -48,12 +48,6 @@ class RequestSaidaProduto extends FormRequest
                 'required',
                 'numeric',
             ],
-
-            'valor_total' => [
-                'required',
-                'numeric',
-            ],
-
         ];
     }
 
@@ -72,9 +66,6 @@ class RequestSaidaProduto extends FormRequest
 
             'frete.required' => 'O campo frete é obrigátorio',
             'frete.numeric' => 'O campo frete deve ser do tipo numérico.',
-
-            'valor_total.required' => 'O campo valor total é obrigátorio',
-            'valor_total.numeric' => 'O campo valor total deve ser do tipo numérico.'
         ];
     }
 }

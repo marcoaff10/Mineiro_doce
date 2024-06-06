@@ -13,7 +13,6 @@ class CreateSaidaProdutos
         public int $quantidade,
         public int $valor_unidade,
         public int $frete,
-        public int $valor_total
         ){}
 
     //=========================================================================================================
@@ -26,7 +25,6 @@ class CreateSaidaProdutos
             $request->quantidade,
             $request->valor_unidade,
             $request->frete,
-            $request->valor_total
         );
     }
 }

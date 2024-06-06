@@ -53,21 +53,14 @@ function primeiro_nome($nome)
 }
 
 //=========================================================================================================
-function min_estoque($minimo, $quantidade)
-{
-    // função apra mostrar os niveis de estoque e alertar o usuário
+const MOTIVO_ENTRADA = [
+    'compra' => 'Compra',
+    'doacao' => 'Doação',
+    'acerto_de_estoque' => 'Acerto de Estoque'
+];
 
-    $comprar = $minimo - ($minimo * 0.4);
-
-    if ($quantidade < $minimo) return 'text-danger';
-    elseif ($quantidade - $minimo <= $comprar) return 'text-warning';
-    else return 'text-success';
-}
-
-function movimentacao($produto)
-{
-    if (!Entrada_produto::where('produto_id', $produto)->first() && !Saida_produto::where('produto_id', $produto)->first()) {
-        
-        return 'd-none';
-    } 
-}
+const MOTIVO_SAIDA = [
+    'venda' => 'Venda',
+    'doacao' => 'Doação',
+    'acerto_de_estoque' => 'Acerto de Estoque'
+];

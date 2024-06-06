@@ -19,6 +19,7 @@ class Entradas extends Controller
     //=========================================================================================================
     public function store(RequestEntradaProdutos $request)
     {
+
         $this->service->store(
             CreateEntradaProdutos::makeFromRequest($request)
         );

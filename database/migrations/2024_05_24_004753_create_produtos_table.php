@@ -16,7 +16,8 @@ return new class extends Migration
             $table->uuid('categoria_id')->index();
             $table->string('produto');
             $table->float('peso');
-            $table->integer('minimo');
+            $table->integer('minimo')->default(0);
+            $table->integer('maximo')->default(0);
             $table->timestamps();
             $table->softDeletes();
 

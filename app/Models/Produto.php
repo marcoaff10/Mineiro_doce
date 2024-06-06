@@ -18,7 +18,8 @@ class Produto extends Model
         'categoria_id',
         'produto',
         'peso',
-        'minimo'
+        'minimo',
+        'maximo'
     ];
 
     public function categoria(): BelongsTo

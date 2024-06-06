@@ -14,7 +14,6 @@ class CreateEntradaProdutos
         public int $quantidade,
         public int $valor_unidade,
         public int $frete,
-        public int $valor_total
         ){}
 
     //=========================================================================================================
@@ -27,7 +26,6 @@ class CreateEntradaProdutos
             $request->quantidade,
             $request->valor_unidade,
             $request->frete,
-            $request->valor_total
         );
     }    
 }

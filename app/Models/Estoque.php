@@ -6,18 +6,15 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Saida_produto extends Model
+class Estoque extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'saida_produto';
+    protected $table = 'estoque';
 
     protected $fillable = [
-        'motivo',
         'produto_id',
-        'cliente_id',
-        'quantidade',
-        'valor_unidade',
-        'frete',
+        'qtde_entrada',
+        'qtde_saida'
     ];
 }

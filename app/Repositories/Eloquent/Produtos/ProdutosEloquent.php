@@ -5,6 +5,7 @@ namespace App\Repositories\Eloquent\Produtos;
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
 use App\Models\Entrada_produto;
+use App\Models\Estoque;
 use App\Models\Produto;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\PaginationPresenter;
@@ -23,18 +24,18 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function paginate(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
     {
-        $result = $this->model->leftJoin('entradas_produtos', 'produtos.id', 'entradas_produtos.produto_id')
-            ->leftJoin('saidas_produtos', 'produtos.id', 'saidas_produtos.produto_id')
-            ->join('categorias', 'produtos.categoria_id', 'categorias.id')
+        $result = Estoque::leftJoin('produtos', 'produtos.id', 'estoque.produto_id')
+            ->join('categorias', 'categorias.id', 'produtos.categoria_id')
             ->select(
                 'produtos.id',
-                $this->model->raw(
-                    "SUM(CASE WHEN entradas_produtos.quantidade IS NULL THEN 0 ELSE entradas_produtos.quantidade END) - SUM(CASE WHEN saidas_produtos.quantidade IS NULL THEN 0 ELSE saidas_produtos.quantidade END) as estoque"
-                ),
                 'produtos.produto',
                 'produtos.peso',
                 'produtos.minimo',
-                'categorias.categoria'
+                'produtos.maximo',
+                'categorias.categoria',
+                Estoque::raw('SUM(estoque.qtde_entrada) AS entrada'),
+                Estoque::raw('SUM(estoque.qtde_saida) AS saida'),
+                Estoque::raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
             )
             ->groupBy('produtos.id')
             ->where(function ($query) use ($filter) {
@@ -42,8 +43,11 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->where('produto', 'like', "%$filter%");
                     $query->orWhere('categoria', 'like', "%$filter%");
                     $query->orWhere('peso', 'like', "%$filter%");
-                    $query->orWhere('quantidade', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
+                    $query->orWhere('maximo', 'like', "%$filter%");
+                    $query->orWhere('entrada', 'like', "%$filter%");
+                    $query->orWhere('saida', 'like', "%$filter%");
+                    $query->orWhere('estoque', 'like', "%$filter%");
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
@@ -55,13 +59,13 @@ class ProdutosEloquent implements ProdutosInterface
     public function getAll(string $filter = null): array
     {
 
-        $result = $this->model->leftJoin('entradas_produtos', 'produtos.id', 'entradas_produtos.produto_id')
-            ->leftJoin('saidas_produtos', 'produtos.id', 'saidas_produtos.produto_id')
+        $result = $this->model->leftJoin('entrada_produto', 'produtos.id', 'entrada_produto.produto_id')
+            ->leftJoin('saida_produto', 'produtos.id', 'saida_produto.produto_id')
             ->join('categorias', 'produtos.categoria_id', 'categorias.id')
             ->select(
                 'produtos.id',
                 $this->model->raw(
-                    "SUM(CASE WHEN entradas_produtos.quantidade IS NULL THEN 0 ELSE entradas_produtos.quantidade END) - SUM(CASE WHEN saidas_produtos.quantidade IS NULL THEN 0 ELSE saidas_produtos.quantidade END) as estoque"
+                    "SUM(CASE WHEN entrada_produto.quantidade IS NULL THEN 0 ELSE entrada_produto.quantidade END) - SUM(CASE WHEN saida_produto.quantidade IS NULL THEN 0 ELSE saida_produto.quantidade END) as estoque"
                 ),
                 'produtos.produto',
                 'produtos.peso',
@@ -88,9 +92,9 @@ class ProdutosEloquent implements ProdutosInterface
         // buscando linha no banco que corresponde com o id informado
 
         $produto = [
-            'entrada' => $this->model->leftJoin('entradas_produtos', 'produtos.id', '=', 'entradas_produtos.produto_id')
-                            ->join('entradas', 'entradas.id', 'entradas_produtos.entrada_id')
-                            ->join('fornecedores', 'fornecedores.id', 'entradas_produtos.fornecedor_id')
+            'entrada' => $this->model->leftJoin('entrada_produto', 'produtos.id', '=', 'entrada_produto.produto_id')
+                            ->join('entradas', 'entradas.id', 'entrada_produto.entrada_id')
+                            ->join('fornecedores', 'fornecedores.id', 'entrada_produto.fornecedor_id')
                             ->join('categorias', 'categorias.id', 'produtos.categoria_id')
                             ->select(
                                 $this->model->raw('produtos.id AS id_produto'),
@@ -99,30 +103,30 @@ class ProdutosEloquent implements ProdutosInterface
                                 'produtos.minimo',
                                 $this->model->raw('produtos.created_at AS created_produto'),
                                 $this->model->raw('produtos.updated_at AS updated_produto'),
-                                'entradas_produtos.quantidade',
-                                'entradas_produtos.valor_unidade',
-                                'entradas_produtos.frete',
-                                'entradas_produtos.valor_total',
-                                $this->model->raw('entradas_produtos.created_at AS dt_entrada'),
+                                'entrada_produto.quantidade',
+                                'entrada_produto.valor_unidade',
+                                'entrada_produto.frete',
+                                'entrada_produto.valor_total',
+                                $this->model->raw('entrada_produto.created_at AS dt_entrada'),
                                 'entradas.motivo',
                                 'fornecedores.fornecedor'
                             )
                             ->where('produtos.id', $id)->first(),
 
-            'saida' => $this->model->leftJoin('saidas_produtos', 'saidas_produtos.produto_id', 'produtos.id')
-                                ->join('saidas', 'saidas.id', 'saidas_produtos.saida_id')
-                                ->join('clientes', 'clientes.id', 'saidas_produtos.cliente_id')
+            'saida' => $this->model->leftJoin('saida_produto', 'saida_produto.produto_id', 'produtos.id')
+                                ->join('saidas', 'saidas.id', 'saida_produto.saida_id')
+                                ->join('clientes', 'clientes.id', 'saida_produto.cliente_id')
                                 ->join('categorias', 'categorias.id', 'produtos.categoria_id')
                                 ->select(
                                     $this->model->raw('produtos.id AS id_produto'),
                                     'produtos.produto',
                                     'produtos.peso',
                                     'produtos.minimo',
-                                    'saidas_produtos.quantidade',
-                                    'saidas_produtos.valor_unidade',
-                                    'saidas_produtos.frete',
-                                    'saidas_produtos.valor_total',
-                                    $this->model->raw('saidas_produtos.created_at AS dt_saida'),
+                                    'saida_produto.quantidade',
+                                    'saida_produto.valor_unidade',
+                                    'saida_produto.frete',
+                                    'saida_produto.valor_total',
+                                    $this->model->raw('saida_produto.created_at AS dt_saida'),
                                     'saidas.motivo',
                                     'clientes.cliente'
                                 )
@@ -142,7 +146,7 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function store(CreateProdutos $dto): stdClass
     {
-
+      
         // Salvando as informações no banco
         $produto = $this->model->create(
             (array) $dto

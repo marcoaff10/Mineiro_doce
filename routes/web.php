@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     // Entradas Produtos
     Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
     Route::post('/saida_produtos', [Saidas::class, 'store'])->name('saida.produtos');
+    Route::get('/qtde_estoque/{id}', [Saidas::class, 'qtde_estoque'])->name('qtde.estoque');
 
 
     // Clientes

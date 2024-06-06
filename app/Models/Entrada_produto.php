@@ -10,15 +10,14 @@ class Entrada_produto extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $table = 'entradas_produtos';
+    protected $table = 'entrada_produto';
 
     protected $fillable = [
-        'entrada_id',
+        'motivo',
         'produto_id',
         'fornecedor_id',
         'quantidade',
         'valor_unidade',
         'frete',
-        'valor_total'
     ];
 }

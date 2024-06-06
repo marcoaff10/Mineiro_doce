@@ -20,15 +20,6 @@
             }
         });
 
-        const total = document.querySelector('#valor_total');
-        const quantidade = document.querySelector('#quantidade');
-        const unidade = document.querySelector('#valor_unidade');
-        const frete = document.querySelector('#frete');
-
-        frete.addEventListener('change', () => {
-
-            total.value = (parseInt(quantidade.value) * parseInt(unidade.value)) + parseInt(frete.value);
-        });
     }
 
     //====================================================================================================
@@ -45,7 +36,7 @@
             }
         });
 
-        estoque()
+        estoque();
 
         const total = document.querySelector('#valor_totalSaida');
         const quantidade = document.querySelector('#quantidadeSaida');
@@ -62,22 +53,39 @@
         var select = document.querySelector('#produtoSaida');
 
         select.onchange = function(event) {
-            var option = event.target.options[event.target.selectedIndex].dataset.estoque;
-            var quantidade = document.querySelector('#estoque');
-            quantidade.textContent = option;
-
-            var quantidade = document.querySelector('#quantidadeSaida');
-            quantidade.addEventListener('change', () => {
-
-                if (parseInt(quantidade.value)  > option) {
-                    let error = document.querySelector('#error');
-                    error.classList.remove('d-none');
-                } else {
-                    error.classList.add('d-none');
+            var id = event.target.options[event.target.selectedIndex].dataset.estoque;
+            url = "{{ route('qtde.estoque', ':id') }}";
+            url = url.replace(':id', id)
+            $.ajax({
+                url: url,
+                success: (data) => {
+                    if (data.estoque === null) {
+                        var semEstoque = 0;
+                        $('#estoque').html(semEstoque);
+                    } else {
+                        $('#estoque').html(data.estoque);
+                        $('#estoqueHidden').val(data.estoque)
+                    }
                 }
-            });
+            }, 'json');
         }
 
+        var quantidade = document.querySelector('#quantidadeSaida')
+
+        quantidade.addEventListener('focusout', () => {
+            var estoque = document.querySelector('#estoqueHidden');
+
+            if (parseInt(quantidade.value) > estoque.value) {
+                let error = document.querySelector('#error');
+                error.classList.remove('d-none');
+                let baixar = document.querySelector('#baixar');
+                baixar.setAttribute('disabled', true)
+            } else {
+                error.classList.add('d-none');
+                baixar.disabled = false;
+            }
+
+        });
 
     }
 </script>

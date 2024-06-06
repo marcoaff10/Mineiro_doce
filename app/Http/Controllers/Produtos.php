@@ -31,14 +31,15 @@ class Produtos extends Controller
             filter: $request->filter
         );
 
-        
+ 
         $fornecedores = Fornecedor::all();
+        $produtosEstoque = $this->model->all();
 
         $clientes = Cliente::all();
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes'));
+        return view('dashboard.produdos.show_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes','produtosEstoque'));
     }
 
     //=========================================================================================================

@@ -43,7 +43,12 @@ class RequestProdutos extends FormRequest
                 'required',
                 'numeric',
                 'min:0'
+            ],
 
+            'maximo' => [
+                'required',
+                'numeric',
+                'min:0'
             ]
         ];
     }
@@ -65,7 +70,11 @@ class RequestProdutos extends FormRequest
 
             'minimo.required' => 'O campo minimo é obrigátorio.',
             'minimo.numeric' => 'O campo minimo deve ser um valor numérico.',
-            'minimo.min' => 'O minimo não pode ser menor do que :min.'
+            'minimo.min' => 'O minimo não pode ser menor do que :min.',
+
+            'maximo.required' => 'O campo maximo é obrigátorio.',
+            'maximo.numeric' => 'O campo maximo deve ser um valor numérico.',
+            'maximo.min' => 'O maximo não pode ser menor do que :min.'
 
         ];
     }
