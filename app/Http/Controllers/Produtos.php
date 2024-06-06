@@ -46,7 +46,7 @@ class Produtos extends Controller
     {
         $produto = $this->service->findOne($id);
 
-        dd($produto);
+        
         return view('dashboard.produdos.detalhes_produtos', compact('produto'));
     }
 
@@ -55,10 +55,8 @@ class Produtos extends Controller
     {
 
         $categorias = Categoria::get();
-        $fornecedores = Fornecedor::get();
 
-
-        return view('dashboard.produdos.create_produtos', compact('categorias', 'fornecedores'));
+        return view('dashboard.produdos.create_produtos', compact('categorias'));
     }
 
     //=========================================================================================================
@@ -87,11 +85,10 @@ class Produtos extends Controller
     public function update($id)
     {
         
-        $produto = $this->service->findOne($id);
+        $produto = $this->model->where('id', $id)->first();
         $categorias = Categoria::get();
-        $fornecedores = Fornecedor::get();
         
-        return view('dashboard.produdos.update_produtos', compact('produto', 'categorias', 'fornecedores'));
+        return view('dashboard.produdos.update_produtos', compact('produto', 'categorias'));
     }
 
     //=========================================================================================================

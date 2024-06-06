@@ -45,6 +45,8 @@
             }
         });
 
+        estoque()
+
         const total = document.querySelector('#valor_totalSaida');
         const quantidade = document.querySelector('#quantidadeSaida');
         const unidade = document.querySelector('#valor_unidadeSaida');
@@ -54,5 +56,28 @@
 
             total.value = (parseInt(quantidade.value) * parseInt(unidade.value)) - parseInt(frete.value);
         });
+    }
+    //====================================================================================================
+    function estoque() {
+        var select = document.querySelector('#produtoSaida');
+
+        select.onchange = function(event) {
+            var option = event.target.options[event.target.selectedIndex].dataset.estoque;
+            var quantidade = document.querySelector('#estoque');
+            quantidade.textContent = option;
+
+            var quantidade = document.querySelector('#quantidadeSaida');
+            quantidade.addEventListener('change', () => {
+
+                if (parseInt(quantidade.value)  > option) {
+                    let error = document.querySelector('#error');
+                    error.classList.remove('d-none');
+                } else {
+                    error.classList.add('d-none');
+                }
+            });
+        }
+
+
     }
 </script>

@@ -18,6 +18,7 @@ class SaidaProdutosEloquent implements SaidaProdutosInterface
 
     public function store(CreateSaidaProdutos $dto): stdClass
     {
+
         $saida = $this->model->create(
             [
                 'motivo' => $dto->motivo,

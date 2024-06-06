@@ -15,37 +15,29 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-5 text-info text-center">{{ $produto->produto }}</strong>
+                <strong class="fs-5 text-info text-center">{{ $produto->entrada->produto }}</strong>
             </div>
             <div class="card-body">
                 <div class="row justify-content-between">
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-4">
-                        <h2 class="mb-3 fw-bold">Informações:</h2>
-                        <ul>
-                            <li>Produto: {{ $produto->produto }}</li>
-                            <li>Categoria: {{ $produto->categoria }}</li>
-
-                            <li>Peso:
-                                {{ $produto->peso >= 1000 ? $produto->peso / 1000 . 'kg' : $produto->peso . 'g' }}
-                            </li>
-                            <li>Quantidade mínima: {{ $produto->minimo }} uni.</li>
-                            <li>Estoque: </li>
-                        </ul>
-                    </div>
-
-                    <div class="col-lg-5 col-md-12 col-sm-12 mb-4">
-                        <h2 class="mb-3 fw-bold">datas:</h2>
-                        <ul>
-                            <li>Cadastrado: {{ date('d/m/Y', strtotime($produto->created_at)) }}</li>
-                            <li>Ultima atualização: {{ date('d/m/Y', strtotime($produto->updated_at)) }}</li>
-                        </ul>
-                    </div>
+                    <h2 class="mb-2 fw-bold">Informações:</h2>
+                    <ul>
+                        <li>Cadastrado: {{ date('d/m/Y', strtotime($produto->entrada->created_produto)) }}</li>
+                        <li>Ultima atualização: {{ date('d/m/Y', strtotime($produto->entrada->updated_produto)) }}</li>
+                    </ul>
 
                     <div class="col-12 text-center mt-4">
-
-                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                            data-bs-toggle="modal">Inativar</a>
-                        <a href="{{ route('update.produtos', ['id' => $produto->id]) }}" class="btn btn-primary">Editar</a>
+                        {{$produto->entrada->quantidade}}
+                        <button class="btn btn-danger"data-bs-target="#confirmDelete" 
+                            data-bs-toggle="modal" 
+                            @if (!is_null($produto->saida) && $produto->entrada->quantidade - $produto->saida->quantidade <= 0)
+                                disabled
+                            @elseif (is_null($produto->saida) || $produto->entrada->quantidade > 0)
+                                disabled
+                            @endif>
+                            Inativar
+                        </button>
+                        <a href="{{ route('update.produtos', ['id' => $produto->entrada->id_produto]) }}"
+                            class="btn btn-primary">Editar</a>
 
                     </div>
 
@@ -65,13 +57,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Deseja inativar o produto <strong>{{ $produto->produto }}</strong> ?
+                    Deseja inativar o produto <strong>{{ $produto->entrada->produto }}</strong> ?
                 </div>
                 <div class="modal-footer">
                     <form action="{{ route('delete.produtos') }}" method="POST">
                         @method('PUT')
                         @csrf
-                        <input type="hidden" name="id" value="{{ $produto->id }}">
+                        <input type="hidden" name="id" value="{{ $produto->entrada->id_produto }}">
                         <button type="submit" class="btn btn-danger">
                             confirmar
                         </button>

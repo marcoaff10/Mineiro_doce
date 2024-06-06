@@ -5,7 +5,7 @@
             <th class="text-center">Categoria</th>
             <th class="text-center">QTDE. Min</th>
             <th class="text-center">Estoque</th>
-            <th class="text-center">Detalhes</th>
+            <th class="text-center">Movimentações</th>
         </thead>
         <tbody>
             @foreach ($produtos->items() as $produto)
@@ -14,11 +14,11 @@
                     <td class=" align-middle"> {{ $produto->categoria }} </td>
                     <td class="text-center align-middle"> {{ $produto->minimo }} uni. </td>
                     <td
-                        class="text-center align-middle fw-bold {{ min_estoque($produto->minimo, $produto->quantidade) }}">
-                        {{ $produto->quantidade > 0 ? $produto->quantidade : '0' }}</td>
+                        class="text-center align-middle fw-bold {{ min_estoque($produto->minimo, $produto->estoque) }}">
+                        {{ $produto->estoque }}</td>
                     <td class="text-center align-middle">
                         <a href=" {{ route('detalhes.produtos', ['id' => $produto->id]) }} "
-                            class="text-decoration-none text-success">
+                            class="text-decoration-none text-success {{ movimentacao($produto->id) }}">
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </a>
                     </td>
