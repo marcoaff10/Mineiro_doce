@@ -66,3 +66,38 @@ const MOTIVO_SAIDA = [
 ];
 
 //=========================================================================================================
+function motivoEntrada($motivo)
+{
+    // retorna o valor da array motivo da entrada
+    if (key_exists($motivo, MOTIVO_ENTRADA)) {
+        return MOTIVO_ENTRADA[$motivo];
+    }
+
+}
+
+//=========================================================================================================
+function motivoSaida($motivo)
+{
+    if (key_exists($motivo, MOTIVO_SAIDA)) {
+        return MOTIVO_SAIDA[$motivo];
+    }
+}
+
+//=========================================================================================================
+function somaProdutos($array)
+{
+    $valor = array_reduce($array, function($carry, $items) {
+        return $carry + $items->valor_unidade;
+    });
+
+    $frete = array_reduce($array, function($carry, $items) {
+        return $carry + $items->frete;
+    });
+
+
+
+    return [
+        'valor' => $valor,
+        'frete' => $frete
+    ];
+}

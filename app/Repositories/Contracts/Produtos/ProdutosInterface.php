@@ -12,6 +12,8 @@ interface ProdutosInterface
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function getAll(string $filter = null): array;
     public function findOne(string $id): stdClass|null;
+    public function paginateEntradas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
+    public function paginateSaidas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function store(CreateProdutos $dto): stdClass;
     public function update(UpdateProdutos $dto): stdClass|null;
     public function delete(string $id): void;

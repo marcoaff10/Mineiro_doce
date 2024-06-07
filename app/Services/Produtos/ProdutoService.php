@@ -36,6 +36,28 @@ class ProdutoService
     }
 
     //=====================================================================
+    public function paginateEntradas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->produto_interface->paginateEntradas(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
+    public function paginateSaidas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->produto_interface->paginateSaidas(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
     public function store(CreateProdutos $dto):stdClass
     {
         return $this->produto_interface->store($dto);

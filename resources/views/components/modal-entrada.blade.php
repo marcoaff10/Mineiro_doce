@@ -25,7 +25,7 @@
 
                         <div class="mb-3 d-none" id="fornecedor">
                             <label for="fornecedor" class="form-label">Fornecedor</label>
-                            <select name="fornecedor" class="form-select" required>
+                            <select name="fornecedor" id="fornecedorSelect" class="form-select">
                                 <option value="">Selecione um Fornecedor</option>
                                 @foreach ($fornecedores as $fornecedor)
                                     <option value="{{ $fornecedor->id }}">{{ $fornecedor->fornecedor }}
@@ -38,7 +38,7 @@
                             <label for="produto" class="form-label">Produto</label>
                             <select name="produto" id="produto" class="form-select" required>
                                 <option value="">Selecione um Produto</option>
-                                @foreach ($produtos as $produto)
+                                @foreach ($produtos->items() as $produto)
                                     <option value="{{ $produto->id }}">{{ $produto->produto }}
                                     </option>
                                 @endforeach

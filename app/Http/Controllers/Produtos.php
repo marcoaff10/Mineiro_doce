@@ -31,24 +31,44 @@ class Produtos extends Controller
             filter: $request->filter
         );
 
- 
+        
         $fornecedores = Fornecedor::all();
-        $produtosEstoque = $this->model->all();
 
         $clientes = Cliente::all();
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes','produtosEstoque'));
+        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes'));
     }
 
     //=========================================================================================================
-    public function detalhes(string $id)
+    public function movimentacao(string $id, Request $request)
     {
         $produto = $this->service->findOne($id);
 
+        $produtoEntrada = $this->service->paginateEntradas(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+        );
         
-        return view('dashboard.produdos.detalhes_produtos', compact('produto'));
+        $produtoSaida = $this->service->paginateSaidas(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+        );
+
+        foreach ($produtoEntrada->items() as $valor) {
+            $total = 0;
+            $total += $valor->valor_unidade;
+        }
+
+
+
+        
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'produtoEntrada', 'produtoSaida','filters'));
     }
 
     //=========================================================================================================
@@ -79,7 +99,7 @@ class Produtos extends Controller
             CreateProdutos::makeFromRequest($request)
         );
 
-        return redirect()->route('show.produtos');
+        return redirect()->route('estoque.produtos');
     }
 
     //=========================================================================================================
@@ -111,7 +131,7 @@ class Produtos extends Controller
             UpdateProdutos::makeFromRequest($request)
         );
 
-        return redirect()->route('show.produtos');
+        return redirect()->route('movimentacao.produtos', $request->id);
     }
 
     //=========================================================================================================
@@ -120,7 +140,7 @@ class Produtos extends Controller
         $this->service->delete($request->id);
 
         
-        return redirect()->route('show.produtos');
+        return redirect()->route('estoque.produtos');
     }
 
 }

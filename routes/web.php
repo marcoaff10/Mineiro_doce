@@ -38,11 +38,10 @@ Route::middleware('auth')->group(function () {
     Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
 
     // Produtos
-    Route::get('/show_produtos', [Produtos::class, 'show'])->name('show.produtos');
     Route::get('/estoque_produtos', [Produtos::class, 'estoque'])->name('estoque.produtos');
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
-    Route::get('/detalhes_produtos/{id}', [Produtos::class, 'detalhes'])->name('detalhes.produtos');
+    Route::get('/movimentacao_produtos/{id}', [Produtos::class, 'movimentacao'])->name('movimentacao.produtos');
     Route::get('/update_produtos/{id}', [Produtos::class, 'update'])->name('update.produtos');
     Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');

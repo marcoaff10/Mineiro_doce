@@ -73,7 +73,7 @@
                 </div>
 
                 <div class="mt-3 text-center ">
-                    <a href="{{ route('show.produtos') }}" class="btn btn-secondary me-2">Cancelar</a>
+                    <a href="{{ route('estoque.produtos') }}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-2">Cadastrar</button>
                 </div>
 

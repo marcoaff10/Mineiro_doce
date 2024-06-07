@@ -20,7 +20,7 @@
                                 <strong><i class="bi bi-search"></i></strong>
                             </button>
                             @if ($filters['filter'] != '')
-                                <a href="{{ route('show.produtos') }}" class="fw-bold text-danger ms-3 fs-5 align-middle">
+                                <a href="{{ route('estoque.produtos') }}" class="fw-bold text-danger ms-3 fs-5 align-middle">
                                     <strong><i class="bi bi-x-lg align-middle"></i></strong>
                                 </a>
                             @endif
@@ -31,7 +31,7 @@
 
             <div class="row p-2 justify-content-between p-1">
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                    <a href=" {{ route('show.produtos') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.produtos') }} " class="btn btn-primary w-100">
                         Cadastrar Produto 
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
@@ -53,11 +53,11 @@
             </div>
 
             <!--===============================================Modal Entrada===================================================================================== -->
-            <x-modal-entrada :produtos="$produtosEstoque" :fornecedores="$fornecedores" />
+            <x-modal-entrada :produtos="$produtos" :fornecedores="$fornecedores" />
             <!--===============================================Fim Modal Entrada===================================================================================== -->
 
             <!--===============================================Modal Saida===================================================================================== -->
-            <x-modal-saida :produtos="$produtosEstoque" :clientes="$clientes" />
+            <x-modal-saida :produtos="$produtos" :clientes="$clientes" />
             <!--===============================================Fim Modal Saida===================================================================================== -->
 
             @if (count($produtos->items()) > 0)
@@ -67,7 +67,7 @@
                 <!--================================================SM==================================================================================== -->
                 <x-produtoEstoqueSm :produtos="$produtos" :filters="$filters" />
             @else
-                <p class=" text-center opacity-50 mt-5">Sem produtos cadastrados.</p>
+                <p class=" text-center opacity-50 mt-5">Nunhum produto encontrado.</p>
             @endif
         </div>
     </div>

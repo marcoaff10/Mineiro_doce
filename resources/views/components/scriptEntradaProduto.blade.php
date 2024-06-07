@@ -11,12 +11,15 @@
         const motivo = document.querySelector('#motivoEntrada');
 
         motivo.addEventListener('change', () => {
-
+            
             if (motivo.value === 'compra') {
                 let fornecedor = document.querySelector('#fornecedor');
+                let fornecedorSelect = document.querySelector('#fornecedorSelect');
                 fornecedor.classList.remove('d-none');
+                fornecedorSelect.setAttribute('required', true)
             } else {
                 fornecedor.classList.add('d-none');
+                fornecedorSelect.required = false
             }
         });
 

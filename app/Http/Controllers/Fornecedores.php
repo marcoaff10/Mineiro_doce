@@ -54,6 +54,7 @@ class Fornecedores extends Controller
     {
         if (substr($request->cnpj, 0, 1) == 0) {
             $cnpj = substr($request->cnpj, 1, 13);
+
         } else {
             $cnpj = $request->cnpj;
         }

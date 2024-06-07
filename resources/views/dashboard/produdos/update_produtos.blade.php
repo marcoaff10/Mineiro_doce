@@ -78,7 +78,7 @@
                 </div>
 
                 <div class="mb-3 text-center ">
-                    <a href="{{ route('detalhes.produtos', ['id' => $produto->id]) }}" class="btn btn-secondary me-2">Cancelar</a>
+                    <a href="{{ route('movimentacao.produtos', ['id' => $produto->id]) }}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-2">Editar</button>
                 </div>
 

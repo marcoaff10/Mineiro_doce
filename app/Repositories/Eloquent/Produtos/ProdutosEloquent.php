@@ -46,33 +46,29 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
                     $query->orWhere('maximo', 'like', "%$filter%");
-                    $query->orHavingRaw(
-                        "CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) like %$filter%"
-                    );
-
                 }
             })
             ->paginate($totalPerPage, ['*'], 'page', $page);
 
         return new PaginationPresenter($result);
-    }  
+    }
 
     //=====================================================================
     public function getAll(string $filter = null): array
     {
 
-        $result = $this->model->leftJoin('entrada_produto', 'produtos.id', 'entrada_produto.produto_id')
-            ->leftJoin('saida_produto', 'produtos.id', 'saida_produto.produto_id')
-            ->join('categorias', 'produtos.categoria_id', 'categorias.id')
+        $result = $this->model->leftJoin('estoque', 'produtos.id', 'estoque.produto_id')
+            ->join('categorias', 'categorias.id', 'produtos.categoria_id')
             ->select(
                 'produtos.id',
-                $this->model->raw(
-                    "SUM(CASE WHEN entrada_produto.quantidade IS NULL THEN 0 ELSE entrada_produto.quantidade END) - SUM(CASE WHEN saida_produto.quantidade IS NULL THEN 0 ELSE saida_produto.quantidade END) as estoque"
-                ),
                 'produtos.produto',
                 'produtos.peso',
                 'produtos.minimo',
-                'categorias.categoria'
+                'produtos.maximo',
+                'categorias.categoria',
+                $this->model->raw('SUM(estoque.qtde_entrada) AS entrada'),
+                $this->model->raw('SUM(estoque.qtde_saida) AS saida'),
+                $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
             )
             ->where(function ($query) use ($filter) {
                 if ($filter) {
@@ -81,7 +77,6 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('peso', 'like', "%$filter%");
                     $query->orWhere('minimo', 'like', "%$filter%");
                     $query->orWhere('maximo', 'like', "%$filter%");
-
                 }
             })
             ->get();
@@ -94,63 +89,76 @@ class ProdutosEloquent implements ProdutosInterface
     {
 
         // buscando linha no banco que corresponde com o id informado
-
-        $produto = [
-            'entrada' => $this->model->leftJoin('entrada_produto', 'produtos.id', '=', 'entrada_produto.produto_id')
-                            ->join('entradas', 'entradas.id', 'entrada_produto.entrada_id')
-                            ->join('fornecedores', 'fornecedores.id', 'entrada_produto.fornecedor_id')
-                            ->join('categorias', 'categorias.id', 'produtos.categoria_id')
-                            ->select(
-                                $this->model->raw('produtos.id AS id_produto'),
-                                'produtos.produto',
-                                'produtos.peso',
-                                'produtos.minimo',
-                                $this->model->raw('produtos.created_at AS created_produto'),
-                                $this->model->raw('produtos.updated_at AS updated_produto'),
-                                'entrada_produto.quantidade',
-                                'entrada_produto.valor_unidade',
-                                'entrada_produto.frete',
-                                'entrada_produto.valor_total',
-                                $this->model->raw('entrada_produto.created_at AS dt_entrada'),
-                                'entradas.motivo',
-                                'fornecedores.fornecedor'
-                            )
-                            ->where('produtos.id', $id)->first(),
-
-            'saida' => $this->model->leftJoin('saida_produto', 'saida_produto.produto_id', 'produtos.id')
-                                ->join('saidas', 'saidas.id', 'saida_produto.saida_id')
-                                ->join('clientes', 'clientes.id', 'saida_produto.cliente_id')
-                                ->join('categorias', 'categorias.id', 'produtos.categoria_id')
-                                ->select(
-                                    $this->model->raw('produtos.id AS id_produto'),
-                                    'produtos.produto',
-                                    'produtos.peso',
-                                    'produtos.minimo',
-                                    'saida_produto.quantidade',
-                                    'saida_produto.valor_unidade',
-                                    'saida_produto.frete',
-                                    'saida_produto.valor_total',
-                                    $this->model->raw('saida_produto.created_at AS dt_saida'),
-                                    'saidas.motivo',
-                                    'clientes.cliente'
-                                )
-                                ->where('produtos.id', $id)->first()
-        ];
-
-
+        $produto = $this->model->where('produtos.id', $id)->leftJoin('estoque', 'estoque.produto_id', 'produtos.id')
+            ->join('categorias', 'categorias.id', 'produtos.categoria_id')
+            ->select(
+                'produtos.*',
+                'categorias.categoria',
+                $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque')
+            )
+            ->groupBy('produtos.id')
+            ->first();
 
 
         // caso não encontre informações com o id informado retorna null
         if (!$produto) return null;
 
         // transformando os valores de array para um objeto
-        return (object) $produto;
+        return (object) $produto->toArray();
+    }
+
+    //=====================================================================
+    public function paginateEntradas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        $produtoEntrada = $this->model->leftJoin('entrada_produto', 'entrada_produto.produto_id', 'produtos.id')
+            ->leftJoin('fornecedores',  function ($join) {
+                $join->on('fornecedores.id', 'entrada_produto.fornecedor_id')
+                    ->where('entrada_produto.fornecedor_id', '!=', null);
+            })
+            ->select(
+                'produtos.produto',
+                'entrada_produto.motivo',
+                'entrada_produto.quantidade',
+                'entrada_produto.valor_unidade',
+                'entrada_produto.frete',
+                'entrada_produto.created_at',
+                'fornecedores.fornecedor'
+            )
+            ->orderBy('entrada_produto.created_at')
+            ->where('produtos.id', $id)
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+
+        return new PaginationPresenter($produtoEntrada);
+    }
+
+    //=====================================================================
+    public function paginateSaidas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        $produtoSaida = $this->model->leftJoin('saida_produto', 'saida_produto.produto_id', 'produtos.id')
+            ->leftJoin('clientes',  function ($join) {
+                $join->on('clientes.id', 'saida_produto.cliente_id')
+                    ->where('saida_produto.cliente_id', '!=', null);
+            })
+            ->select(
+                'produtos.produto',
+                'saida_produto.motivo',
+                'saida_produto.quantidade',
+                'saida_produto.valor_unidade',
+                'saida_produto.frete',
+                'saida_produto.created_at',
+                'clientes.cliente'
+            )
+            ->orderBy('saida_produto.created_at')
+            ->where('produtos.id', $id)
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+
+        return new PaginationPresenter($produtoSaida);
     }
 
     //=====================================================================
     public function store(CreateProdutos $dto): stdClass
     {
-      
+
         // Salvando as informações no banco
         $produto = $this->model->create(
             (array) $dto

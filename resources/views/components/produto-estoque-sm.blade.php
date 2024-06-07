@@ -13,7 +13,7 @@
                     <td class="text-center align-middle"> {{ $produto->categoria }} </td>
                     <td class="text-center align-middle fw-bold ">{{ empty($produto->estoque) ? 0 : $produto->estoque }}</td>
                     <td class="text-center align-middle">
-                        <a href=" {{ route('detalhes.produtos', ['id' => $produto->id]) }} "
+                        <a href=" {{ route('movimentacao.produtos', ['id' => $produto->id]) }} "
                             class="text-decoration-none text-success ">
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </a>

@@ -40,7 +40,7 @@
                                 <label for="produto" class="form-label">Produto</label>
                                 <select name="produto" id="produtoSaida" class="form-select" required>
                                     <option value="">Selecione um Produto</option>
-                                    @foreach ($produtos as $produto)
+                                    @foreach ($produtos->items() as $produto)
                                         <option value="{{ $produto->id }}" data-estoque="{{$produto->id}}">
                                             {{ $produto->produto }}
                                         </option>
