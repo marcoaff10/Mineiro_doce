@@ -39,15 +39,6 @@ class RequestSaidaProduto extends FormRequest
                 'numeric',
             ],
 
-            'valor_unidade' => [
-                'required',
-                'numeric',
-            ],
-
-            'frete' => [
-                'required',
-                'numeric',
-            ],
         ];
     }
 
@@ -60,12 +51,6 @@ class RequestSaidaProduto extends FormRequest
 
             'quantidade.required' => 'O campo quantidade é obrigátorio',
             'quantidade.numeric' => 'O campo quantidade deve ser do tipo numérico.',
-
-            'valor_unidade.required' => 'O campo valor unidade é obrigátorio',
-            'valor_unidade.numeric' => 'O campo valor unidade deve ser do tipo numérico.',
-
-            'frete.required' => 'O campo frete é obrigátorio',
-            'frete.numeric' => 'O campo frete deve ser do tipo numérico.',
         ];
     }
 }

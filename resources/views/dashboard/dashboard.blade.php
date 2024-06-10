@@ -15,18 +15,35 @@
                         </a>
                     </li>
 
-                    
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#compras-collapse" aria-expanded="false">
-                            <i class="bi bi-box"></i>
-                            Produtos
+                            <i class="bi bi-cart-plus"></i>
+                            Compras
                             <i class="bi bi-caret-down align-middle "></i>
                         </button>
                         <div class="collapse" id="compras-collapse">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('estoque.produtos') }}" class="link-dark rounded">Visão
-                                        Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('show.compras') }}" class="link-dark rounded">
+                                    Compras</a></li>
+                                <li class="ms-4"><a href="{{ route('create.compras') }}"
+                                        class="link-dark rounded">Novo</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#produtos-collapse" aria-expanded="false">
+                            <i class="bi bi-box"></i>
+                            Produtos
+                            <i class="bi bi-caret-down align-middle "></i>
+                        </button>
+                        <div class="collapse" id="produtos-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="ms-4"><a href="{{ route('estoque.produtos') }}" class="link-dark rounded">Produtos</a></li>
                                 <li class="ms-4"><a href="{{ route('create.produtos') }}"
                                         class="link-dark rounded">Novo</a></li>
 
@@ -43,7 +60,7 @@
                         </button>
                         <div class="collapse" id="clientes-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.clientes') }}" class="link-dark rounded">Visão Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('show.clientes') }}" class="link-dark rounded">Clientes</a></li>
                                 <li class="ms-4"><a href="{{ route('create.clientes') }}" class="link-dark rounded">Novo</a></li>
                             </ul>
                         </div>
@@ -58,7 +75,7 @@
                         </button>
                         <div class="collapse" id="fornecedores-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.fornecedores') }}" class="link-dark rounded">Visão Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('show.fornecedores') }}" class="link-dark rounded">Fornecedores</a></li>
                                 <li class="ms-4"><a href="{{ route('create.fornecedores') }}" class="link-dark rounded">Novo</a></li>
                             </ul>
                         </div>
@@ -73,7 +90,7 @@
                         </button>
                         <div class="collapse" id="categorias-collapse" style="">
                             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="{{ route('show.categorias') }}" class="link-dark rounded">Visão Geral</a></li>
+                                <li class="ms-4"><a href="{{ route('show.categorias') }}" class="link-dark rounded">Categorias</a></li>
                                 <li class="ms-4"><a href="{{ route('create.categorias') }}" class="link-dark rounded">Novo</a></li>
                             </ul>
                         </div>

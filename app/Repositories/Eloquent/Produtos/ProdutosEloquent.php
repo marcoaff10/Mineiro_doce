@@ -119,8 +119,6 @@ class ProdutosEloquent implements ProdutosInterface
                 'produtos.produto',
                 'entrada_produto.motivo',
                 'entrada_produto.quantidade',
-                'entrada_produto.valor_unidade',
-                'entrada_produto.frete',
                 'entrada_produto.created_at',
                 'fornecedores.fornecedor'
             )
@@ -143,8 +141,6 @@ class ProdutosEloquent implements ProdutosInterface
                 'produtos.produto',
                 'saida_produto.motivo',
                 'saida_produto.quantidade',
-                'saida_produto.valor_unidade',
-                'saida_produto.frete',
                 'saida_produto.created_at',
                 'clientes.cliente'
             )

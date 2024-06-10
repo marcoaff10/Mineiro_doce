@@ -33,16 +33,14 @@
                     <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
                         <h2 class="mb-2 fw-bold">Valores totais de entrada:</h2>
                         <ul>
-                            <li>Valor total de compra: R$ {{ somaProdutos($produtoEntrada->items())['valor'] }}</li>
-                            <li>Valor total de fretes: R$ {{ somaProdutos($produtoEntrada->items())['frete'] }}</li>
+                            <li>Valor total de compra: R$ </li>
                         </ul>
                     </div>
 
                     <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
                         <h2 class="mb-2 fw-bold">Valores totais de saida:</h2>
                         <ul>
-                            <li>Valor total de compra: {{ somaProdutos($produtoSaida->items())['valor'] }}</li>
-                            <li>Valor total de fretes: R$ {{ somaProdutos($produtoSaida->items())['frete'] }}</li>
+                            <li>Valor total de compra:</li>
                         </ul>
                     </div>
 
@@ -77,7 +75,6 @@
                                     <th class="text-center align-middle">Motivo</th>
                                     <th class="text-center align-middle">QTDE</th>
                                     <th class="text-center align-middle">Valor uni.</th>
-                                    <th class="text-center align-middle">Frete</th>
                                     <th class="text-center align-middle">Fornecedor</th>
                                     <th class="text-center align-middle">Data</th>
                                     <th class="text-center align-middle">Usuário</th>
@@ -88,8 +85,6 @@
                                             <td class=" align-middle">{{ $entrada->produto }}</td>
                                             <td class=" align-middle">{{ motivoEntrada($entrada->motivo) }}</td>
                                             <td class="text-center align-middle">{{ $entrada->quantidade }}</td>
-                                            <td class="text-center align-middle">R$ {{ $entrada->valor_unidade }}</td>
-                                            <td class="text-center align-middle">R$ {{ $entrada->frete }}</td>
                                             <td class=" align-middle">{{ $entrada->fornecedor ?? '-' }}</td>
                                             <td class="text-center align-middle">
                                                 {{ date('d/m/Y', strtotime($entrada->created_at)) }}</td>
@@ -115,7 +110,6 @@
                                     <th class="text-center align-middle">Motivo</th>
                                     <th class="text-center align-middle">QTDE</th>
                                     <th class="text-center align-middle">Valor uni.</th>
-                                    <th class="text-center align-middle">Frete</th>
                                     <th class="text-center align-middle">Fornecedor</th>
                                     <th class="text-center align-middle">Data</th>
                                     <th class="text-center align-middle">Usuário</th>
@@ -126,8 +120,6 @@
                                             <td class=" align-middle">{{ $saida->produto }}</td>
                                             <td class=" align-middle">{{ motivoSaida($saida->motivo) }}</td>
                                             <td class="text-center align-middle">{{ $saida->quantidade }}</td>
-                                            <td class="text-center align-middle">R$ {{ $saida->valor_unidade }}</td>
-                                            <td class="text-center align-middle">R$ {{ $saida->frete }}</td>
                                             <td class=" align-middle">{{ $saida->cliente ?? '-' }}</td>
                                             <td class="text-center align-middle">
                                                 {{ date('d/m/Y', strtotime($saida->created_at)) }}</td>

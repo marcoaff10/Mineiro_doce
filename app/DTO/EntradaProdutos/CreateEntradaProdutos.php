@@ -12,8 +12,6 @@ class CreateEntradaProdutos
         public string $produto_id,
         public string|null $fornecedor_id, 
         public int $quantidade,
-        public int $valor_unidade,
-        public int $frete,
         ){}
 
     //=========================================================================================================
@@ -24,8 +22,6 @@ class CreateEntradaProdutos
             $request->produto,
             $request->fornecedor,
             $request->quantidade,
-            $request->valor_unidade,
-            $request->frete,
         );
     }    
 }

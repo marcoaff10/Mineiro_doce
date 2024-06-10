@@ -17,7 +17,5 @@ class Saida_produto extends Model
         'produto_id',
         'cliente_id',
         'quantidade',
-        'valor_unidade',
-        'frete',
     ];
 }

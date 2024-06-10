@@ -19,6 +19,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{{asset('assets/js/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{ asset('assets/js/app.js') }}"></script>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
@@ -45,7 +46,7 @@
     
     <script src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    
 </body>
 
 </html>

@@ -64,17 +64,6 @@
                                     insuficiente.</div>
                             </div>
 
-                            <div class="col-3">
-                                <label for="valor_unidade" class="form-label">Valor Uni.</label>
-                                <input type="text" name="valor_unidade" id="valor_unidadeSaida" class="form-control"
-                                    required>
-                            </div>
-
-                            <div class="col-3">
-                                <label for="frete" class="form-label">Frete</label>
-                                <input type="text" name="frete" id="freteSaida" class="form-control" required>
-                            </div>
-
 
                         </div>
 

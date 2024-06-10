@@ -11,18 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('entrada_produto', function (Blueprint $table) {
+        Schema::create('compra_produto', function (Blueprint $table) {
             $table->uuid('id')->primary();
-            $table->enum('motivo', ['compra', 'doacao', 'acerto_de_estoque']);
-            $table->uuid('produto_id')->index();
-            $table->uuid('fornecedor_id')->index()->nullable();
-            $table->integer('quantidade');
-            $table->float('valor_unidade');
-            $table->float('frete');
+            $table->uuid('compra_id')->index();
+            $table->uuid('produto_id');
+            $table->float('preco_compra')->default(0);
+            $table->integer('quantidade')->unsigned();
             $table->timestamps();
 
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
+            $table->foreign('compra_id')->references('id')->on('compras');
             $table->foreign('produto_id')->references('id')->on('produtos');
+
         });
     }
 
@@ -31,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('entrada_produto');
+        Schema::dropIfExists('compra_produto');
     }
 };

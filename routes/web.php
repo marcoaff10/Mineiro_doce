@@ -19,6 +19,20 @@ Route::middleware('auth')->group(function () {
     // dashbord
     Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
 
+    // Compras
+    Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
+    Route::get('/create_compras', [Compras::class, 'create'])->name('create.compras');
+    Route::post('/store_compras', [Compras::class, 'store'])->name('store.compras');
+    Route::get('/produtos_compra/{id}', [Compras::class, 'produtos_compra'])->name('produtos.compra');
+    Route::post('/store_produtos_compra', [Compras::class, 'store_produtos_compra'])->name('store.produtos.compra');
+    Route::get('/detalhes_compra/{id}', [Compras::class, 'detalhes'])->name('detalhes.compra');
+    Route::get('/update_compra/{id}', [Compras::class, 'update'])->name('update.compra');
+    Route::get('/itens_compra/{id}', [Compras::class, 'itens_compra'])->name('itens.compra');
+    Route::put('/update_submit_compra', [Compras::class, 'update_submit'])->name('update.submit.compra');
+    Route::put('/frete_compra', [Compras::class, 'frete_compra'])->name('frete.compra');
+    Route::get('/destroy_compra/{id}', [Compras::class, 'destroy'])->name('destroy.compras');
+
+
     // Fornecedores
     Route::get('/show_fornecedores', [Fornecedores::class, 'show'])->name('show.fornecedores');
     Route::get('/create_fornecedores', [Fornecedores::class, 'create'])->name('create.fornecedores');

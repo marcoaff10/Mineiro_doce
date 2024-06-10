@@ -57,15 +57,7 @@ class Produtos extends Controller
             page: $request->get('page', 1),
             totalPerPage: $request->get('per_page', 15),
         );
-
-        foreach ($produtoEntrada->items() as $valor) {
-            $total = 0;
-            $total += $valor->valor_unidade;
-        }
-
-
-
-        
+   
         $filters = ['filter' => $request->get('filter', '')];
 
         return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'produtoEntrada', 'produtoSaida','filters'));

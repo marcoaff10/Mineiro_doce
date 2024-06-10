@@ -72,32 +72,64 @@ function motivoEntrada($motivo)
     if (key_exists($motivo, MOTIVO_ENTRADA)) {
         return MOTIVO_ENTRADA[$motivo];
     }
-
 }
 
 //=========================================================================================================
 function motivoSaida($motivo)
 {
+    // retorna o valor da array motivo da saida
     if (key_exists($motivo, MOTIVO_SAIDA)) {
         return MOTIVO_SAIDA[$motivo];
     }
 }
 
 //=========================================================================================================
-function somaProdutos($array)
+function somar($array)
 {
-    $valor = array_reduce($array, function($carry, $items) {
-        return $carry + $items->valor_unidade;
-    });
-
-    $frete = array_reduce($array, function($carry, $items) {
-        return $carry + $items->frete;
+ // retorna a soma total das chaves iguais de um array
+    $valor = array_reduce($array, function ($carry, $items) {
+        return $carry + ($items->preco_compra * $items->quantidade) ;
     });
 
 
 
     return [
         'valor' => $valor,
-        'frete' => $frete
     ];
+}
+
+//=========================================================================================================
+function preco($preco)
+{
+    // retorna o valor salvo no banco com os centavos formatados
+    if (str_contains($preco, '.'))
+    {
+        $tmp = explode('.', $preco);
+        $end = end($tmp);
+        if (strlen($end) == 1) {
+            return $preco . 0;
+        } else {
+            return $preco;
+        }
+    } else {
+        return $preco . '.00' ;
+    }
+    
+}
+
+//=========================================================================================================
+function arrayToObject($items)
+{
+    // transforma um array em um array de objeto
+    $response = [];
+    foreach ($items as $item) {
+        $std = new stdClass;
+        foreach ($item->toArray() as $key => $value) {
+            $std->{$key} = $value;
+        }
+
+        array_push($response, $std);
+    }
+
+    return $response;
 }

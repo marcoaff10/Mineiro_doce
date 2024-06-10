@@ -11,8 +11,6 @@ class CreateSaidaProdutos
         public string $produto_id,
         public string|null $cliente_id, 
         public int $quantidade,
-        public int $valor_unidade,
-        public int $frete,
         ){}
 
     //=========================================================================================================
@@ -23,8 +21,6 @@ class CreateSaidaProdutos
             $request->produto,
             $request->cliente,
             $request->quantidade,
-            $request->valor_unidade,
-            $request->frete,
         );
     }
 }

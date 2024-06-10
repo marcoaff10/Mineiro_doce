@@ -72,5 +72,5 @@
         </div>
     </div>
 
-    <x-scriptEntradaProduto />
+    <x-script />
 @endsection
