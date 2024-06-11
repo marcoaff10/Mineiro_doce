@@ -15,7 +15,7 @@ class Saida_produto extends Model
     protected $fillable = [
         'motivo',
         'produto_id',
-        'cliente_id',
+        'venda_id',
         'quantidade',
     ];
 }

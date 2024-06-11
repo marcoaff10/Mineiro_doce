@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('vendas', function (Blueprint $table) {
             $table->uuid('id')->primary();
+            $table->string('venda');
             $table->uuid('cliente_id')->index();
             $table->float('frete')->index();
             $table->integer('ativa')->unsigned()->default(0);

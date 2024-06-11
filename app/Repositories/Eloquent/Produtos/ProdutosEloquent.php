@@ -111,16 +111,16 @@ class ProdutosEloquent implements ProdutosInterface
     public function paginateEntradas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
         $produtoEntrada = $this->model->leftJoin('entrada_produto', 'entrada_produto.produto_id', 'produtos.id')
-            ->leftJoin('fornecedores',  function ($join) {
-                $join->on('fornecedores.id', 'entrada_produto.fornecedor_id')
-                    ->where('entrada_produto.fornecedor_id', '!=', null);
+            ->leftJoin('compras',  function ($join) {
+                $join->on('compras.id', 'entrada_produto.compra_id')
+                    ->where('entrada_produto.compra_id', '!=', null);
             })
             ->select(
                 'produtos.produto',
                 'entrada_produto.motivo',
                 'entrada_produto.quantidade',
                 'entrada_produto.created_at',
-                'fornecedores.fornecedor'
+                'compras.compra'
             )
             ->orderBy('entrada_produto.created_at')
             ->where('produtos.id', $id)
@@ -133,16 +133,16 @@ class ProdutosEloquent implements ProdutosInterface
     public function paginateSaidas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
         $produtoSaida = $this->model->leftJoin('saida_produto', 'saida_produto.produto_id', 'produtos.id')
-            ->leftJoin('clientes',  function ($join) {
-                $join->on('clientes.id', 'saida_produto.cliente_id')
-                    ->where('saida_produto.cliente_id', '!=', null);
+            ->leftJoin('vendas',  function ($join) {
+                $join->on('vendas.id', 'saida_produto.venda_id')
+                    ->where('saida_produto.venda_id', '!=', null);
             })
             ->select(
                 'produtos.produto',
                 'saida_produto.motivo',
                 'saida_produto.quantidade',
                 'saida_produto.created_at',
-                'clientes.cliente'
+                'vendas.venda'
             )
             ->orderBy('saida_produto.created_at')
             ->where('produtos.id', $id)

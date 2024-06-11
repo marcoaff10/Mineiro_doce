@@ -66,10 +66,11 @@ class EntradaProdutosEloquent implements EntradaProdutosInterface
     public function entrada_compra(string $id): stdClass
     {
         $compras = CompraProduto::where('compra_id', $id)->select('compra_id', 'produto_id', 'quantidade')->get();
-
+        
         foreach ($compras as $compra) {
             $this->model->create(
                 [
+                    'compra_id' => $compra->compra_id,
                     'produto_id' => $compra->produto_id,
                     'quantidade' => $compra->quantidade
                 ]

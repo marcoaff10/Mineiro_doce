@@ -15,7 +15,7 @@ class Entrada_produto extends Model
     protected $fillable = [
         'motivo',
         'produto_id',
-        'fornecedor_id',
+        'compra_id',
         'quantidade',
 
     ];
