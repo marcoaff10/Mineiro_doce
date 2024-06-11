@@ -26,10 +26,6 @@ class RequestEntradaProdutos extends FormRequest
                 'required',
             ],
 
-            'fornecedor' => [
-                'nullable'
-            ],
-
             'produto' => [
                 'required',
             ],

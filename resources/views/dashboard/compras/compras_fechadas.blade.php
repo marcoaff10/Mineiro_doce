@@ -1,12 +1,12 @@
 @extends('dashboard.dashboard')
-@section('title', 'Compras Desativadas')
+@section('title', 'Compras Fechadas')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Compras <i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block">Compras Fechadas<i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
                 </div>
             </div>
             <div class="row py-3">
@@ -55,8 +55,6 @@
                             <th class="text-center align-middle">Ativa</th>
                             <th class="text-center align-middle">Fechada</th>
                             <th class="text-center align-middle">Valor</th>
-                            <th class="text-center align-middle">Reativar</th>
-                            <th class="text-center align-middle">Excluir</th>
                         </thead>
                         <tbody>
                             @foreach ($compras->items() as $compra)
@@ -66,22 +64,6 @@
                                     <td class="text-center align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
                                     <td class="text-center align-middle"> {{ $compra->entrada == 1 ? 'SIM' : 'NÃO' }} </td>
                                     <td class="text-center align-middle"> R$ {{ preco($compra->valor) }} </td>
-                                    <td class="text-center align-middle">
-                                        <form action="{{ route('reativar.compra')}}" method="POST">
-                                            @method('PUT')
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $compra->id }}">
-                                            <button type="submit" class="text-decoration-none text-success ">
-                                                <i class="bi bi-check-circle"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                    <td class="text-center align-middle">
-                                        <a href=" {{ route('destroy.compras', $compra->id) }} "
-                                            class="text-decoration-none text-danger ">
-                                            <i class="bi bi-trash"></i>
-                                        </a>
-                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

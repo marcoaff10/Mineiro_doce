@@ -27,11 +27,6 @@
                             <label for="cliente" class="form-label">Cliente</label>
                             <select name="cliente" class="form-select" required>
                                 <option value="">Selecione um Fornecedor</option>
-                                @foreach ($clientes as $cliente)
-                                    <option value="{{ $cliente->id }}">
-                                        {{ $cliente->cliente }}
-                                    </option>
-                                @endforeach
                             </select>
                         </div>
 
@@ -63,8 +58,6 @@
                                 <div class="text-danger text-center alert-danger mt-2 d-none" id="error">Estoque
                                     insuficiente.</div>
                             </div>
-
-
                         </div>
 
                         <div class="mb-3">

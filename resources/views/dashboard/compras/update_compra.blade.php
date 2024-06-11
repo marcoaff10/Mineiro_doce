@@ -73,5 +73,5 @@
             </form>
         </div>
     </div>
-    <x-script />
+    <x-script-compra />
 @endsection

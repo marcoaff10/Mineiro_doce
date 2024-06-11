@@ -19,8 +19,8 @@ return new class extends Migration
             $table->integer('quantidade')->unsigned();
             $table->timestamps();
 
-            $table->foreign('compra_id')->references('id')->on('compras');
-            $table->foreign('produto_id')->references('id')->on('produtos');
+            $table->foreign('compra_id')->references('id')->on('compras')->onDelete('cascade');
+            $table->foreign('produto_id')->references('id')->on('produtos')->onDelete('cascade');
 
         });
     }

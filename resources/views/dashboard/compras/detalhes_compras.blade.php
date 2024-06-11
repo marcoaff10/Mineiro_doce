@@ -20,6 +20,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
+                        <h2 class="fs-5 text-info mb-3">{{ $compra[0]->compra}}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
                             @foreach ($compra as $item)

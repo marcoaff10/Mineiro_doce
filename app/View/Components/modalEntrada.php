@@ -13,15 +13,15 @@ class modalEntrada extends Component
      */
 
      public $produtos;
-     public $fornecedores;
+     public $entradas;
 
     public function __construct(
         $produtos,
-        $fornecedores
+        $entradas
     )
     {
         $this->produtos = $produtos;
-        $this->fornecedores = $fornecedores;
+        $this->entradas = $entradas;
     }
 
     /**

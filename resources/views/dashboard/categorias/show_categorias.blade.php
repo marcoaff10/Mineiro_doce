@@ -12,8 +12,10 @@
 
             <div class="row justify-content-between">
                 <div class="col-sm-12 col-lg-4 mb-3">
-                    <a href=" {{ route('create.categorias') }} " class="btn btn-primary"><i
-                            class="bi bi-plus-circle-dotted"></i></a>
+                    <a href=" {{ route('create.categorias') }} " class="btn btn-primary">
+                        Cadastrar Categoria
+                        <i class="bi bi-plus-circle ms-1"></i>
+                    </a>
                 </div>
 
                 <div class="col-sm-12 col-lg-6">

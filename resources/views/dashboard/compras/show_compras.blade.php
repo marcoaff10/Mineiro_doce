@@ -6,7 +6,7 @@
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Compras <i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block">Compras Abertas<i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
                 </div>
             </div>
             <div class="row py-3">
@@ -30,7 +30,7 @@
             </div>
 
             <div class="row p-2 justify-content-between p-1">
-                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
+                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                     <a href=" {{ route('create.compras') }} " class="btn btn-primary w-100">
                         Comprar
                         <i class="bi bi-plus-circle ms-1"></i>
@@ -38,19 +38,28 @@
                 </div>
 
                 @if (isset($desativadas) && count($desativadas) > 0)
-                    <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
+                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                         <a href=" {{ route('compras.desativadas') }} " class="btn btn-secondary w-100">
                             Compras Desativadas
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>
                     </div>
                 @endif
+
+                @if (isset($fechadas) && count($fechadas) > 0)
+                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                    <a href=" {{ route('compras.fechadas') }} " class="btn btn-success w-100">
+                        Compras Fechadas
+                        <i class="bi bi-box-seam ms-1"></i>
+                    </a>
+                </div>
+            @endif
             </div>
 
             @if (count($compras->items()) > 0)
                 <x-comprasLg :compras="$compras" :filters="$filters" />
             @else
-                <p class=" text-center opacity-50 mt-5">Nenhuma compra.</p>
+                <p class=" text-center opacity-50 mt-5">Nenhuma compra aberta.</p>
             @endif
         </div>
     </div>

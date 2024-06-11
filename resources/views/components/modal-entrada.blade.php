@@ -11,55 +11,24 @@
                 </div>
 
                 <div class="modal-body">
-                    <form action="{{ route('entrada.produtos') }}" method="POST">
-                        @csrf
-                        <div class="mb-3">
-                            <label for="motivo" class="form-label">Motivo</label>
-                            <select name="motivo" id="motivoEntrada" class="form-select" required>
-                                <option value="">Selecione um Motivo</option>
-                                @foreach (MOTIVO_ENTRADA as $key => $value)
-                                    <option value="{{ $key }}">{{ $value }}</option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="mb-3">
+                        <label for="selecionar" class="form-label">Motivo</label>
+                        <select name="selecionar" id="motivoEntrada" class="form-select" required>
+                            <option value="">Selecione um Motivo</option>
+                            @foreach (MOTIVO_ENTRADA as $key => $value)
+                                <option value="{{ $key }}" data-motivo="{{ $key }}">{{ $value }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                        <div class="mb-3 d-none" id="fornecedor">
-                            <label for="fornecedor" class="form-label">Fornecedor</label>
-                            <select name="fornecedor" id="fornecedorSelect" class="form-select">
-                                <option value="">Selecione um Fornecedor</option>
-                                @foreach ($fornecedores as $fornecedor)
-                                    <option value="{{ $fornecedor->id }}">{{ $fornecedor->fornecedor }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="d-none" id="modalCompras">
+                        <x-modal-entrada-compra :entradas="$entradas" />
+                    </div>
 
-                        <div class="mb-3">
-                            <label for="produto" class="form-label">Produto</label>
-                            <select name="produto" id="produto" class="form-select" required>
-                                <option value="">Selecione um Produto</option>
-                                @foreach ($produtos->items() as $produto)
-                                    <option value="{{ $produto->id }}">{{ $produto->produto }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="d-none" id="modalEntradas">
+                        <x-modal-entradas :produtos="$produtos" />
+                    </div>
 
-                        <div class="d-flex  justify-content-between mb-4">
-                            <div class="col-3">
-                                <label for="quantidade" class="form-label">Quantidade</label>
-                                <input type="number" name="quantidade" id="quantidade" class="form-control" required>
-                            </div>
-
-                        </div>
-
-                        <div class="mb-3">
-                            <button type="submit" class="btn btn-success">
-                                Entrar
-                            </button>
-                        </div>
-
-                    </form>
                 </div>
 
             </div>

@@ -149,4 +149,6 @@
             </form>
         </div>
     </div>
+
+    <x-script-cnpj />
 @endsection

@@ -53,19 +53,16 @@
             </div>
 
             <!--===============================================Modal Entrada===================================================================================== -->
-            <x-modal-entrada :produtos="$produtos" :fornecedores="$fornecedores" />
+            <x-modal-entrada :produtos="$produtos" :entradas="$entradas" />
             <!--===============================================Fim Modal Entrada===================================================================================== -->
 
             <!--===============================================Modal Saida===================================================================================== -->
-            <x-modal-saida :produtos="$produtos" :clientes="$clientes" />
+            <x-modal-saida :produtos="$produtos" :saidas="$saidas" />
             <!--===============================================Fim Modal Saida===================================================================================== -->
 
             @if (count($produtos->items()) > 0)
                 <x-produtoEstoqueLg :produtos="$produtos" :filters="$filters" />
-                <!--===============================================MD===================================================================================== -->
-                <x-produtoEstoqueMd :produtos="$produtos" :filters="$filters" />
-                <!--================================================SM==================================================================================== -->
-                <x-produtoEstoqueSm :produtos="$produtos" :filters="$filters" />
+
             @else
                 <p class=" text-center opacity-50 mt-5">Nunhum produto encontrado.</p>
             @endif

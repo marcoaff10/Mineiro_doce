@@ -14,6 +14,7 @@ interface ComprasInterface
 {
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function getAll(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
+    public function comprasFechadas(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function findOne(string $id);
     public function store(CreateCompras $dto): stdClass;
     public function storeProdutos(CreateProdutosCompra $dto): stdClass;

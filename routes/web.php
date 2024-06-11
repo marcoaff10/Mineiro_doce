@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/desativar_compra', [Compras::class, 'desativar_compra'])->name('desativar.compra');
     Route::get('/compras_desativadas', [Compras::class, 'compras_desativadas'])->name('compras.desativadas');
     Route::put('/reativar_compras', [Compras::class, 'reativar_compras'])->name('reativar.compra');
+    Route::get('/compras_fechadas', [Compras::class, 'compras_fechadas'])->name('compras.fechadas');
     Route::get('/destroy_compra/{id}', [Compras::class, 'destroy'])->name('destroy.compras');
 
 
@@ -65,6 +66,10 @@ Route::middleware('auth')->group(function () {
 
     // Entradas Produtos
     Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
+    Route::get('/compra_entrada/{id}', [Entradas::class, 'compra_entrada'])->name('entrada.compra');
+    Route::post('/compra_entrada', [Entradas::class, 'entrada_compra'])->name('entrar.compra');
+
+    // Saidas Produtos
     Route::post('/saida_produtos', [Saidas::class, 'store'])->name('saida.produtos');
     Route::get('/qtde_estoque/{id}', [Saidas::class, 'qtde_estoque'])->name('qtde.estoque');
 

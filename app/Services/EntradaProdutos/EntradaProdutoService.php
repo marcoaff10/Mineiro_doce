@@ -16,4 +16,16 @@ class EntradaProdutoService
         return $this->entrada_interface->store($dto);
     }
 
+    //=========================================================================================================
+    public function produtosEntrada(string $id)
+    {
+        return $this->entrada_interface->produtosEntrada($id);
+    }
+
+    //=========================================================================================================
+    public function entrada_compra(string $id): stdClass
+    {
+        return $this->entrada_interface->entrada_compra($id);
+    }
+
 }

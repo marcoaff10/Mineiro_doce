@@ -36,6 +36,16 @@ class CompraService
     }
 
     //=====================================================================
+    public function comprasFechadas(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->compra_interface->comprasFechadas(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
     public function findOne(string $id)
     {
         return $this->compra_interface->findOne($id);

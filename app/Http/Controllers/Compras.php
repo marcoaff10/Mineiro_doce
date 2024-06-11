@@ -33,10 +33,13 @@ class Compras extends Controller
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        $desativadas = $this->model->where('ativa', 0)->get();
+
+        $desativadas = $this->model->where('ativa', 0)->where('entrada', 0)->get();
+
+        $fechadas = $this->model->where('entrada', 1)->get();
 
 
-        return view('dashboard.compras.show_compras', compact('compras', 'filters', 'desativadas'));
+        return view('dashboard.compras.show_compras', compact('compras', 'filters', 'desativadas', 'fechadas'));
     }
 
     //=========================================================================================================
@@ -170,6 +173,7 @@ class Compras extends Controller
         return view('dashboard.compras.compras_desativadas', compact('compras', 'filters'));
     }
 
+    //=========================================================================================================
     public function reativar_compras(Request $request)
     {
         // Desativando a compra
@@ -181,13 +185,24 @@ class Compras extends Controller
     }
 
     //=========================================================================================================
+    public function compras_fechadas(Request $request)
+    {
+        $compras = $this->service->comprasFechadas(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+
+        return view('dashboard.compras.compras_fechadas', compact('compras', 'filters'));
+    }
+
+    //=========================================================================================================
     public function destroy(string $id)
     {
         // deletando a compra caso o usuário desista durante o cadastramento
-
-        if (CompraProduto::where('compra_id', $id)->get()) {
-            CompraProduto::where('compra_id', $id)->delete();
-        }
 
         $this->service->delete($id);
 

@@ -4,7 +4,7 @@
             <th class="text-center align-middle">Compra</th>
             <th class="text-center align-middle">Fornecedor</th>
             <th class="text-center align-middle">Ativa</th>
-            <th class="text-center align-middle">Entrada</th>
+            <th class="text-center align-middle">Fechada</th>
             <th class="text-center align-middle">QTDE. Produtos</th>
             <th class="text-center align-middle">Valor</th>
             <th class="text-center align-middle">Detalhes</th>

@@ -32,8 +32,6 @@
                         @enderror
                     </div>
 
-
-
                 </div>
 
                 <div class="mb-4 d-lg-flex justify-content-between">
@@ -60,8 +58,6 @@
                     </div>
 
                 </div>
-
-
 
                 <div class="mb-4 d-lg-flex justify-content-between">
 
@@ -140,7 +136,7 @@
                 </div>
 
                 <div class="mb-3 text-center ">
-                    <a href="{{ route('detalhes.fornecedores', ['id' => $cliente->id]) }}" class="btn btn-secondary me-2">Cancelar</a>
+                    <a href="{{ route('detalhes.clientes', ['id' => $cliente->id]) }}" class="btn btn-secondary me-2">Cancelar</a>
                     <button type="submit" class="btn btn-primary ms-2">Editar</button>
                 </div>
 
@@ -152,4 +148,6 @@
             </form>
         </div>
     </div>
+
+    <x-script-cnpj />
 @endsection

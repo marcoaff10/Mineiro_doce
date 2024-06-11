@@ -6,19 +6,14 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class modalSaida extends Component
+class scriptCnpj extends Component
 {
     /**
      * Create a new component instance.
      */
-    
-    public $produtos;
-    public $saidas;
-    
-    public function __construct($produtos, $saidas)
+    public function __construct()
     {
-        $this->produtos = $produtos;
-        $this->saidas = $saidas;
+        //
     }
 
     /**
@@ -26,6 +21,6 @@ class modalSaida extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modal-saida');
+        return view('components.script-cnpj');
     }
 }

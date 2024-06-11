@@ -15,11 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->enum('motivo', ['compra', 'doacao', 'acerto_de_estoque']);
             $table->uuid('produto_id')->index();
-            $table->uuid('fornecedor_id')->index()->nullable();
             $table->integer('quantidade');
             $table->timestamps();
 
-            $table->foreign('fornecedor_id')->references('id')->on('fornecedores');
             $table->foreign('produto_id')->references('id')->on('produtos');
         });
     }

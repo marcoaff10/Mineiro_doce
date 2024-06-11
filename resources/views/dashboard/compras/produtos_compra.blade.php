@@ -56,12 +56,20 @@
                         </div>
                     @endif
 
-                    <div class="mt-3 text-center ">
-                        <a href="{{ route('destroy.compras', $compra->id) }}" class="btn btn-secondary mx-2">Cancelar Pedido</a>
-                        <button type="submit" class="btn btn-primary mx-2">Adicionar</button>
-                        @if (count($pedido) > 0)
-                            <a href="{{ route('show.compras') }}" class="btn btn-success mx-2">Fechar Pedido</a>
+                    <div class="row justify-content-between mt-3">
+                        <div class="col-sm-12 col-md-3 col-lg-3 my-2">
+                            <a href="{{ route('destroy.compras', $compra->id) }}" class="btn btn-secondary w-100">Cancelar</a>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3 col-lg-3 my-2">
+                            <button type="submit" class="btn btn-primary w-100">Adicionar</button>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4 col-lg-4 my-2">
+                            @if (count($pedido) > 0)
+                            <a href="{{ route('show.compras') }}" class="btn btn-success w-100">Fechar Pedido</a>
                         @endif
+                        </div>
                     </div>
 
                     @if (session('error_create'))

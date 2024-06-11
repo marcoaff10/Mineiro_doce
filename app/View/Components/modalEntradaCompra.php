@@ -6,26 +6,25 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class modalSaida extends Component
+class modalEntradaCompra extends Component
 {
     /**
      * Create a new component instance.
      */
-    
-    public $produtos;
-    public $saidas;
-    
-    public function __construct($produtos, $saidas)
-    {
-        $this->produtos = $produtos;
-        $this->saidas = $saidas;
-    }
 
+     public $entradas;
+
+    public function __construct(
+        $entradas
+    )
+    {
+        $this->entradas = $entradas;
+    }
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.modal-saida');
+        return view('components.modal-entrada-compra');
     }
 }

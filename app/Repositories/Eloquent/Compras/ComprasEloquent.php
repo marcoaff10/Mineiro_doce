@@ -38,6 +38,7 @@ class ComprasEloquent implements ComprasInterface
                 )
             )
             ->groupBy('compras.id')
+            ->where('compras.entrada', 0)
             ->where('compras.ativa', 1)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
@@ -71,6 +72,39 @@ class ComprasEloquent implements ComprasInterface
             )
             ->groupBy('compras.id')
             ->where('compras.ativa', 0)
+            ->where('compras.entrada', 0)
+            ->where(function ($query) use ($filter) {
+                if ($filter) {
+                    $query->where('fornecedor', 'like', "%$filter%");
+                    $query->orWhere('compra', 'like', "%$filter%");
+                    $query->orWhere('entrada', 'like', "%$filter%");
+                    $query->orWhere('ativa', 'like', "%$filter%");
+                }
+            })
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+        return new PaginationPresenter($result);
+    }
+
+    //=====================================================================
+    public function comprasFechadas(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        $result = $this->model->leftJoin('compra_produto', 'compra_produto.compra_id', 'compras.id')
+            ->join('fornecedores', 'fornecedores.id', 'compras.fornecedor_id')
+            ->select(
+                'compras.id',
+                'compras.compra',
+                'compras.ativa',
+                'compras.entrada',
+                'fornecedores.fornecedor',
+                $this->model->raw(
+                    'COUNT(compra_produto.id) AS produtos'
+                ),
+                $this->model->raw(
+                    'CAST(SUM(compra_produto.quantidade * compra_produto.preco_compra) AS DECIMAL(20, 2))  AS valor'
+                )
+            )
+            ->groupBy('compras.id')
+            ->where('compras.entrada', 1)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('fornecedor', 'like', "%$filter%");

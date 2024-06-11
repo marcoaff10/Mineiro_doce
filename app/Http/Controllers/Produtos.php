@@ -7,6 +7,7 @@ use App\DTO\Produtos\UpdateProdutos;
 use App\Http\Requests\RequestProdutos;
 use App\Models\Categoria;
 use App\Models\Cliente;
+use App\Models\Compra;
 use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Services\Produtos\ProdutoService;
@@ -32,13 +33,13 @@ class Produtos extends Controller
         );
 
         
-        $fornecedores = Fornecedor::all();
+        $entradas = Compra::where('entrada', 0)->where('ativa', 1)->get();
 
-        $clientes = Cliente::all();
+        $saidas = Compra::where('entrada', 1)->where('ativa', 1)->get();
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'fornecedores', 'clientes'));
+        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'entradas', 'saidas'));
     }
 
     //=========================================================================================================
@@ -95,7 +96,7 @@ class Produtos extends Controller
     }
 
     //=========================================================================================================
-    public function update($id)
+    public function update(string $id)
     {
         
         $produto = $this->model->where('id', $id)->first();

@@ -1,4 +1,4 @@
-<div class="d-none d-lg-block d-xl-block d-xxl-block w-100 col-12">
+<div class="w-100 col-12" style="max-width: 100%; overflow-x: auto;">
     <table class="table table-striped table-bordered " id="datatables">
         <thead class="table-dark">
             <th class="text-center">Produto</th>

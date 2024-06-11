@@ -10,7 +10,6 @@ class CreateEntradaProdutos
     public function __construct(
         public string $motivo, 
         public string $produto_id,
-        public string|null $fornecedor_id, 
         public int $quantidade,
         ){}
 
@@ -20,7 +19,6 @@ class CreateEntradaProdutos
         return new self(
             $request->motivo,
             $request->produto,
-            $request->fornecedor,
             $request->quantidade,
         );
     }    
