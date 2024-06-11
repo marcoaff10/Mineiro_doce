@@ -89,7 +89,11 @@
                     <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
                         data-bs-toggle="modal">Inativar</a>
                     <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btn-primary">Editar</a>
-
+                    @if (session('error_disable'))
+                        <div class="text-danger alert-danger mt-2 text-center">
+                            {{ session()->get('error_disable') }}
+                        </div>
+                    @endif
                 </div>
 
             </div>
@@ -103,15 +107,17 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-danger text-center" id="confirmDeleteLabel">Atenção <i
-                        class="bi bi-exclamation-triangle-fill"></i></h1>
+                <h1 class="modal-title fs-5 text-danger text-center" id="confirmDeleteLabel">
+                    Atenção
+                    <i class="bi bi-exclamation-triangle-fill"></i>
+                </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 Deseja inativar a compra {{ $compra[0]->compra }} <strong></strong> ?
             </div>
             <div class="modal-footer">
-                <form action="{{ route('delete.fornecedores') }}" method="POST">
+                <form action="{{ route('desativar.compra') }}" method="POST">
                     @method('PUT')
                     @csrf
                     <input type="hidden" name="id" value="{{ $compra[0]->id }}">

@@ -13,7 +13,7 @@ use stdClass;
 interface ComprasInterface
 {
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
-    public function getAll(string $filter = null): array;
+    public function getAll(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function findOne(string $id);
     public function store(CreateCompras $dto): stdClass;
     public function storeProdutos(CreateProdutosCompra $dto): stdClass;

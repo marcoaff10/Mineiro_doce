@@ -30,6 +30,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/itens_compra/{id}', [Compras::class, 'itens_compra'])->name('itens.compra');
     Route::put('/update_submit_compra', [Compras::class, 'update_submit'])->name('update.submit.compra');
     Route::put('/frete_compra', [Compras::class, 'frete_compra'])->name('frete.compra');
+    Route::put('/desativar_compra', [Compras::class, 'desativar_compra'])->name('desativar.compra');
+    Route::get('/compras_desativadas', [Compras::class, 'compras_desativadas'])->name('compras.desativadas');
+    Route::put('/reativar_compras', [Compras::class, 'reativar_compras'])->name('reativar.compra');
     Route::get('/destroy_compra/{id}', [Compras::class, 'destroy'])->name('destroy.compras');
 
 

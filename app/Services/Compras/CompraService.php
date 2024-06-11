@@ -26,9 +26,13 @@ class CompraService
         );
     }
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function getAll(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->compra_interface->getAll();
+        return $this->compra_interface->getAll(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
     }
 
     //=====================================================================

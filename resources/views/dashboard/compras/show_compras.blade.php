@@ -13,29 +13,38 @@
                 <div class="col text-end ">
                     <form action="" method="GET">
 
-                        {{-- <div class="mb-3 d-flex">
+                        <div class="mb-3 d-flex">
                             <input type="text" name="filter" id="filter" class="form-control me-3 h-25 rounded-pill"
                                 placeholder="Pesquisar" value="{{ $filters['filter'] ?? '' }}">
                             <button type="submit" class="me-3 align-middle fs-5 fw-bold">
                                 <strong><i class="bi bi-search"></i></strong>
                             </button>
                             @if ($filters['filter'] != '')
-                                <a href="{{ route('estoque.produtos') }}" class="fw-bold text-danger ms-3 fs-5 align-middle">
+                                <a href="{{ route('show.compras') }}" class="fw-bold text-danger ms-3 fs-5 align-middle">
                                     <strong><i class="bi bi-x-lg align-middle"></i></strong>
                                 </a>
                             @endif
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </div>
 
             <div class="row p-2 justify-content-between p-1">
-                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
                     <a href=" {{ route('create.compras') }} " class="btn btn-primary w-100">
                         Comprar
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
                 </div>
+
+                @if (isset($desativadas) && count($desativadas) > 0)
+                    <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
+                        <a href=" {{ route('compras.desativadas') }} " class="btn btn-secondary w-100">
+                            Compras Desativadas
+                            <i class="bi bi-x-circle ms-1"></i>
+                        </a>
+                    </div>
+                @endif
             </div>
 
             @if (count($compras->items()) > 0)

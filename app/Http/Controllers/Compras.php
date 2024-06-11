@@ -19,7 +19,6 @@ class Compras extends Controller
 {
     public function __construct(protected CompraService $service, protected Compra $model)
     {
-        
     }
     //=========================================================================================================
     // Ccompras
@@ -34,7 +33,10 @@ class Compras extends Controller
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.compras.show_compras', compact('compras', 'filters'));
+        $desativadas = $this->model->where('ativa', 0)->get();
+
+
+        return view('dashboard.compras.show_compras', compact('compras', 'filters', 'desativadas'));
     }
 
     //=========================================================================================================
@@ -66,16 +68,15 @@ class Compras extends Controller
 
         $pedido = CompraProduto::where('compra_id', $id)->get();
 
-        $compra = $this->model->where('id', $id)->select('id','compra')->first();
+        $compra = $this->model->where('id', $id)->select('id', 'compra')->first();
 
-        return view('dashboard.compras.produtos_compra', compact('compra', 'produtos','pedido' ));
+        return view('dashboard.compras.produtos_compra', compact('compra', 'produtos', 'pedido'));
     }
 
     //=========================================================================================================
     public function store_produtos_compra(RequestProdutosCompra $request)
-    {   
-        if (CompraProduto::where('produto_id', $request->produto)->where('compra_id', $request->compra)->first())
-        {
+    {
+        if (CompraProduto::where('produto_id', $request->produto)->where('compra_id', $request->compra)->first()) {
             return redirect()->route('produtos.compra', $request->compra)->with('error_create', 'Produto já cadastrado nessa compra.');
         }
 
@@ -90,29 +91,34 @@ class Compras extends Controller
     public function detalhes(string $id)
     {
         $compra = $this->service->findOne($id);
-        
+
         return view('dashboard.compras.detalhes_compras', compact('compra'));
     }
 
     //=========================================================================================================
     public function update(string $id)
     {
+        // Atualizar apenas quantidade e preço unitário dos produtos já cadastrados na compra
         $compra = $this->service->findOne($id);
-        
+
         return view('dashboard.compras.update_compra', compact('compra'));
     }
 
     //=========================================================================================================
     public function itens_compra(string $id)
     {
+        // Chamada via Ajax para puxar informações dinamicamente do produto para a view
+
         $data = CompraProduto::where('produto_id', $id)->select('preco_compra', 'quantidade')->first();
-       
+
         return response()->json($data);
     }
 
     //=========================================================================================================
     public function update_submit(RequestProdutosCompra $request)
     {
+        // atualizando apenas os produtos já cadastrados na compra
+
         $this->service->updateProdutos(
             UpdateProdutosCompra::makeFromRequesr($request)
         );
@@ -123,6 +129,8 @@ class Compras extends Controller
     //=========================================================================================================
     public function frete_compra(Request $request)
     {
+        // atualizanfo o frete da compra
+
         $this->service->update(
             UpdateCompras::makeFromRequest($request)
         );
@@ -131,8 +139,55 @@ class Compras extends Controller
     }
 
     //=========================================================================================================
+    public function desativar_compra(Request $request)
+    {
+        // Desativando a compra
+        if ($this->model->where('id', $request->id)->where('entrada', 1)->first()) {
+            return redirect()->route('detalhes.compra', $request->id)->with('error_disable', 'Impossivel desativar uma compra que já entrou para o estoque.');
+        }
+
+        $this->model->findOrFail($request->id)->update(
+            ['ativa' => 0]
+        );
+
+        return redirect()->route('show.compras');
+    }
+
+    //=========================================================================================================
+    public function compras_desativadas(Request $request)
+    {
+        // Lista de todas as compras desativadas
+
+        $compras = $this->service->getAll(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+        
+
+        return view('dashboard.compras.compras_desativadas', compact('compras', 'filters'));
+    }
+
+    public function reativar_compras(Request $request)
+    {
+        // Desativando a compra
+        $this->model->findOrFail($request->id)->update(
+            ['ativa' => 1]
+        );
+
+        return redirect()->route('show.compras');
+    }
+
+    //=========================================================================================================
     public function destroy(string $id)
     {
+        // deletando a compra caso o usuário desista durante o cadastramento
+
+        if (CompraProduto::where('compra_id', $id)->get()) {
+            CompraProduto::where('compra_id', $id)->delete();
+        }
 
         $this->service->delete($id);
 

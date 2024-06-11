@@ -38,6 +38,7 @@ class ComprasEloquent implements ComprasInterface
                 )
             )
             ->groupBy('compras.id')
+            ->where('compras.ativa', 1)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('fornecedor', 'like', "%$filter%");
@@ -51,9 +52,9 @@ class ComprasEloquent implements ComprasInterface
     }
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function getAll(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->model->leftJoin('compra_produto', 'compra_produto.compra_id', 'compras.id')
+        $result = $this->model->leftJoin('compra_produto', 'compra_produto.compra_id', 'compras.id')
             ->join('fornecedores', 'fornecedores.id', 'compras.fornecedor_id')
             ->select(
                 'compras.id',
@@ -69,6 +70,7 @@ class ComprasEloquent implements ComprasInterface
                 )
             )
             ->groupBy('compras.id')
+            ->where('compras.ativa', 0)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('fornecedor', 'like', "%$filter%");
@@ -77,8 +79,8 @@ class ComprasEloquent implements ComprasInterface
                     $query->orWhere('ativa', 'like', "%$filter%");
                 }
             })
-            ->get()
-            ->toArray();
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+        return new PaginationPresenter($result);
     }
 
     //=====================================================================
