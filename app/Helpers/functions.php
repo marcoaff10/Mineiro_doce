@@ -88,7 +88,7 @@ function somar($array)
 {
  // retorna a soma total das chaves iguais de um array
     $valor = array_reduce($array, function ($carry, $items) {
-        return $carry + ($items->preco_compra * $items->quantidade) ;
+        return $carry + ($items->preco_compra ?? $items->preco_venda * $items->quantidade) ;
     });
 
 

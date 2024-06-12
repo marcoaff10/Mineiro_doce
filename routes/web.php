@@ -11,6 +11,7 @@ use App\Http\Controllers\Pedidos;
 use App\Http\Controllers\Produtos;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Saidas;
+use App\Http\Controllers\Vendas;
 use Illuminate\Support\Facades\Route;
 
 
@@ -18,6 +19,8 @@ Route::middleware('auth')->group(function () {
 
     // dashbord
     Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
+
+    //=============================================================================================================
 
     // Compras
     Route::get('/show_compras', [Compras::class, 'show'])->name('show.compras');
@@ -46,6 +49,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
     Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
 
+    //=============================================================================================================
+
     //  Categorias
     Route::get('/show_categorias', [Categorias::class, 'show'])->name('show.categorias');
     Route::get('/create_categorias', [Categorias::class, 'create'])->name('create.categorias');
@@ -64,6 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
+    //=============================================================================================================
+
     // Entradas Produtos
     Route::post('/entrada_produtos', [Entradas::class, 'store'])->name('entrada.produtos');
     Route::get('/compra_entrada/{id}', [Entradas::class, 'compra_entrada'])->name('entrada.compra');
@@ -73,6 +80,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/saida_produtos', [Saidas::class, 'store'])->name('saida.produtos');
     Route::get('/qtde_estoque/{id}', [Saidas::class, 'qtde_estoque'])->name('qtde.estoque');
 
+    //=============================================================================================================
 
     // Clientes
     Route::get('/show_clientes', [Clientes::class, 'show'])->name('show.clientes');
@@ -83,7 +91,30 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_clientes', [Clientes::class, 'update_submit'])->name('update.submit.clientes');
     Route::put('/delete_clientes', [Clientes::class, 'delete'])->name('delete.clientes');
 
+    // Vendas
+    Route::get('/show_vendas', [Vendas::class, 'show'])->name('show.vendas');
+    Route::get('/create_vendas', [Vendas::class, 'create'])->name('create.vendas');
+    Route::post('/store_vendas', [Vendas::class, 'store'])->name('store.vendas');
+    Route::get('/produtos_venda/{id}', [Vendas::class, 'produtos_venda'])->name('produtos.venda');
+    Route::post('/store_produtos_venda', [Vendas::class, 'store_produtos_venda'])->name('store.produtos.venda');
+    Route::get('/estoque_disponivel_vendas/{id}', [Vendas::class, 'estoque_disponivel_vendas'])->name('estoque.disponivel.vendas');
+    Route::get('/detalhes_venda/{id}', [Vendas::class, 'detalhes'])->name('detalhes.venda');
+    Route::put('/frete_venda', [Vendas::class, 'frete_venda'])->name('frete.venda');
+    Route::get('/update_venda/{id}', [Vendas::class, 'update'])->name('update.venda');
+    Route::get('/itens_venda/{produto_id}/{id}', [Vendas::class, 'itens_venda'])->name('itens.venda');
+    Route::put('/update_submit_venda', [Vendas::class, 'update_submit'])->name('update.submit.venda');
+    Route::put('/desativar_venda', [Vendas::class, 'desativar_venda'])->name('desativar.venda');
+    Route::get('/vendas_desativadas', [Vendas::class, 'vendas_desativadas'])->name('vendas.desativadas');
+    Route::put('/reativar_vendas', [Vendas::class, 'reativar_vendas'])->name('reativar.venda');
+    
+    Route::get('/vendas_fechadas', [Vendas::class, 'vendas_fechadas'])->name('vendas.fechadas');
 
+
+    Route::get('/destroy_venda/{id}', [Vendas::class, 'destroy'])->name('destroy.vendas');
+
+
+    //=============================================================================================================
+    
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

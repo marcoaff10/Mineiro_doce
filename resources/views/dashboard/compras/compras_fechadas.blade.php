@@ -75,6 +75,4 @@
             @endif
         </div>
     </div>
-
-    <x-script />
 @endsection

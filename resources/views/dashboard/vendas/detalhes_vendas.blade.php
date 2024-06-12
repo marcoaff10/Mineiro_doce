@@ -1,5 +1,5 @@
 @extends('dashboard.dashboard')
-@section('title', 'Detalhes da Compra')
+@section('title', 'Detalhes da Venda')
 @section('content')
     <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
         <div class="row my-2">
@@ -7,11 +7,6 @@
                 <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
             </div>
 
-            {{-- <div class="col text-end">
-                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
-                    <i class="bi bi-skip-backward-fill"></i>
-                </a>
-            </div> --}}
         </div>
         <div class="col card p-3">
             <div class="row p-2">
@@ -20,33 +15,33 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                        <h2 class="fs-5 text-info mb-3">{{ $compra[0]->compra}}</h2>
+                        <h2 class="fs-5 text-info mb-3">{{ $venda[0]->venda}}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
-                            @foreach ($compra as $item)
-                                <li class="my-1">Fornecedor: {{ $item->fornecedor }}</li>
+                            @foreach ($venda as $item)
+                                <li class="my-1">Cliente: {{ $item->cliente }}</li>
                                 <li class="my-1">
                                     Frete: {{ $item->frete == 0 ? 'Frete não informado.' : 'R$ ' . preco($item->frete) }}
                                 </li>
                                 <li class="my-1">
-                                    {{ $item->ativa === 1 ? 'Compra Ativa' : 'NÃO' }}
+                                     {{ $item->ativa === 1 ? 'Venda Ativa' : 'Venda Desativada' }}
                                 </li class="my-1">
                                 <li class="my-1">
-                                    {{ $item->entrada === 1 ? 'Entrou no Estoque' : 'Não Entrada no estoque' }}
-                                    @if ($item->entrada === 0)
+                                    {{ $item->saida === 1 ? 'Venda Fechada' : 'Peças em Estoque'   }}
+                                    @if ($item->saida === 0)
                                         <a href="{{ route('estoque.produtos') }}"
-                                            class="ms-2 text-decoration-none fw-bold text-success">ENTRAR.</a>
+                                            class="ms-2 text-decoration-none fw-bold text-danger">SAIR.</a>
                                     @endif
                                 </li>
-                                <li class="my-1 fw-bold">Valor total da compra: R$ {{ preco(somar($compra)['valor']) }}</li>
+                                <li class="my-1 fw-bold">Valor total da venda: R$ {{ preco(somar($venda)['valor']) }}</li>
                             @break
                         @endforeach
-                        @if ($compra[0]->frete == 0)
+                        @if ($venda[0]->frete == 0)
                             <li class="my-1">
-                                <form action="{{ route('frete.compra') }}" method="POST" class="col-4">
+                                <form action="{{ route('frete.venda') }}" method="POST" class="col-4">
                                     @method('PUT')
                                     @csrf
-                                    <input type="hidden" name="compra" value="{{ $compra[0]->id }}">
+                                    <input type="hidden" name="venda" value="{{ $venda[0]->id }}">
                                     <input type="text" name="frete" class="form-control form-control-sm mt-4 mb-2"
                                         placeholder="Frete" required>
                                     <button type="submit" class="btn btn-success align-middle"
@@ -67,16 +62,16 @@
                                 <th class="text-center align-middle">Produto</th>
                                 <th class="text-center align-middle">Quantidade</th>
                                 <th class="text-center align-middle">Preço Unitário</th>
-                                <th class="text-center align-middle">Preço Compra</th>
+                                <th class="text-center align-middle">Preço venda</th>
                             </thead>
                             <tbody>
-                                @foreach ($compra as $item)
+                                @foreach ($venda as $item)
                                     <tr>
                                         <td class="text-center align-middle"> {{ $item->produto }} </td>
                                         <td class="text-center align-middle"> {{ $item->quantidade }} </td>
-                                        <td class="text-center align-middle"> R$ {{ preco($item->preco_compra) }} </td>
+                                        <td class="text-center align-middle"> R$ {{ preco($item->preco_venda) }} </td>
                                         <th class="text-center align-middle">R$
-                                            {{ preco($item->quantidade * $item->preco_compra) }}
+                                            {{ preco($item->quantidade * $item->preco_venda) }}
                                         </th>
                                     </tr>
                                 @endforeach
@@ -89,7 +84,7 @@
 
                     <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
                         data-bs-toggle="modal">Inativar</a>
-                    <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('update.venda', $venda[0]->id) }}" class="btn btn-primary">Editar</a>
                     @if (session('error_disable'))
                         <div class="text-danger alert-danger mt-2 text-center">
                             {{ session()->get('error_disable') }}
@@ -115,13 +110,13 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Deseja inativar a compra {{ $compra[0]->compra }} <strong></strong> ?
+                Deseja inativar a venda {{ $venda[0]->venda }} <strong></strong> ?
             </div>
             <div class="modal-footer">
-                <form action="{{ route('desativar.compra') }}" method="POST">
+                <form action="{{ route('desativar.venda') }}" method="POST">
                     @method('PUT')
                     @csrf
-                    <input type="hidden" name="id" value="{{ $compra[0]->id }}">
+                    <input type="hidden" name="id" value="{{ $venda[0]->id }}">
                     <button type="submit" class="btn btn-danger">
                         confirmar
                     </button>

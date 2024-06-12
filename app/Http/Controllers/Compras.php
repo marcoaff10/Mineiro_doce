@@ -48,9 +48,8 @@ class Compras extends Controller
 
         $fornecedores = Fornecedor::all();
 
-        $produtos = Produto::all();
 
-        return view('dashboard.compras.create_compras', compact('fornecedores', 'produtos'));
+        return view('dashboard.compras.create_compras', compact('fornecedores'));
     }
 
     //=========================================================================================================

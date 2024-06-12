@@ -1,12 +1,12 @@
 @extends('dashboard.dashboard')
-@section('title', 'Compras Desativadas')
+@section('title', 'Vendas Desativadas')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Compras <i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block">Vendas <i class="bi bi-truck ms-1 align-middle"></i></h1>
                 </div>
             </div>
             <div class="row py-3">
@@ -20,7 +20,7 @@
                                 <strong><i class="bi bi-search"></i></strong>
                             </button>
                             @if ($filters['filter'] != '')
-                                <a href="{{ route('compras.desativadas') }}"
+                                <a href="{{ route('vendas.desativadas') }}"
                                     class="fw-bold text-danger ms-3 fs-5 align-middle">
                                     <strong><i class="bi bi-x-lg align-middle"></i></strong>
                                 </a>
@@ -32,26 +32,26 @@
 
             <div class="row p-2 justify-content-between p-1">
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
-                    <a href=" {{ route('create.compras') }} " class="btn btn-primary w-100">
-                        Comprar
+                    <a href=" {{ route('create.vendas') }} " class="btn btn-primary w-100">
+                        Vender
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
-                    <a href=" {{ route('show.compras') }} " class="btn btn-success w-100">
-                        Compras Ativas
+                    <a href=" {{ route('show.vendas') }} " class="btn btn-success w-100">
+                        Vendas Ativas
                         <i class="bi bi-check-circle ms-1"></i>
                     </a>
                 </div>
             </div>
 
-            @if (count($compras->items()) > 0)
+            @if (count($vendas->items()) > 0)
                 <div class="w-100 col-12" style="max-width: 100%; overflow-x: auto">
                     <table class="table table-striped table-bordered " id="datatables">
                         <thead class="table-dark">
-                            <th class="text-center align-middle">Compra</th>
-                            <th class="text-center align-middle">Fornecedor</th>
+                            <th class="text-center align-middle">venda</th>
+                            <th class="text-center align-middle">Cliente</th>
                             <th class="text-center align-middle">Ativa</th>
                             <th class="text-center align-middle">Fechada</th>
                             <th class="text-center align-middle">Valor</th>
@@ -59,25 +59,25 @@
                             <th class="text-center align-middle">Excluir</th>
                         </thead>
                         <tbody>
-                            @foreach ($compras->items() as $compra)
+                            @foreach ($vendas->items() as $venda)
                                 <tr>
-                                    <td class="w-25 align-middle"> {{ $compra->compra }} </td>
-                                    <td class="align-middle"> {{ primeiro_nome($compra->fornecedor) }} </td>
-                                    <td class="text-center align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> {{ $compra->entrada == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> R$ {{ preco($compra->valor) }} </td>
+                                    <td class="w-25 align-middle"> {{ $venda->venda }} </td>
+                                    <td class="align-middle"> {{ primeiro_nome($venda->cliente) }} </td>
+                                    <td class="text-center align-middle "> {{ $venda->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td class="text-center align-middle"> {{ $venda->saida == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td class="text-center align-middle"> R$ {{ preco($venda->valor) }} </td>
                                     <td class="text-center align-middle">
-                                        <form action="{{ route('reativar.compra')}}" method="POST">
+                                        <form action="{{ route('reativar.venda')}}" method="POST">
                                             @method('PUT')
                                             @csrf
-                                            <input type="hidden" name="id" value="{{ $compra->id }}">
+                                            <input type="hidden" name="id" value="{{ $venda->id }}">
                                             <button type="submit" class="text-decoration-none text-success ">
                                                 <i class="bi bi-check-circle"></i>
                                             </button>
                                         </form>
                                     </td>
                                     <td class="text-center align-middle">
-                                        <a href=" {{ route('destroy.compras', $compra->id) }} "
+                                        <a href=" {{ route('destroy.vendas', $venda->id) }} "
                                             class="text-decoration-none text-danger ">
                                             <i class="bi bi-trash"></i>
                                         </a>
@@ -86,10 +86,10 @@
                             @endforeach
                         </tbody>
                     </table>
-                    <x-pagination :paginator="$compras" :appends="$filters" />
+                    <x-pagination :paginator="$vendas" :appends="$filters" />
                 </div>
             @else
-                <p class=" text-center opacity-50 mt-5">Nenhuma compra.</p>
+                <p class=" text-center opacity-50 mt-5">Nenhuma venda desativada.</p>
             @endif
         </div>
     </div>

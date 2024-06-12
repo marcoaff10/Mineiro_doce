@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary();
             $table->string('venda');
             $table->uuid('cliente_id')->index();
-            $table->float('frete')->index();
+            $table->float('frete')->default(0);
             $table->integer('ativa')->unsigned()->default(0);
             $table->integer('saida')->unsigned()->default(0);
             $table->timestamps();

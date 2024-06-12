@@ -17,6 +17,24 @@
 
                     <li class="mb-1">
                         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
+                            data-bs-target="#vendas-collapse" aria-expanded="false">
+                            <i class="bi bi-truck"></i>
+                            Vendas
+                            <i class="bi bi-caret-down align-middle "></i>
+                        </button>
+                        <div class="collapse" id="vendas-collapse">
+                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                <li class="ms-4"><a href="{{ route('show.vendas') }}" class="link-dark rounded">
+                                    Vendas</a></li>
+                                <li class="ms-4"><a href="{{ route('create.vendas') }}"
+                                        class="link-dark rounded">Novo</a></li>
+
+                            </ul>
+                        </div>
+                    </li>
+
+                    <li class="mb-1">
+                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
                             data-bs-target="#compras-collapse" aria-expanded="false">
                             <i class="bi bi-cart-plus"></i>
                             Compras
