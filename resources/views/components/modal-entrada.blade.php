@@ -12,7 +12,7 @@
 
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="selecionar" class="form-label">Motivo</label>
+                        <label class="form-label">Motivo</label>
                         <select name="selecionar" id="motivoEntrada" class="form-select" required>
                             <option value="">Selecione um Motivo</option>
                             @foreach (MOTIVO_ENTRADA as $key => $value)

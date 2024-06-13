@@ -239,6 +239,21 @@ class Vendas extends Controller
     }
 
     //=========================================================================================================
+    public function vendas_fechadas(Request $request)
+    {
+        $vendas = $this->service->vendasFechadas(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+
+        return view('dashboard.vendas.vendas_fechadas', compact('vendas', 'filters'));
+    }
+
+    //=========================================================================================================
     public function destroy(string $id)
     {
         // deletando a venda caso o usuário desista durante o cadastramento

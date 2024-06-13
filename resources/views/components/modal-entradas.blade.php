@@ -2,7 +2,7 @@
     @csrf
     <input type="hidden" name="motivo" value="" id="motivo">
     <div class="mb-3">
-        <label for="produto" class="form-label">Produtos</label>
+        <label class="form-label">Produtos</label>
         <select name="produto" id="produto" class="form-select">
             <option value="">Selecione um produto</option>
             @foreach ($produtos->items() as $produto)
@@ -14,7 +14,7 @@
     </div>
 
     <div class="mb-3">
-        <label for="quantidade" class="form-label">Quantidade</label>
+        <label class="form-label">Quantidade</label>
         <input type="text" name="quantidade" id="quantidade" class="form-control" placeholder="Quantidade">
     </div>
 

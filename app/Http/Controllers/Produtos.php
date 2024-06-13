@@ -10,6 +10,7 @@ use App\Models\Cliente;
 use App\Models\Compra;
 use App\Models\Fornecedor;
 use App\Models\Produto;
+use App\Models\Venda;
 use App\Services\Produtos\ProdutoService;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
@@ -35,7 +36,7 @@ class Produtos extends Controller
         
         $entradas = Compra::where('entrada', 0)->where('ativa', 1)->get();
 
-        $saidas = Compra::where('entrada', 1)->where('ativa', 1)->get();
+        $saidas = Venda::where('saida', 0)->where('ativa', 1)->get();
 
         $filters = ['filter' => $request->get('filter', '')];
 

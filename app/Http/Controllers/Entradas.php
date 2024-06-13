@@ -28,8 +28,7 @@ class Entradas extends Controller
 
     //=========================================================================================================
     public function entrada_compra(Request $request)
-    {
-               
+    {        
         $this->service->entrada_compra($request->compra);
 
         return redirect()->route('estoque.produtos');

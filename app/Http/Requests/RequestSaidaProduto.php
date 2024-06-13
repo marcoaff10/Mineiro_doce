@@ -26,10 +26,6 @@ class RequestSaidaProduto extends FormRequest
                 'required',
             ],
 
-            'fornecedor' => [
-                'nullable'
-            ],
-
             'produto' => [
                 'required',
             ],

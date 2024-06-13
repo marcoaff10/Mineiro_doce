@@ -77,8 +77,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/compra_entrada', [Entradas::class, 'entrada_compra'])->name('entrar.compra');
 
     // Saidas Produtos
+    Route::get('/venda_saida/{id}', [Saidas::class, 'venda_saida'])->name('saida.venda');
+    Route::post('/venda_saida', [Saidas::class, 'saida_venda'])->name('sair.venda');
+
     Route::post('/saida_produtos', [Saidas::class, 'store'])->name('saida.produtos');
-    Route::get('/qtde_estoque/{id}', [Saidas::class, 'qtde_estoque'])->name('qtde.estoque');
 
     //=============================================================================================================
 

@@ -12,7 +12,6 @@ class Saidas extends Controller
 {
     public function __construct(protected SaidaProdutoService $service)
     {
-        
     }
 
 
@@ -21,6 +20,7 @@ class Saidas extends Controller
     //=========================================================================================================
     public function store(RequestSaidaProduto $request)
     {
+
         $this->service->store(
             CreateSaidaProdutos::makeFromRequest($request)
         );
@@ -29,12 +29,19 @@ class Saidas extends Controller
     }
 
     //=========================================================================================================
-    public function qtde_estoque($id)
+    public function saida_venda(Request $request)
     {
-        $data = Estoque::where('produto_id', $id)->select(
-            Estoque::raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque')
-        )->first();
+        
+        $this->service->saida_venda($request->venda);
 
-        return response()->json($data);
+        return redirect()->route('estoque.produtos');
+    }
+
+    //=========================================================================================================
+    public function venda_saida(string $id)
+    {
+        $data = $this->service->produtoSaida($id);
+
+        return $data;
     }
 }

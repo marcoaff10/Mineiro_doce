@@ -1,7 +1,7 @@
 <form action="{{ route('entrar.compra') }}" method="POST">
     @csrf
     <div class="mb-3" id="compra">
-        <label for="compra" class="form-label">Compras</label>
+        <label class="form-label">Compras</label>
         <select name="compra" id="compraEntrada" class="form-select">
             <option value="">Selecione uma Compra</option>
             @foreach ($entradas as $entrada)

@@ -1,4 +1,4 @@
-<div class="w-100 col-12" style="max-width: 100%; overflow-x: auto">
+<div class="w-100 col-12 my-3" style="max-width: 100%; overflow-x: auto">
     <table class="table table-striped table-bordered " id="datatables">
         <thead class="table-dark">
             <th class="text-center align-middle">Venda</th>
@@ -28,5 +28,5 @@
             @endforeach
         </tbody>
     </table>
-    <x-pagination :paginator="$vendas" :appends="$filters" />
 </div>
+<x-pagination :paginator="$vendas" :appends="$filters" />

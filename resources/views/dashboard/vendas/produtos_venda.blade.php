@@ -35,7 +35,7 @@
 
                         
                         <div class="col-lg-12 col-sm-12 mb-3">
-                            <label for="quantidade" class="form-label">Quantidade</label>
+                            <label class="form-label">Quantidade</label>
                             <input type="text" name="quantidade" id="quantidadeVenda" class="form-control"
                                 placeholder="Quantidade..." value="{{ old('quantidade') }}">
                                 <div class="d-none text-center text-danger alert-danger mt-2" id="error">
