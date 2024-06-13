@@ -36,6 +36,29 @@ class FornecedoreService
     }
 
     //=====================================================================
+    public function comprasAtivasFornecedor(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->fornecedor_interface->comprasAtivasFornecedor(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
+    public function comprasFechadasFornecedor(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->fornecedor_interface->comprasFechadasFornecedor(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+
+    //=====================================================================
     public function store(CreateFornecedores $dto): stdClass
     {
         return $this->fornecedor_interface->store($dto);

@@ -6,7 +6,7 @@
 
             <div class="row">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Fornecedores <i class="bi bi-box ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block">Fornecedores <i class="bi bi-shop ms-1 align-middle"></i></h1>
                 </div>
             </div>
 

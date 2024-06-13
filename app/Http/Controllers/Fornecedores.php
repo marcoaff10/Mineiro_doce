@@ -34,13 +34,28 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function detalhes(string $id)
+    public function detalhes(string $id, Request $request)
     {
         
         $fornecedor = $this->service->findOne($id);
 
+        $ativas = $this->service->comprasAtivasFornecedor(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
 
-        return view('dashboard.fornecedores.detalhes_fornecedor', compact('fornecedor'));
+        $fechadas = $this->service->comprasFechadasFornecedor(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+    
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('dashboard.fornecedores.detalhes_fornecedor', compact('fornecedor', 'ativas', 'fechadas', 'filters'));
     }
 
     //=========================================================================================================

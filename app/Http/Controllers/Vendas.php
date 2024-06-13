@@ -117,6 +117,7 @@ class Vendas extends Controller
         $venda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
             ->where('produto_id', $id)
             ->where('vendas.saida', 0)
+            ->where('vendas.ativa', 1)
             ->select(
                 VendaProduto::raw('SUM(venda_produto.quantidade) AS venda')
             )->first();
@@ -165,6 +166,7 @@ class Vendas extends Controller
         ->where('produto_id', $produto_id)
             ->where('venda_id', '!=', $id)
             ->where('vendas.saida', 0)
+            ->where('vendas.ativa', 1)
             ->select(
                 VendaProduto::raw('SUM(venda_produto.quantidade) AS venda')
             )->first();

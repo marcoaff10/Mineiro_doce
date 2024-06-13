@@ -55,6 +55,7 @@
                             <th class="text-center align-middle">Ativa</th>
                             <th class="text-center align-middle">Fechada</th>
                             <th class="text-center align-middle">Valor</th>
+                            <th class="text-center align-middle">Detalhes</th>
                         </thead>
                         <tbody>
                             @foreach ($compras->items() as $compra)
@@ -64,6 +65,12 @@
                                     <td class="text-center align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
                                     <td class="text-center align-middle"> {{ $compra->entrada == 1 ? 'SIM' : 'NÃO' }} </td>
                                     <td class="text-center align-middle"> R$ {{ preco($compra->valor) }} </td>
+                                    <td class="text-center align-middle">
+                                        <a href=" {{ route('detalhes.compra', $compra->id) }} "
+                                            class="text-decoration-none text-success ">
+                                            <i class="bi bi-arrow-right-circle-fill"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

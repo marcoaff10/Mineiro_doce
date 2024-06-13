@@ -3,8 +3,8 @@
         <thead class="table-dark">
             <th class="text-center align-middle">Venda</th>
             <th class="text-center align-middle">Cliente</th>
-            <th class="text-center align-middle">Ativa</th>
-            <th class="text-center align-middle">Fechada</th>
+            <th class="text-center align-middle">Status</th>
+            <th class="text-center align-middle">Estoque</th>
             <th class="text-center align-middle">Produtos</th>
             <th class="text-center align-middle">Valor</th>
             <th class="text-center align-middle">Detalhes</th>
@@ -14,8 +14,8 @@
                 <tr>
                     <td class="w-25 align-middle"> {{ $venda->venda }} </td>
                     <td class="align-middle"> {{ primeiro_nome($venda->cliente) }} </td>
-                    <td class="text-center align-middle "> {{ $venda->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
-                    <td class="text-center align-middle"> {{ $venda->saida == 1 ? 'SIM' : 'NÃO' }} </td>
+                    <td class="text-center align-middle "> {{ $venda->ativa == 1 ? 'Ativa' : 'Fechada' }} </td>
+                    <td class="text-center align-middle"> {{ $venda->saida == 1 ? 'Saiu' : 'Não Saiu' }} </td>
                     <td class="text-center align-middle"> {{ $venda->produtos }} </td>
                     <td class="text-center align-middle"> R$ {{ preco($venda->valor) }} </td>
                     <td class="text-center align-middle">

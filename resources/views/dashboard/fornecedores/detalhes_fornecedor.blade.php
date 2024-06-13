@@ -4,7 +4,7 @@
     <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-shop ms-1"></i></h1>
             </div>
 
             {{-- <div class="col text-end">
@@ -15,7 +15,7 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-5 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
+                <strong class="fs-4 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -34,7 +34,9 @@
                             <li>Cidade: {{ $fornecedor->cidade }}</li>
                             <li>Estado: {{ $fornecedor->uf }}</li>
                             <li>CEP: {{ $fornecedor->cep }}</li>
-                            <li>Logradouro: {{ $fornecedor->endereco . ', ' . ($fornecedor->num == '' ? 'S/N' : $fornecedor->num) }}</li>
+                            <li>Logradouro:
+                                {{ $fornecedor->endereco . ', ' . ($fornecedor->num == '' ? 'S/N' : $fornecedor->num) }}
+                            </li>
                             <li>Bairro: {{ $fornecedor->bairro }}</li>
                         </ul>
                     </div>
@@ -62,7 +64,7 @@
     </div>
 
 
-
+    {{-- ====================================================================================================================================== --}}
     <div class="modal fade" id="confirmDelete" aria-hidden="true" aria-labelledby="confirmDeleteLabel" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -78,7 +80,7 @@
                     <form action="{{ route('delete.fornecedores') }}" method="POST">
                         @method('PUT')
                         @csrf
-                        <input type="hidden" name="id" value="{{$fornecedor->id}}">
+                        <input type="hidden" name="id" value="{{ $fornecedor->id }}">
                         <button type="submit" class="btn btn-danger">
                             confirmar
                         </button>
@@ -87,5 +89,15 @@
             </div>
         </div>
     </div>
+
+    @if (count($ativas->items()) > 0)
+        <x-compra-ativa-fornecedor :ativas="$ativas" :filters="$filters" />
+    @endif
+
+    {{-- ====================================================================================================================================== --}}
+
+    @if (count($fechadas->items()) > 0)
+        <x-compra-fechadas-fornecedor :fechadas="$fechadas" :filters="$filters" />
+    @endif
 
 @endsection

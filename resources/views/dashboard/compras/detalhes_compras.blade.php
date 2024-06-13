@@ -6,12 +6,6 @@
             <div class="col">
                 <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
             </div>
-
-            {{-- <div class="col text-end">
-                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
-                    <i class="bi bi-skip-backward-fill"></i>
-                </a>
-            </div> --}}
         </div>
         <div class="col card p-3">
             <div class="row p-2">
@@ -20,7 +14,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                        <h2 class="fs-5 text-info mb-3">{{ $compra[0]->compra}}</h2>
+                        <h2 class="fs-5 text-info mb-3">{{ $compra[0]->compra }}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
                             @foreach ($compra as $item)
@@ -29,7 +23,7 @@
                                     Frete: {{ $item->frete == 0 ? 'Frete não informado.' : 'R$ ' . preco($item->frete) }}
                                 </li>
                                 <li class="my-1">
-                                    {{ $item->ativa === 1 ? 'Compra Ativa' : 'NÃO' }}
+                                    {{ $item->ativa === 1 ? 'Status: Ativa' : 'Status: Fechada' }}
                                 </li class="my-1">
                                 <li class="my-1">
                                     {{ $item->entrada === 1 ? 'Entrou no Estoque' : 'Não Entrada no estoque' }}
@@ -41,7 +35,8 @@
                                 <li class="my-1 fw-bold">Valor total da compra: R$ {{ preco(somar($compra)['valor']) }}</li>
                             @break
                         @endforeach
-                        @if ($compra[0]->frete == 0)
+
+                        @if ($compra[0]->frete == 0 && $compra[0]->ativa == 1)
                             <li class="my-1">
                                 <form action="{{ route('frete.compra') }}" method="POST" class="col-4">
                                     @method('PUT')
@@ -85,17 +80,18 @@
                     </div>
                 </div>
 
-                <div class="col-12 text-center mt-4">
-
-                    <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                        data-bs-toggle="modal">Inativar</a>
-                    <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btn-primary">Editar</a>
-                    @if (session('error_disable'))
-                        <div class="text-danger alert-danger mt-2 text-center">
-                            {{ session()->get('error_disable') }}
-                        </div>
-                    @endif
-                </div>
+                @if ($compra[0]->ativa == 1)
+                    <div class="col-12 text-center mt-4">
+                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                            data-bs-toggle="modal">Inativar</a>
+                        <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btn-primary">Editar</a>
+                        @if (session('error_disable'))
+                            <div class="text-danger alert-danger mt-2 text-center">
+                                {{ session()->get('error_disable') }}
+                            </div>
+                        @endif
+                    </div>
+                @endif
 
             </div>
         </div>
