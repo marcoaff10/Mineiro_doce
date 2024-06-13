@@ -102,21 +102,24 @@ class Vendas extends Controller
             $join->on('venda_produto.produto_id', 'estoque.produto_id')
                 ->where('venda_produto.produto_id', '!=', null);
         })
-            ->where('estoque.produto_id', $id)->select(
+            ->leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
+            ->where('estoque.produto_id', $id)
+            ->select(
                 Estoque::raw(
                     'CAST(
-                            CASE WHEN venda_produto.produto_id IS NULL 
-                            THEN estoque.qtde_entrada - estoque.qtde_saida 
-                            ELSE estoque.qtde_entrada - estoque.qtde_saida 
-                            END  
-                        AS DECIMAL(20, 0)) AS estoque'
+                        estoque.qtde_entrada - estoque.qtde_saida 
+                        AS DECIMAL(20, 0)
+                        ) AS estoque'
                 )
             )
             ->first();
 
-        $venda = VendaProduto::where('produto_id', $id)->select(
-            VendaProduto::raw('SUM(venda_produto.quantidade) AS venda')
-        )->first();
+        $venda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
+            ->where('produto_id', $id)
+            ->where('vendas.saida', 0)
+            ->select(
+                VendaProduto::raw('SUM(venda_produto.quantidade) AS venda')
+            )->first();
 
         $estoque->estoque = $estoque->estoque - $venda->venda;
 
@@ -158,8 +161,10 @@ class Vendas extends Controller
             ->where('venda_produto.venda_id', $id)
             ->first();
 
-        $venda = VendaProduto::where('produto_id', $produto_id)
+        $venda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
+        ->where('produto_id', $produto_id)
             ->where('venda_id', '!=', $id)
+            ->where('vendas.saida', 0)
             ->select(
                 VendaProduto::raw('SUM(venda_produto.quantidade) AS venda')
             )->first();

@@ -7,9 +7,11 @@ use App\DTO\Produtos\UpdateProdutos;
 use App\Models\Entrada_produto;
 use App\Models\Estoque;
 use App\Models\Produto;
+use App\Models\Saida_produto;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\PaginationPresenter;
 use App\Repositories\Contracts\Produtos\ProdutosInterface;
+use App\View\Components\EntradaProduto;
 use Illuminate\Support\Facades\DB;
 use stdClass;
 
@@ -89,14 +91,39 @@ class ProdutosEloquent implements ProdutosInterface
     {
 
         // buscando linha no banco que corresponde com o id informado
-        $produto = $this->model->where('produtos.id', $id)->leftJoin('estoque', 'estoque.produto_id', 'produtos.id')
+        $produto = $this->model->leftJoin('estoque', 'estoque.produto_id', 'produtos.id')
+            ->leftJoin('compra_produto', function($join) {
+                $join->on('compra_produto.produto_id', 'produtos.id')
+                ->where('compra_produto.id', '!=', null);
+            })
+            ->leftJoin('compras', function($join) {
+                $join->on('compra_produto.compra_id', 'compras.id')
+                ->where('compra_produto.compra_id', '!=', null);
+            })
+
+            ->leftJoin('venda_produto', function($join) {
+                $join->on('venda_produto.produto_id', 'produtos.id')
+                ->where('venda_produto.id', '!=', null);
+            })
+            ->leftJoin('vendas', function($join) {
+                $join->on('venda_produto.venda_id', 'vendas.id')
+                ->where('venda_produto.venda_id', '!=', null);
+            })
             ->join('categorias', 'categorias.id', 'produtos.categoria_id')
             ->select(
                 'produtos.*',
                 'categorias.categoria',
-                $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque')
+                $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
+                $this->model->raw('CAST(MIN(compra_produto.preco_compra) AS DECIMAL(20,2)) AS min_compra'),
+                $this->model->raw('CAST(MAX(compra_produto.preco_compra) AS DECIMAL(20,2)) AS max_compra'),
+                $this->model->raw('CAST(AVG(compra_produto.preco_compra) AS DECIMAL(20,2)) AS avg_compra'),
+                $this->model->raw('CAST(MIN(venda_produto.preco_venda) AS DECIMAL(20,2)) AS min_venda'),
+                $this->model->raw('CAST(MAX(venda_produto.preco_venda) AS DECIMAL(20,2)) AS max_venda'),
+                $this->model->raw('CAST(AVG(venda_produto.preco_venda) AS DECIMAL(20,2)) AS avg_venda'),
+                $this->model->raw('CAST((SUM(venda_produto.preco_venda) - SUM(compra_produto.preco_compra)) AS DECIMAL(20,2)) AS lucro')
             )
             ->groupBy('produtos.id')
+            ->where('produtos.id', $id)
             ->first();
 
 
@@ -110,9 +137,17 @@ class ProdutosEloquent implements ProdutosInterface
     //=====================================================================
     public function paginateEntradas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        $produtoEntrada = $this->model->leftJoin('entrada_produto', 'entrada_produto.produto_id', 'produtos.id')
-            ->leftJoin('compras',  function ($join) {
+        $entradas = Entrada_produto::leftJoin('produtos', 'produtos.id', 'entrada_produto.produto_id')
+            ->leftJoin('compras', function ($join) {
                 $join->on('compras.id', 'entrada_produto.compra_id')
+                    ->where('entrada_produto.compra_id', '!=', null);
+            })
+            ->leftJoin('compra_produto', function ($join) {
+                $join->on('compra_produto.compra_id', 'compras.id')
+                    ->where('entrada_produto.compra_id', '!=', null);
+            })
+            ->leftJoin('fornecedores', function ($join) {
+                $join->on('fornecedores.id', 'compras.fornecedor_id')
                     ->where('entrada_produto.compra_id', '!=', null);
             })
             ->select(
@@ -120,21 +155,30 @@ class ProdutosEloquent implements ProdutosInterface
                 'entrada_produto.motivo',
                 'entrada_produto.quantidade',
                 'entrada_produto.created_at',
-                'compras.compra'
+                'fornecedores.fornecedor',
+                'compra_produto.preco_compra',
             )
             ->orderBy('entrada_produto.created_at')
             ->where('produtos.id', $id)
             ->paginate($totalPerPage, ['*'], 'page', $page);
 
-        return new PaginationPresenter($produtoEntrada);
+        return new PaginationPresenter($entradas);
     }
 
     //=====================================================================
     public function paginateSaidas(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        $produtoSaida = $this->model->leftJoin('saida_produto', 'saida_produto.produto_id', 'produtos.id')
-            ->leftJoin('vendas',  function ($join) {
+        $saidas = Saida_produto::leftJoin('produtos', 'produtos.id', 'saida_produto.produto_id')
+            ->leftJoin('vendas', function ($join) {
                 $join->on('vendas.id', 'saida_produto.venda_id')
+                    ->where('saida_produto.venda_id', '!=', null);
+            })
+            ->leftJoin('venda_produto', function ($join) {
+                $join->on('venda_produto.venda_id', 'vendas.id')
+                    ->where('saida_produto.venda_id', '!=', null);
+            })
+            ->leftJoin('clientes', function ($join) {
+                $join->on('clientes.id', 'vendas.cliente_id')
                     ->where('saida_produto.venda_id', '!=', null);
             })
             ->select(
@@ -142,13 +186,14 @@ class ProdutosEloquent implements ProdutosInterface
                 'saida_produto.motivo',
                 'saida_produto.quantidade',
                 'saida_produto.created_at',
-                'vendas.venda'
+                'clientes.cliente',
+                'venda_produto.preco_venda',
             )
             ->orderBy('saida_produto.created_at')
             ->where('produtos.id', $id)
             ->paginate($totalPerPage, ['*'], 'page', $page);
 
-        return new PaginationPresenter($produtoSaida);
+        return new PaginationPresenter($saidas);
     }
 
     //=====================================================================

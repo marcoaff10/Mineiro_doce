@@ -16,40 +16,86 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-5 text-info text-center">{{ $produto->produto }}</strong>
+                <strong class="fs-3 text-info text-center">{{ $produto->produto }}</strong>
             </div>
             <div class="card-body">
-                <div class="row justify-content-between">
-                    <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
-                        <h2 class="mb-2 fw-bold">Informações de estoque:</h2>
-                        <ul>
-                            <li>Estoque Mínimo: {{ $produto->minimo }}</li>
-                            <li>Estoque Máxima: {{ $produto->maximo }}</li>
-                            <li>Estoque Total: {{ $produto->estoque }}</li>
-                            <li>Estoque Situação: </li>
-                        </ul>
+                <div class="row justify-content-center">
+                    <div class="col-sm-12 col-md-6 col-lg-6 my-4">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <h2 class="mb-2 fw-bold">Informações de Estoque:</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <p>Estoque Mínimo: {{ $produto->minimo }}</p>
+                                <p>Estoque Máxima: {{ $produto->maximo }}</p>
+                                <p>Estoque Total: {{ $produto->estoque == null ? '0' : $produto->estoque }}</p>
+                                <p>Estoque Situação:</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
-                        <h2 class="mb-2 fw-bold">Valores totais de entrada:</h2>
-                        <ul>
-                            <li>Valor total de compra: R$ </li>
-                        </ul>
+                    <div class="col-sm-12 col-md-6 col-lg-6 my-4">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <h2 class="mb-2 fw-bold">Informações:</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <p>Cadastrado: {{ date('d/m/Y', strtotime($produto->created_at)) }}</p>
+                                <p>Ultima atualização: {{ date('d/m/Y', strtotime($produto->updated_at)) }}</p>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
-                        <h2 class="mb-2 fw-bold">Valores totais de saida:</h2>
-                        <ul>
-                            <li>Valor total de compra:</li>
-                        </ul>
+                    <div class="col-sm-12 col-md-6 col-lg-6 my-4 ">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <h2 class="mb-2 fw-bold">Histórico de Compras:</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <p>Valor mais baixo de compra:
+                                    {{ $produto->min_compra == null ? '' : 'R$ ' . preco($produto->min_compra) }}</p>
+                                <p>Valor mais alto de compra:
+                                    {{ $produto->max_compra == null ? '' : 'R$ ' . preco($produto->max_compra) }}</p>
+                                <p>Valor médio de compra:
+                                    {{ $produto->avg_compra == null ? '' : 'R$ ' . preco($produto->avg_compra) }}</p>
+
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="col-sm-12 col-md-3 col-lg-3 mt-3">
-                        <h2 class="mb-2 fw-bold">Informações:</h2>
-                        <ul>
-                            <li>Cadastrado: {{ date('d/m/Y', strtotime($produto->created_at)) }}</li>
-                            <li>Ultima atualização: {{ date('d/m/Y', strtotime($produto->updated_at)) }}</li>
-                        </ul>
+                    <div class="col-sm-12 col-md-6 col-lg-6 my-4">
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <h2 class="mb-2 fw-bold">Histórico de Vendas:</h2>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                            <div class="col-sm-12 col-md-7 col-lg-7">
+                                <p>Valor mais baixo de venda:
+                                    {{ $produto->min_venda == null ? '' : 'R$ ' . preco($produto->min_venda) }}</p>
+                                <p>Valor mais alto de venda:
+                                    {{ $produto->max_venda == null ? '' : 'R$ ' . preco($produto->max_venda) }}</p>
+                                <p>Valor médio de venda:
+                                    {{ $produto->avg_venda == null ? '' : 'R$ ' . preco($produto->avg_venda) }}</p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-start align-items-center py-4">
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <h1 class="fw-bold fs-4 text-success">
+                                Lucro por unidade:
+                                {{ $produto->lucro == null ? '' : 'R$ ' . preco($produto->lucro) }}
+                            </h1>
+
+                        </div>
                     </div>
 
                     <div class="col-12 text-center mt-5">
@@ -62,75 +108,15 @@
 
                     </div>
 
-
+                    @if (count($entradas->items()) > 0)
+                        <x-entrada-produto :entradas="$entradas" :filters="$filters" />
+                    @endif
                     {{-- ====================================== - Produtos Entrada - ============================================== --}}
-                    <div class="row mt-3 py-5">
-                        <div class="row ">
-                            <h1 class="mb-3 fs-4 d-block">Entradas</h1>
-                        </div>
-                        <div class="col-12" style="max-width: 100%; overflow-x: auto">
-                            <table class="table table-bordered table-striped">
-                                <thead class="table-dark">
-                                    <th class="text-center align-middle">Produto</th>
-                                    <th class="text-center align-middle">Motivo</th>
-                                    <th class="text-center align-middle">QTDE</th>
-                                    <th class="text-center align-middle">Valor uni.</th>
-                                    <th class="text-center align-middle">Fornecedor</th>
-                                    <th class="text-center align-middle">Data</th>
-                                    <th class="text-center align-middle">Usuário</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($produtoEntrada->items() as $entrada)
-                                        <tr>
-                                            <td class=" align-middle">{{ $entrada->produto }}</td>
-                                            <td class=" align-middle">{{ motivoEntrada($entrada->motivo) }}</td>
-                                            <td class="text-center align-middle">{{ $entrada->quantidade }}</td>
-                                            <td class=" align-middle">{{ $entrada->fornecedor ?? '-' }}</td>
-                                            <td class="text-center align-middle">
-                                                {{ date('d/m/Y', strtotime($entrada->created_at)) }}</td>
-                                            <td class=" align-middle">{{ auth()->user()->name }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <x-pagination :paginator="$produtoEntrada" :appends="$filters" />
-                    </div>
-                    <hr class="mb-1">
-                    <hr class="mt-1">
+
                     {{-- ====================================== - Produtos Saida - ============================================== --}}
-                    <div class="row mt-5">
-                        <div class="row ">
-                            <h1 class="mb-3 fs-4 d-block">Saidas</h1>
-                        </div>
-                        <div class="col-12" style="max-width: 100%; overflow-x: auto">
-                            <table class="table table-bordered table-striped">
-                                <thead class="table-dark">
-                                    <th class="text-center align-middle">Produto</th>
-                                    <th class="text-center align-middle">Motivo</th>
-                                    <th class="text-center align-middle">QTDE</th>
-                                    <th class="text-center align-middle">Valor uni.</th>
-                                    <th class="text-center align-middle">Fornecedor</th>
-                                    <th class="text-center align-middle">Data</th>
-                                    <th class="text-center align-middle">Usuário</th>
-                                </thead>
-                                <tbody>
-                                    @foreach ($produtoSaida->items() as $saida)
-                                        <tr>
-                                            <td class=" align-middle">{{ $saida->produto }}</td>
-                                            <td class=" align-middle">{{ motivoSaida($saida->motivo) }}</td>
-                                            <td class="text-center align-middle">{{ $saida->quantidade }}</td>
-                                            <td class=" align-middle">{{ $saida->cliente ?? '-' }}</td>
-                                            <td class="text-center align-middle">
-                                                {{ date('d/m/Y', strtotime($saida->created_at)) }}</td>
-                                            <td class=" align-middle">{{ auth()->user()->name }}</td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                        <x-pagination :paginator="$produtoSaida" :appends="$filters" />
-                    </div>
+                    @if (count($saidas->items()) > 0)
+                        <x-saida-produto :saidas="$saidas" :filters="$filters" />
+                    @endif
 
                 </div>
             </div>

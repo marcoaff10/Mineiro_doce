@@ -47,14 +47,14 @@ class Produtos extends Controller
     public function movimentacao(string $id, Request $request)
     {
         $produto = $this->service->findOne($id);
-
-        $produtoEntrada = $this->service->paginateEntradas(
+        
+        $entradas = $this->service->paginateEntradas(
             id: $id,
             page: $request->get('page', 1),
             totalPerPage: $request->get('per_page', 15),
         );
         
-        $produtoSaida = $this->service->paginateSaidas(
+        $saidas = $this->service->paginateSaidas(
             id: $id,
             page: $request->get('page', 1),
             totalPerPage: $request->get('per_page', 15),
@@ -62,7 +62,7 @@ class Produtos extends Controller
    
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'produtoEntrada', 'produtoSaida','filters'));
+        return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'entradas', 'saidas','filters'));
     }
 
     //=========================================================================================================
