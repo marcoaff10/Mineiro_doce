@@ -34,18 +34,32 @@ class Clientes extends Controller
     }
 
     //=========================================================================================================
-    public function detalhes(string $id)
+    public function detalhes(string $id, Request $request)
     {
         $cliente = $this->service->findOne($id);
+    
+        $ativas = $this->service->vendasAtivasCliente(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
 
-        return view('dashboard.clientes.detalhes_clientes', compact('cliente'));
+        $fechadas = $this->service->vendasFechadasCliente(
+            id: $id,
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('dashboard.clientes.detalhes_clientes', compact('cliente', 'ativas', 'fechadas', 'filters'));
     }
 
     //=========================================================================================================
     public function create()
     {
-
-
         return view('dashboard.clientes.create_clientes');
     }
 
@@ -69,14 +83,14 @@ class Clientes extends Controller
             CreateClientes::makeFromRequest($request)
         );
 
-        
+
         return redirect()->route('show.clientes');
     }
 
     //=========================================================================================================
     public function update(string $id)
     {
-        $cliente = $this->service->findOne($id);
+        $cliente = $this->service->findOne($id); 
 
         return view('dashboard.clientes.update_clientes', compact('cliente'));
     }

@@ -34,11 +34,12 @@
                             <li>Cidade: {{ $cliente->cidade }}</li>
                             <li>Estado: {{ $cliente->uf }}</li>
                             <li>CEP: {{ $cliente->cep }}</li>
-                            <li>Logradouro: {{ $cliente->endereco . ', ' . ($cliente->num == '' ? 'S/N' : $cliente->num) }}</li>
+                            <li>Logradouro: {{ $cliente->endereco . ', ' . ($cliente->num == '' ? 'S/N' : $cliente->num) }}
+                            </li>
                             <li>Bairro: {{ $cliente->bairro }}</li>
                         </ul>
                     </div>
-                    
+
 
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                         <h2 class="mb-3 fw-bold">datas:</h2>
@@ -52,36 +53,21 @@
 
                         <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
                             data-bs-toggle="modal">Inativar</a>
-                        <a href="{{ route('update.clientes', ['id' => $cliente->id]) }}"
-                            class="btn btn-primary">Editar</a>
+                        <a href="{{ route('update.clientes', ['id' => $cliente->id]) }}" class="btn btn-primary">Editar</a>
 
                     </div>
 
                 </div>
 
-                <div class="row">
-                    <div class="row ">
-                        <h1 class="mb-3 fs-4 d-block">Compras</h1>
-                    </div>
-                    <table class="table table-bordered table-striped">
-                        <thead class="table-dark">
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                @if (count($ativas->items()) > 0)
+                    <x-venda-ativa-cliente :ativas="$ativas" :filters="$filters" />
+                @endif
+
+                {{-- ====================================================================================================================================== --}}
+
+                @if (count($fechadas->items()) > 0)
+                    <x-venda-fechada-cliente :fechadas="$fechadas" :filters="$filters" />
+                @endif
 
             </div>
         </div>
@@ -104,7 +90,7 @@
                     <form action="{{ route('delete.clientes') }}" method="POST">
                         @method('PUT')
                         @csrf
-                        <input type="hidden" name="id" value="{{$cliente->id}}">
+                        <input type="hidden" name="id" value="{{ $cliente->id }}">
                         <button type="submit" class="btn btn-danger">
                             confirmar
                         </button>

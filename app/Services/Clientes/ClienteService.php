@@ -36,6 +36,28 @@ class ClienteService
     }
 
     //=====================================================================
+    public function vendasAtivasCliente(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->clientes_interface->vendasAtivasCliente(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
+    public function vendasFechadasCliente(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
+    {
+        return $this->clientes_interface->vendasFechadasCliente(
+            id: $id,
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
+    }
+
+    //=====================================================================
     public function store(CreateClientes $dto): stdClass
     {
         return $this->clientes_interface->store($dto);
