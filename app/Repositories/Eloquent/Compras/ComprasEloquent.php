@@ -152,7 +152,8 @@ class ComprasEloquent implements ComprasInterface
             [
                 'compra' => 'Compra_' . uniqid(),
                 'fornecedor_id' => $dto->fornecedor_id,
-                'ativa' => 1
+                'ativa' => 1,
+                'data' => date('Y-m-d')
             ]
         );
 

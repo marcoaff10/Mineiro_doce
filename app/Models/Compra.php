@@ -18,5 +18,6 @@ class Compra extends Model
         'frete',
         'ativa',
         'entrada',
+        'data'
     ];
 }

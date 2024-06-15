@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('frete')->default(0);
             $table->integer('ativa')->unsigned()->default(0);
             $table->integer('saida')->unsigned()->default(0);
+            $table->date('data');
             $table->timestamps();
 
             $table->foreign('cliente_id')->references('id')->on('clientes');

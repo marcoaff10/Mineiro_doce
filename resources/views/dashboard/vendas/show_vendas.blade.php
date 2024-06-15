@@ -48,7 +48,7 @@
 
                 @if (isset($fechadas) && count($fechadas) > 0)
                 <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
-                    <a href=" {{ route('compras.fechadas') }} " class="btn btn-success w-100">
+                    <a href=" {{ route('vendas.fechadas') }} " class="btn btn-success w-100">
                         Vendas Fechadas
                         <i class="bi bi-box-seam ms-1"></i>
                     </a>

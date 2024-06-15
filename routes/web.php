@@ -19,6 +19,7 @@ Route::middleware('auth')->group(function () {
 
     // dashbord
     Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
+    Route::get('/lucro_total', [Main::class, 'lucroTotal'])->name('lucro.total');
 
     //=============================================================================================================
 
@@ -107,11 +108,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_venda', [Vendas::class, 'update_submit'])->name('update.submit.venda');
     Route::put('/desativar_venda', [Vendas::class, 'desativar_venda'])->name('desativar.venda');
     Route::get('/vendas_desativadas', [Vendas::class, 'vendas_desativadas'])->name('vendas.desativadas');
-    Route::put('/reativar_vendas', [Vendas::class, 'reativar_vendas'])->name('reativar.venda');
-    
+    Route::put('/reativar_vendas', [Vendas::class, 'reativar_vendas'])->name('reativar.venda'); 
     Route::get('/vendas_fechadas', [Vendas::class, 'vendas_fechadas'])->name('vendas.fechadas');
-
-
     Route::get('/destroy_venda/{id}', [Vendas::class, 'destroy'])->name('destroy.vendas');
 
 

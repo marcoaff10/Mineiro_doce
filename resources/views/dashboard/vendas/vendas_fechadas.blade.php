@@ -57,13 +57,13 @@
                             <th class="text-center align-middle">Valor</th>
                         </thead>
                         <tbody>
-                            @foreach ($vendas->items() as $compra)
+                            @foreach ($vendas->items() as $venda)
                                 <tr>
-                                    <td class="w-25 align-middle"> {{ $compra->compra }} </td>
-                                    <td class="align-middle"> {{ primeiro_nome($compra->clientes) }} </td>
-                                    <td class="text-center align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> {{ $compra->saida == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> R$ {{ preco($compra->valor) }} </td>
+                                    <td class="w-25 align-middle"> {{ $venda->venda }} </td>
+                                    <td class="align-middle"> {{ primeiro_nome($venda->cliente) }} </td>
+                                    <td class="text-center align-middle "> {{ $venda->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td class="text-center align-middle"> {{ $venda->saida == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td class="text-center align-middle"> R$ {{ preco($venda->valor) }} </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -71,7 +71,7 @@
                     <x-pagination :paginator="$vendas" :appends="$filters" />
                 </div>
             @else
-                <p class=" text-center opacity-50 mt-5">Nenhuma compra fechada.</p>
+                <p class=" text-center opacity-50 mt-5">Nenhuma venda fechada.</p>
             @endif
         </div>
     </div>

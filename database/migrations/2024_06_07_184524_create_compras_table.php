@@ -18,6 +18,7 @@ return new class extends Migration
             $table->float('frete')->index()->default(0);
             $table->integer('ativa')->unsigned()->default(0);
             $table->integer('entrada')->unsigned()->default(0);
+            $table->date('data');
             $table->timestamps();
 
             $table->foreign('fornecedor_id')->references('id')->on('fornecedores');

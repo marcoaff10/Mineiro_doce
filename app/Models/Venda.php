@@ -17,6 +17,7 @@ class Venda extends Model
         'cliente_id',
         'frete',
         'ativa',
-        'saida'
+        'saida',
+        'data'
     ];
 }

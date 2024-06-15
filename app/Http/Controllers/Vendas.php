@@ -35,7 +35,6 @@ class Vendas extends Controller
 
         $filters = ['filter' => $request->get('filter', '')];
 
-
         $desativadas = $this->model->where('ativa', 0)->where('saida', 0)->get();
 
         $fechadas = $this->model->where('saida', 1)->get();
@@ -163,7 +162,7 @@ class Vendas extends Controller
             ->first();
 
         $venda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
-        ->where('produto_id', $produto_id)
+            ->where('produto_id', $produto_id)
             ->where('venda_id', '!=', $id)
             ->where('vendas.saida', 0)
             ->where('vendas.ativa', 1)
