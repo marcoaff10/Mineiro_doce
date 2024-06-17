@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Home\RequestLucroTotal;
-use App\Http\Requests\RequestEstatisticasProdutos;
+use App\Http\Requests\Home\RequestEstatisticasProdutos;
+use App\Http\Requests\Home\RequestEstatisticasVendas;
 use App\Services\Home\HomeService;
 use Illuminate\Http\Request;
 
@@ -58,4 +59,21 @@ class Main extends Controller
         return (object) $data;
     }
 
+    //==========================================================================================================
+    // Vendas
+    //==========================================================================================================
+    public function estatisticasVendas()
+    {
+        $data = $this->service->estatisticasVendas();
+
+        return $data;
+    }
+
+    //==========================================================================================================
+    public function estatisticasVendasFiltro(RequestEstatisticasVendas $request)
+    {
+        $data = $this->service->estatisticasVendasFiltro($request);
+
+        return $data;
+    }
 }

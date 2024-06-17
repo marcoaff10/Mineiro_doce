@@ -3,8 +3,10 @@
 
 namespace App\Repositories\Eloquent\Home;
 
+use App\Models\Cliente;
 use App\Models\Compra;
 use App\Models\CompraProduto;
+use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\Venda;
 use App\Models\VendaProduto;
@@ -115,7 +117,6 @@ class HomeEloquent implements HomeInterface
 
             )
             ->where('vendas.saida', 1)
-            ->whereRaw('MONTH(vendas.data) = MONTH(CURDATE())')
             ->orderByRaw('SUM(venda_produto.quantidade * venda_produto.preco_venda) DESC')
             ->groupBy('produtos.id')
             ->limit(5)
@@ -130,7 +131,6 @@ class HomeEloquent implements HomeInterface
     {
         $de = date('Y-m-d', strtotime($request->de));
         $ate = date('Y-m-d', strtotime($request->ate));
-        $produto = $request->produto;
 
         if ($request->tipo == 'preco') {
 
@@ -139,20 +139,14 @@ class HomeEloquent implements HomeInterface
                 ->select(
                     'produtos.produto',
                     Produto::raw(
-                        'MONTH(vendas.data) AS mes'
-                    ),
-                    Produto::raw(
-                        'YEAR(vendas.data) AS ano'
-                    ),
-                    Produto::raw(
                         'CAST(SUM(venda_produto.quantidade * venda_produto.preco_venda) AS DECIMAL(20, 2)) AS valor'
                     )
                 )
-                ->where('produtos.id', $produto)
                 ->whereBetween('vendas.data', [$de, $ate])
                 ->where('vendas.saida', 1)
-                ->orderByRaw('MONTH(vendas.data) ASC')
-                ->groupByRaw('produtos.id, MONTH(vendas.data), YEAR(vendas.data)')
+                ->orderByRaw('SUM(venda_produto.quantidade * venda_produto.preco_venda) DESC')
+                ->groupBy('produtos.id')
+                ->limit(5)
                 ->get()
                 ->toArray();
 
@@ -165,20 +159,88 @@ class HomeEloquent implements HomeInterface
                     ->select(
                         'produtos.produto',
                         Produto::raw(
-                            'MONTH(vendas.data) AS mes'
-                        ),
-                        Produto::raw(
-                            'YEAR(vendas.data) AS ano'
-                        ),
+                            'SUM(venda_produto.quantidade) AS valor'
+                        )
+                    )
+                    ->whereBetween('vendas.data', [$de, $ate])
+                    ->where('vendas.saida', 1)
+                    ->orderByRaw('SUM(venda_produto.quantidade) DESC')
+                    ->groupBy('produtos.id')
+                    ->limit(5)
+                    ->get()
+                    ->toArray();
+
+                return response()->json($estatisticas);
+            }
+        }
+    }
+
+    //=========================================================================================================
+    public function estatisticasVendas()
+    {
+        $estatisticas = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
+            ->leftJoin('clientes', 'clientes.id', 'vendas.cliente_id')
+            ->select(
+                'clientes.cliente',
+                VendaProduto::raw(
+                    'CAST(
+                    SUM(venda_produto.quantidade * venda_produto.preco_venda)
+                    AS DECIMAL(20, 2)
+                ) AS venda'
+                ),
+
+            )
+            ->where('vendas.saida', 1)
+            ->orderByRaw('SUM(venda_produto.quantidade * venda_produto.preco_venda) DESC')
+            ->groupBy('clientes.id')
+            ->limit(5)
+            ->get()
+            ->toArray();
+
+        return response()->json($estatisticas);
+    }
+
+    //=========================================================================================================
+    public function estatisticasVendasFiltro($request)
+    {
+        $de = date('Y-m-d', strtotime($request->de));
+        $ate = date('Y-m-d', strtotime($request->ate));
+
+        if ($request->tipo == 'preco') {
+
+            $estatisticas = Cliente::leftJoin('vendas', 'vendas.cliente_id', 'clientes.id')
+            ->leftJoin('venda_produto', 'venda_produto.venda_id', 'vendas.id')
+                ->select(
+                    'clientes.cliente',
+                    Produto::raw(
+                        'CAST(SUM(venda_produto.quantidade * venda_produto.preco_venda) AS DECIMAL(20, 2)) AS valor'
+                    )
+                )
+                ->whereBetween('vendas.data', [$de, $ate])
+                ->where('vendas.saida', 1)
+                ->orderByRaw('SUM(venda_produto.quantidade * venda_produto.preco_venda) DESC')
+                ->groupBy('clientes.id')
+                ->limit(5)
+                ->get()
+                ->toArray();
+
+            return response()->json($estatisticas);
+        } else {
+            if ($request->tipo == 'quantidade') {
+
+                $estatisticas = Cliente::leftJoin('vendas', 'vendas.cliente_id', 'clientes.id')
+                    ->leftJoin('venda_produto', 'venda_produto.venda_id', 'vendas.id')
+                    ->select(
+                        'clientes.cliente',
                         Produto::raw(
                             'SUM(venda_produto.quantidade) AS valor'
                         )
                     )
-                    ->where('produtos.id', $produto)
                     ->whereBetween('vendas.data', [$de, $ate])
                     ->where('vendas.saida', 1)
-                    ->orderByRaw('MONTH(vendas.data) ASC')
-                    ->groupByRaw('produtos.id, MONTH(vendas.data), YEAR(vendas.data)')
+                    ->orderByRaw('SUM(venda_produto.quantidade) DESC')
+                    ->groupBy('clientes.id')
+                    ->limit(5)
                     ->get()
                     ->toArray();
 

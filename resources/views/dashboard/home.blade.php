@@ -22,7 +22,10 @@
 
         <div class="col-lg-5 card mb-3 p-3">
             <div class="row">
-                <h1 class="fs-4 fw-bold text-info">Vendas<i class="bi bi-truck ms-1 align-middle"></i></h1>
+                <h1 class="fs-4 fw-bold text-info"><i class="bi bi-truck me-1 align-middle"></i>Vendas</h1>
+                <div class="col-12">
+                    <x-estatisticas-vendas />
+                </div>
             </div>
         </div>
         <div class="col-lg-5 card mb-3 p-3">

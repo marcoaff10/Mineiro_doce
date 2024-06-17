@@ -3,7 +3,8 @@
 namespace App\Services\Home;
 
 use App\Http\Requests\Home\RequestLucroTotal;
-use App\Http\Requests\RequestEstatisticasProdutos;
+use App\Http\Requests\Home\RequestEstatisticasProdutos;
+use App\Http\Requests\Home\RequestEstatisticasVendas;
 use App\Repositories\Contracts\Home\HomeInterface;
 use stdClass;
 
@@ -37,5 +38,17 @@ class HomeService
     public function estatisticasProdutosFiltro(RequestEstatisticasProdutos $request)
     {
         return $this->homeInterface->estatisticasProdutosFiltro($request);
+    }
+
+    //=========================================================================================================
+    public function estatisticasVendas()
+    {
+        return $this->homeInterface->estatisticasVendas();
+    }
+
+    //=========================================================================================================
+    public function estatisticasVendasFiltro(RequestEstatisticasVendas $request)
+    {
+        return $this->homeInterface->estatisticasVendasFiltro($request);
     }
 }

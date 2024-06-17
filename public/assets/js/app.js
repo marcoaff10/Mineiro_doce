@@ -2,6 +2,8 @@ $(document).ready(function () {
     getLucro();
     getProdutos();
     getProdutosFilter();
+    getVendas();
+    getVendasFilter();
     //==========================================================================================================
     // Lucro
     //==========================================================================================================
@@ -29,14 +31,14 @@ $(document).ready(function () {
                             ],
                             borderWidth: 1,
                             backgroundColor: [
-                                'rgba(153, 102, 255, 0.2)',
-                                'rgba(255, 99, 132, 0.2)',
-                                'rgba(75, 192, 192, 0.2)',
+                                'rgba(61, 235, 52, 0.2)',
+                                'rgba(212, 41, 25, 0.2)',
+                                'rgba(33, 18, 196, 0.2)',
                             ],
                             borderColor: [
-                                'rgb(153, 102, 255)',
-                                'rgb(255, 99, 132)',
-                                'rgb(75, 192, 192)',
+                                'rgb(61, 235, 52)',
+                                'rgb(212, 41, 25)',
+                                'rgb(33, 18, 196)',
                             ]
                         }]
                     },
@@ -88,14 +90,14 @@ $(document).ready(function () {
                                 ],
                                 borderWidth: 1,
                                 backgroundColor: [
-                                    'rgba(153, 102, 255, 0.2)',
-                                    'rgba(255, 99, 132, 0.2)',
-                                    'rgba(75, 192, 192, 0.2)',
+                                    'rgba(61, 235, 52, 0.2)',
+                                    'rgba(212, 41, 25, 0.2)',
+                                    'rgba(33, 18, 196, 0.2)',
                                 ],
                                 borderColor: [
-                                    'rgb(153, 102, 255)',
-                                    'rgb(255, 99, 132)',
-                                    'rgb(75, 192, 192)',
+                                    'rgb(61, 235, 52)',
+                                    'rgb(212, 41, 25)',
+                                    'rgb(33, 18, 196)',
                                 ]
                             }]
                         },
@@ -117,7 +119,6 @@ $(document).ready(function () {
             }, 'json');
         });
     }
-
 
     //==========================================================================================================
     // Produtos
@@ -161,7 +162,7 @@ $(document).ready(function () {
             data: {
                 labels: produto,
                 datasets: [{
-                    label: 'Os ' + produto.length + ' produtos vendidos do mês R$ ',
+                    label: 'Valores dos ' + produto.length + ' produtos mais vendidos',
                     data: venda,
                     borderWidth: 1,
                     backgroundColor: [
@@ -211,23 +212,17 @@ $(document).ready(function () {
                     'de': $('#produtoDe').val(),
                     'ate': $('#produtoAte').val(),
                     'tipo': $('#tipoFilterProduto').val(),
-                    'produto': $('#produto').val()
                 },
                 success: (data) => {
                     var produto = [];
                     var venda = [];
-                    var mes = [];
-                    var ano = [];
 
                     for (let i = 0; i < data.length; i++) {
                         produto.push(data[i].produto);
                         venda.push(data[i].valor);
-                        mes.push(data[i].mes);
-                        ano.push(data[i].ano);
-
                     }
 
-                    chartProdutosFilter(produto, venda, mes, ano)
+                    chartProdutosFilter(produto, venda)
 
                 },
                 error: (error) => {
@@ -238,7 +233,15 @@ $(document).ready(function () {
     }
 
     //==========================================================================================================
-    function chartProdutosFilter(produto, venda, mes, ano) {
+    function chartProdutosFilter(produto, venda) {
+
+        var deInput = $('#produtoDe').val();
+        var de = new Date(deInput);
+        de = de.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+        var ateInput = $('#produtoAte').val();
+        var ate = new Date(ateInput);
+        ate = ate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
 
         if (chartProduto) {
             chartProduto.destroy();
@@ -248,9 +251,9 @@ $(document).ready(function () {
         chartProduto = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: keyExists(mes),
+                labels: produto,
                 datasets: [{
-                    label: $('#tipoFilterProduto').val() == 'preco' ? 'Valor mensal ' + produto[0] : 'Quantidade mensal ' + produto[0],
+                    label: $('#tipoFilterProduto').val() == 'preco' ? 'Valores de ' + de + ' à ' + ate : 'Quantidade de ' + de + ' à ' + ate,
                     data: venda,
                     borderWidth: 1,
                     backgroundColor: [
@@ -283,60 +286,230 @@ $(document).ready(function () {
     }
 
     //==========================================================================================================
-    function keyExists(data) {
+    // Produtos
+    //==========================================================================================================
+    let chartVenda;
+    function getVendas() {
+        $.ajax({
+            url: "/estatisticas_vendas",
+            dataType: 'json',
+
+            success: (data) => {
+                var clientes = [];
+                var venda = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    clientes.push(data[i].cliente);
+                    venda.push(data[i].venda);
+
+                }
+                chartVendas(clientes, venda)
+
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        }, 'json');
+    }
+
+    //==========================================================================================================
+    function chartVendas(clientes, venda) {
+        if (chartVenda) {
+            chartVenda.destroy();
+        }
+
+        const ctx = document.getElementById('vendaChart');
+
+        chartVenda = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: clientes,
+                datasets: [{
+                    label: 'Os ' + clientes.length + ' clientes que mais compram.',
+                    data: venda,
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(61, 235, 52, 0.2)',
+                        'rgba(212, 41, 25, 0.2)',
+                        'rgba(33, 18, 196, 0.2)',
+                        'rgba(18, 196, 172, 0.2)',
+                        'rgba(196, 18, 184, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(61, 235, 52)',
+                        'rgb(212, 41, 25)',
+                        'rgb(33, 18, 196)',
+                        'rgb(18, 196, 172)',
+                        'rgb(196, 18, 184)',
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    }
+
+    //==========================================================================================================
+    function getVendasFilter() {
+        let vendaFilter = $('#vendaFilter');
+
+        vendaFilter.click(() => {
+
+            $.ajax({
+                url: "/estatisticas_vendas_filtro",
+                dataType: 'json',
+                data: {
+                    'de': $('#vendaDe').val(),
+                    'ate': $('#vendaAte').val(),
+                    'tipo': $('#tipoFilterVenda').val(),
+                },
+                success: (data) => {
+                    console.log(data);
+                    var clientes = [];
+                    var venda = [];
+    
+                    for (let i = 0; i < data.length; i++) {
+                        clientes.push(data[i].cliente);
+                        venda.push(data[i].valor);
+    
+                    }
+
+                    chartVendasFilter(clientes, venda)
+
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            }, 'json');
+        });
+    }
+
+    //==========================================================================================================
+    function chartVendasFilter(clientes, venda) {
+        var deInput = $('#vendaDe').val();
+        var de = new Date(deInput);
+        de = de.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+        var ateInput = $('#vendaAte').val();
+        var ate = new Date(ateInput);
+        ate = ate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+        if (chartVenda) {
+            chartVenda.destroy();
+        }
+
+        const ctx = document.getElementById('vendaChart');
+
+        chartVenda = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: clientes,
+                datasets: [{
+                    label: $('#tipoFilterVenda').val() == 'preco' ? 'Valores de ' + de + ' à ' + ate : 'Quantidade de ' + de + ' à ' + ate,
+                    data: venda,
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(61, 235, 52, 0.2)',
+                        'rgba(212, 41, 25, 0.2)',
+                        'rgba(33, 18, 196, 0.2)',
+                        'rgba(18, 196, 172, 0.2)',
+                        'rgba(196, 18, 184, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(61, 235, 52)',
+                        'rgb(212, 41, 25)',
+                        'rgb(33, 18, 196)',
+                        'rgb(18, 196, 172)',
+                        'rgb(196, 18, 184)',
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    function converterMesAno(data, ano) {
         var month = [];
         for (let i = 0; i < data.length; i++) {
             switch (data[i]) {
                 case 1:
-                    month.push("Janeiro");
+                    month.push("Janeiro" + "/" + ano[i]);
                     break;
                 case 2:
-                    month.push("Fevereiro");
+                    month.push("Fevereiro" + "/" + ano[i]);
                     break;
                 case 3:
-                    month.push("Março");
+                    month.push("Março" + "/" + ano[i]);
                     break;
                 case 4:
-                    month.push("Abril");
+                    month.push("Abril" + "/" + ano[i]);
                     break;
                 case 5:
-                    month.push("Maio");
+                    month.push("Maio" + "/" + ano[i]);
                     break;
                 case 6:
-                    month.push("Junho");
+                    month.push("Junho" + "/" + ano[i]);
                     break;
                 case 7:
-                    month.push("Julho");
+                    month.push("Julho" + "/" + ano[i]);
                     break;
                 case 8:
-                    month.push("Agosto");
+                    month.push("Agosto" + "/" + ano[i]);
                     break;
                 case 9:
-                    month.push("Setembro");
+                    month.push("Setembro" + "/" + ano[i]);
                     break;
                 case 10:
-                    month.push("Outubro");
+                    month.push("Outubro" + "/" + ano[i]);
                     break;
                 case 11:
-                    month.push("Novembro");
+                    month.push("Novembro" + "/" + ano[i]);
                     break;
                 case 12:
-                    month.push("Dezembro");
+                    month.push("Dezembro" + "/" + ano[i]);
                     break;
                 default:
-                    month.push("Mês inválido.");
+                    month.push("Mês inválido." + "/" + ano[i]);
             }
 
         }
         return month;
 
     }
-
-    //==========================================================================================================
-    // Produtos
-    //==========================================================================================================
-    let chartVendas;
-
 });
 
 
