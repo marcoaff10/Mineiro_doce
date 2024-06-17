@@ -1,13 +1,9 @@
 <div class="row">
-    <x-filters />
+    <x-filters-lucro />
 </div>
 
 <div class="row">
-    <div class="card">
-        <div class="card-body">
-            <canvas id="lucroChart"></canvas>
-        </div>
-    </div>
+
+    <canvas id="lucroChart" style="height: 300px; width: 100%"></canvas>
+
 </div>
-
-

@@ -2,11 +2,12 @@
 
 namespace App\View\Components;
 
+use App\Models\Produto;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class Filters extends Component
+class FiltersProdutos extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +22,8 @@ class Filters extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.filters');
+        $produtos = Produto::all();
+        
+        return view('components.filters-produtos',compact('produtos'));
     }
 }

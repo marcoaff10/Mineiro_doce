@@ -20,6 +20,9 @@ Route::middleware('auth')->group(function () {
     // dashbord
     Route::get('/', [Main::class, 'dashboard'])->name('dashboard');
     Route::get('/lucro_total', [Main::class, 'lucroTotal'])->name('lucro.total');
+    Route::get('/lucro_total_filtro', [Main::class, 'lucroTotalFiltro'])->name('lucro.total.filtro');
+    Route::get('/estatisticas_produtos', [Main::class, 'estatisticasProdutos'])->name('estatisticas.produtos');
+    Route::get('/estatisticas_produtos_filtro', [Main::class, 'estatisticasProdutosFiltro'])->name('estatisticas.produtos.filtro');
 
     //=============================================================================================================
 

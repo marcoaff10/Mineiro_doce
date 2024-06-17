@@ -136,8 +136,8 @@
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="row py-4 px-lg-5 ">
+    <div class="container-fluid">
+        <div class="row py-4  ">
             <div class="col">
                 <a class="btn btn-dark " data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
                     aria-controls="offcanvasExample">
@@ -148,7 +148,7 @@
 
 
         <div class="row pb-4 ">
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
                         @yield('content')
