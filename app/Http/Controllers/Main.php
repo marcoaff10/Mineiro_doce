@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Home\RequestEstatisticasCompras;
 use App\Http\Requests\Home\RequestLucroTotal;
 use App\Http\Requests\Home\RequestEstatisticasProdutos;
 use App\Http\Requests\Home\RequestEstatisticasVendas;
@@ -23,6 +24,8 @@ class Main extends Controller
         return view('dashboard.home');
     }
 
+    //=========================================================================================================
+    // Lucro
     //=========================================================================================================
     public function lucroTotal()
     {
@@ -73,6 +76,23 @@ class Main extends Controller
     public function estatisticasVendasFiltro(RequestEstatisticasVendas $request)
     {
         $data = $this->service->estatisticasVendasFiltro($request);
+
+        return $data;
+    }
+    //==========================================================================================================
+    // Compras
+    //==========================================================================================================
+    public function estatisticasCompras()
+    {
+        $data = $this->service->estatisticasCompras();
+
+        return $data;
+    }
+
+    //==========================================================================================================
+    public function estatisticasComprasFiltro(RequestEstatisticasCompras $request)
+    {
+        $data = $this->service->estatisticasComprasFiltro($request);
 
         return $data;
     }

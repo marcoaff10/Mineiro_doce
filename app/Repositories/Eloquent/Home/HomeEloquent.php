@@ -21,6 +21,8 @@ class HomeEloquent implements HomeInterface
     }
 
     //=========================================================================================================
+    // Lucro
+    //=========================================================================================================    
     public function lucroTotal()
     {
 
@@ -99,7 +101,9 @@ class HomeEloquent implements HomeInterface
         );
     }
 
-    //=========================================================================================================
+    //==========================================================================================================
+    // Produtos
+    //==========================================================================================================
     public function estatisticasProdutos()
     {
 
@@ -175,7 +179,9 @@ class HomeEloquent implements HomeInterface
         }
     }
 
-    //=========================================================================================================
+    //==========================================================================================================
+    // Vendas
+    //==========================================================================================================
     public function estatisticasVendas()
     {
         $estatisticas = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
@@ -209,10 +215,10 @@ class HomeEloquent implements HomeInterface
         if ($request->tipo == 'preco') {
 
             $estatisticas = Cliente::leftJoin('vendas', 'vendas.cliente_id', 'clientes.id')
-            ->leftJoin('venda_produto', 'venda_produto.venda_id', 'vendas.id')
+                ->leftJoin('venda_produto', 'venda_produto.venda_id', 'vendas.id')
                 ->select(
                     'clientes.cliente',
-                    Produto::raw(
+                    Cliente::raw(
                         'CAST(SUM(venda_produto.quantidade * venda_produto.preco_venda) AS DECIMAL(20, 2)) AS valor'
                     )
                 )
@@ -232,7 +238,7 @@ class HomeEloquent implements HomeInterface
                     ->leftJoin('venda_produto', 'venda_produto.venda_id', 'vendas.id')
                     ->select(
                         'clientes.cliente',
-                        Produto::raw(
+                        Cliente::raw(
                             'SUM(venda_produto.quantidade) AS valor'
                         )
                     )
@@ -240,6 +246,82 @@ class HomeEloquent implements HomeInterface
                     ->where('vendas.saida', 1)
                     ->orderByRaw('SUM(venda_produto.quantidade) DESC')
                     ->groupBy('clientes.id')
+                    ->limit(5)
+                    ->get()
+                    ->toArray();
+
+                return response()->json($estatisticas);
+            }
+        }
+    }
+
+    //==========================================================================================================
+    // Compras
+    //==========================================================================================================
+    public function estatisticasCompras()
+    {
+        $estatisticas = CompraProduto::leftJoin('compras', 'compras.id', 'compra_produto.compra_id')
+            ->leftJoin('fornecedores', 'fornecedores.id', 'compras.fornecedor_id')
+            ->select(
+                'fornecedores.fornecedor',
+                CompraProduto::raw(
+                    'CAST(
+                        SUM(compra_produto.quantidade * compra_produto.preco_compra)
+                        AS DECIMAL(20, 2)
+                    ) AS compra'
+                ),
+
+            )
+            ->where('compras.entrada', 1)
+            ->orderByRaw('SUM(compra_produto.quantidade * compra_produto.preco_compra) DESC')
+            ->groupBy('fornecedores.id')
+            ->limit(5)
+            ->get()
+            ->toArray();
+
+        return response()->json($estatisticas);
+    }
+
+    //=========================================================================================================
+    public function estatisticasComprasFiltro($request)
+    {
+        $de = date('Y-m-d', strtotime($request->de));
+        $ate = date('Y-m-d', strtotime($request->ate));
+
+        if ($request->tipo == 'preco') {
+
+            $estatisticas = Fornecedor::leftJoin('compras', 'compras.fornecedor_id', 'fornecedores.id')
+                ->leftJoin('compra_produto', 'compra_produto.compra_id', 'compras.id')
+                ->select(
+                    'fornecedores.fornecedor',
+                    Fornecedor::raw(
+                        'CAST(SUM(compra_produto.quantidade * compra_produto.preco_compra) AS DECIMAL(20, 2)) AS valor'
+                    )
+                )
+                ->whereBetween('compras.data', [$de, $ate])
+                ->where('compras.entrada', 1)
+                ->orderByRaw('SUM(compra_produto.quantidade * compra_produto.preco_compra) DESC')
+                ->groupBy('fornecedores.id')
+                ->limit(5)
+                ->get()
+                ->toArray();
+
+            return response()->json($estatisticas);
+        } else {
+            if ($request->tipo == 'quantidade') {
+
+                $estatisticas = Fornecedor::leftJoin('compras', 'compras.fornecedor_id', 'fornecedores.id')
+                    ->leftJoin('compra_produto', 'compra_produto.compra_id', 'compras.id')
+                    ->select(
+                        'fornecedores.fornecedor',
+                        Fornecedor::raw(
+                            'SUM(compra_produto.quantidade) AS valor'
+                        )
+                    )
+                    ->whereBetween('compras.data', [$de, $ate])
+                    ->where('compras.entrada', 1)
+                    ->orderByRaw('SUM(compra_produto.quantidade * compra_produto.preco_compra) DESC')
+                    ->groupBy('fornecedores.id')
                     ->limit(5)
                     ->get()
                     ->toArray();

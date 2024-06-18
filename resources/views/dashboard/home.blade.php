@@ -31,6 +31,9 @@
         <div class="col-lg-5 card mb-3 p-3">
             <div class="row">
                 <h1 class="fs-4 fw-bold text-info">Compras<i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                <div class="col-12">
+                    <x-estatisticas-compras />
+                </div>
             </div>
         </div>
         <div class="col-lg-5 card mb-3 p-3">

@@ -2,6 +2,7 @@
 
 namespace App\Services\Home;
 
+use App\Http\Requests\Home\RequestEstatisticasCompras;
 use App\Http\Requests\Home\RequestLucroTotal;
 use App\Http\Requests\Home\RequestEstatisticasProdutos;
 use App\Http\Requests\Home\RequestEstatisticasVendas;
@@ -17,6 +18,8 @@ class HomeService
     }
 
     //=========================================================================================================
+    // Lucro
+    //=========================================================================================================
     public function lucroTotal()
     {
         return $this->homeInterface->lucroTotal();
@@ -28,7 +31,9 @@ class HomeService
         return $this->homeInterface->lucroTotalFiltro($request);
     }
 
-    //=========================================================================================================
+    //==========================================================================================================
+    // Produtos
+    //==========================================================================================================
     public function estatisticasProdutos()
     {
         return $this->homeInterface->estatisticasProdutos();
@@ -40,7 +45,9 @@ class HomeService
         return $this->homeInterface->estatisticasProdutosFiltro($request);
     }
 
-    //=========================================================================================================
+    //==========================================================================================================
+    // Vendas
+    //==========================================================================================================
     public function estatisticasVendas()
     {
         return $this->homeInterface->estatisticasVendas();
@@ -50,5 +57,19 @@ class HomeService
     public function estatisticasVendasFiltro(RequestEstatisticasVendas $request)
     {
         return $this->homeInterface->estatisticasVendasFiltro($request);
+    }
+
+    //==========================================================================================================
+    // Compras
+    //==========================================================================================================
+    public function estatisticasCompras()
+    {
+        return $this->homeInterface->estatisticasCompras();
+    }
+
+    //=========================================================================================================
+    public function estatisticasComprasFiltro(RequestEstatisticasCompras $request)
+    {
+        return $this->homeInterface->estatisticasComprasFiltro($request);
     }
 }

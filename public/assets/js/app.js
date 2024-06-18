@@ -4,6 +4,9 @@ $(document).ready(function () {
     getProdutosFilter();
     getVendas();
     getVendasFilter();
+    getCompras();
+    getComprasFilter();
+
     //==========================================================================================================
     // Lucro
     //==========================================================================================================
@@ -123,6 +126,7 @@ $(document).ready(function () {
     //==========================================================================================================
     // Produtos
     //==========================================================================================================
+
     let chartProduto;
     function getProdutos() {
         $.ajax({
@@ -286,8 +290,9 @@ $(document).ready(function () {
     }
 
     //==========================================================================================================
-    // Produtos
+    // Vendas
     //==========================================================================================================
+
     let chartVenda;
     function getVendas() {
         $.ajax({
@@ -376,14 +381,13 @@ $(document).ready(function () {
                     'tipo': $('#tipoFilterVenda').val(),
                 },
                 success: (data) => {
-                    console.log(data);
                     var clientes = [];
                     var venda = [];
-    
+
                     for (let i = 0; i < data.length; i++) {
                         clientes.push(data[i].cliente);
                         venda.push(data[i].valor);
-    
+
                     }
 
                     chartVendasFilter(clientes, venda)
@@ -419,6 +423,173 @@ $(document).ready(function () {
                 datasets: [{
                     label: $('#tipoFilterVenda').val() == 'preco' ? 'Valores de ' + de + ' à ' + ate : 'Quantidade de ' + de + ' à ' + ate,
                     data: venda,
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(61, 235, 52, 0.2)',
+                        'rgba(212, 41, 25, 0.2)',
+                        'rgba(33, 18, 196, 0.2)',
+                        'rgba(18, 196, 172, 0.2)',
+                        'rgba(196, 18, 184, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(61, 235, 52)',
+                        'rgb(212, 41, 25)',
+                        'rgb(33, 18, 196)',
+                        'rgb(18, 196, 172)',
+                        'rgb(196, 18, 184)',
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    }
+
+    //==========================================================================================================
+    // Vendas
+    //==========================================================================================================
+    let chartCompra;
+    function getCompras() {
+        $.ajax({
+            url: "/estatisticas_compras",
+            dataType: 'json',
+            success: (data) => {
+                var fornecedores = [];
+                var compra = [];
+
+                for (let i = 0; i < data.length; i++) {
+                    fornecedores.push(data[i].fornecedor);
+                    compra.push(data[i].compra);
+
+                }
+                chartCompras(fornecedores, compra)
+
+            },
+            error: (error) => {
+                console.log(error);
+            }
+        }, 'json');
+    }
+
+    //==========================================================================================================
+    function chartCompras(fornecedores, compra) {
+        if (chartCompra) {
+            chartCompra.destroy();
+        }
+
+        const ctx = document.getElementById('compraChart');
+
+        chartCompra = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: fornecedores,
+                datasets: [{
+                    label: 'Os ' + fornecedores.length + ' fornecedores que você mais compra.',
+                    data: compra,
+                    borderWidth: 1,
+                    backgroundColor: [
+                        'rgba(61, 235, 52, 0.2)',
+                        'rgba(212, 41, 25, 0.2)',
+                        'rgba(33, 18, 196, 0.2)',
+                        'rgba(18, 196, 172, 0.2)',
+                        'rgba(196, 18, 184, 0.2)',
+
+                    ],
+                    borderColor: [
+                        'rgb(61, 235, 52)',
+                        'rgb(212, 41, 25)',
+                        'rgb(33, 18, 196)',
+                        'rgb(18, 196, 172)',
+                        'rgb(196, 18, 184)',
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
+    }
+
+    //==========================================================================================================
+    function getComprasFilter() {
+        let compraFilter = $('#compraFilter');
+
+        compraFilter.click(() => {
+
+            $.ajax({
+                url: "/estatisticas_compras_filtro",
+                dataType: 'json',
+                data: {
+                    'de': $('#compraDe').val(),
+                    'ate': $('#compraAte').val(),
+                    'tipo': $('#tipoFilterCompra').val(),
+                },
+                success: (data) => {
+                    console.log(data);
+                    var fornecedores = [];
+                    var compra = [];
+
+                    for (let i = 0; i < data.length; i++) {
+                        fornecedores.push(data[i].fornecedor);
+                        compra.push(data[i].valor);
+
+                    }
+
+                    chartComprasFilter(fornecedores, compra)
+
+                },
+                error: (error) => {
+                    console.log(error);
+                }
+            }, 'json');
+        });
+    }
+
+    //==========================================================================================================
+    function chartComprasFilter(fornecedores, compra) {
+        var deInput = $('#compraDe').val();
+        var de = new Date(deInput);
+        de = de.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+        var ateInput = $('#compraAte').val();
+        var ate = new Date(ateInput);
+        ate = ate.toLocaleDateString('pt-BR', { timeZone: 'UTC' });
+
+        if (chartCompra) {
+            chartCompra.destroy();
+        }
+
+        const ctx = document.getElementById('compraChart');
+
+        chartCompra = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: fornecedores,
+                datasets: [{
+                    label: $('#tipoFilterCompra').val() == 'preco' ? 'Valores de ' + de + ' à ' + ate : 'Quantidade de ' + de + ' à ' + ate,
+                    data: compra,
                     borderWidth: 1,
                     backgroundColor: [
                         'rgba(61, 235, 52, 0.2)',

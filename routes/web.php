@@ -28,6 +28,9 @@ Route::middleware('auth')->group(function () {
     // Vendas
     Route::get('/estatisticas_vendas', [Main::class, 'estatisticasVendas'])->name('estatisticas.vendas');
     Route::get('/estatisticas_vendas_filtro', [Main::class, 'estatisticasVendasFiltro'])->name('estatisticas.vendas.filtro');
+    // Vendas
+    Route::get('/estatisticas_compras', [Main::class, 'estatisticasCompras'])->name('estatisticas.compras');
+    Route::get('/estatisticas_compras_filtro', [Main::class, 'estatisticasComprasFiltro'])->name('estatisticas.compras.filtro');
 
     //=============================================================================================================
 
@@ -116,13 +119,13 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_venda', [Vendas::class, 'update_submit'])->name('update.submit.venda');
     Route::put('/desativar_venda', [Vendas::class, 'desativar_venda'])->name('desativar.venda');
     Route::get('/vendas_desativadas', [Vendas::class, 'vendas_desativadas'])->name('vendas.desativadas');
-    Route::put('/reativar_vendas', [Vendas::class, 'reativar_vendas'])->name('reativar.venda'); 
+    Route::put('/reativar_vendas', [Vendas::class, 'reativar_vendas'])->name('reativar.venda');
     Route::get('/vendas_fechadas', [Vendas::class, 'vendas_fechadas'])->name('vendas.fechadas');
     Route::get('/destroy_venda/{id}', [Vendas::class, 'destroy'])->name('destroy.vendas');
 
 
     //=============================================================================================================
-    
+
     // Perfil
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
