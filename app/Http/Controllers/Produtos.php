@@ -8,9 +8,11 @@ use App\Http\Requests\RequestProdutos;
 use App\Models\Categoria;
 use App\Models\Cliente;
 use App\Models\Compra;
+use App\Models\CompraProduto;
 use App\Models\Fornecedor;
 use App\Models\Produto;
 use App\Models\Venda;
+use App\Models\VendaProduto;
 use App\Services\Produtos\ProdutoService;
 use Illuminate\Http\Request;
 use PhpParser\Node\Expr\FuncCall;
@@ -33,36 +35,50 @@ class Produtos extends Controller
             filter: $request->filter
         );
 
-        
+        $inativados = $this->model->where('ativa', 0)->get();
+
+
         $entradas = Compra::where('entrada', 0)->where('ativa', 1)->get();
 
         $saidas = Venda::where('saida', 0)->where('ativa', 1)->get();
 
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'entradas', 'saidas'));
+        return view('dashboard.produdos.estoque_produtos', compact('produtos', 'filters', 'entradas', 'saidas', 'inativados'));
     }
 
     //=========================================================================================================
     public function movimentacao(string $id, Request $request)
     {
         $produto = $this->service->findOne($id);
-        
+
         $entradas = $this->service->paginateEntradas(
             id: $id,
             page: $request->get('page', 1),
             totalPerPage: $request->get('per_page', 15),
         );
-        
+
         $saidas = $this->service->paginateSaidas(
             id: $id,
             page: $request->get('page', 1),
             totalPerPage: $request->get('per_page', 15),
         );
-   
+
+        $inativarCompra = CompraProduto::leftJoin('compras', 'compras.id', 'compra_produto.compra_id')
+            ->where('compra_produto.produto_id', $id)
+            ->where('compras.ativa', 1)
+            ->where('compras.entrada',)
+            ->get();
+
+        $inativarVenda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
+            ->where('venda_produto.produto_id', $id)
+            ->where('vendas.ativa', 1)
+            ->where('vendas.saida',)
+            ->get();
+
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'entradas', 'saidas','filters'));
+        return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'entradas', 'saidas', 'filters', 'inativarCompra', 'inativarVenda'));
     }
 
     //=========================================================================================================
@@ -99,10 +115,10 @@ class Produtos extends Controller
     //=========================================================================================================
     public function update(string $id)
     {
-        
+
         $produto = $this->model->where('id', $id)->first();
         $categorias = Categoria::get();
-        
+
         return view('dashboard.produdos.update_produtos', compact('produto', 'categorias'));
     }
 
@@ -129,12 +145,47 @@ class Produtos extends Controller
     }
 
     //=========================================================================================================
+    public function inativar_produto(string $id)
+    {
+
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 0]
+        );
+
+        return redirect()->route('estoque.produtos');
+    }
+
+    //=========================================================================================================
+    public function reativar_produto(string $id)
+    {
+
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 1]
+        );
+
+        return redirect()->route('estoque.produtos');
+    }
+
+    //=========================================================================================================
+    public function produto_inativado(Request $request)
+    {
+        $produtos = $this->service->paginateInativos(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('dashboard.produdos.produtos_inativados', compact('produtos', 'filters'));
+    }
+
+    //=========================================================================================================
     public function delete(Request $request)
     {
         $this->service->delete($request->id);
 
-        
+
         return redirect()->route('estoque.produtos');
     }
-
 }

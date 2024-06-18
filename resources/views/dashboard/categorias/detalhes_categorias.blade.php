@@ -4,7 +4,7 @@
     <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
         <div class="row">
             <div class="col">
-                <a href="{{route('show.categorias')}}" class="fs-3 text-decoration-none link-secondary">
+                <a href="{{ route('show.categorias') }}" class="fs-3 text-decoration-none link-secondary">
                     <i class="bi bi-skip-backward-circle align-middle"></i>
                 </a>
             </div>
@@ -30,11 +30,23 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                            data-bs-toggle="modal">Inativar</a>
+                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                            data-bs-toggle="modal"
+                            @if (count($produtosAtivos) > 0)
+                                disabled
+                            @endif>
+                            Inativar
+                        </button>
                         <a href="{{ route('update.categorias', ['id' => $categoria->id]) }}"
-                            class="btn btn-primary">Editar</a>
+                            class="btn btn-primary">
+                            Editar
+                        </a>
 
+                        @if (session('error_disable'))
+                            <div class="text-danger alert-danger my-2 text-center">
+                                {{ session()->get('error_disable') }}
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -54,9 +66,9 @@
                         Deseja inativar a categoria <strong>{{ $categoria->categoria }}</strong> ?
                     </div>
                     <div class="modal-footer">
-                            <a href="{{ route('inativar.categorias', $categoria->id) }}" class="btn btn-danger">
-                                confirmar
-                            </a>
+                        <a href="{{ route('inativar.categorias', $categoria->id) }}" class="btn btn-danger">
+                            confirmar
+                        </a>
                         </form>
                     </div>
                 </div>

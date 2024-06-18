@@ -27,7 +27,7 @@
     </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-secondary">
+        <button type="submit" class="btn btn-danger">
             Baixar
         </button>
     </div>

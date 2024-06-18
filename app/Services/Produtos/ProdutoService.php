@@ -24,9 +24,13 @@ class ProdutoService
     }
     
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function paginateInativos(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->produto_interface->getAll($filter);
+        return $this->produto_interface->paginateInativos(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
     }
 
     //=====================================================================

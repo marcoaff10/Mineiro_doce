@@ -41,6 +41,7 @@ class ProdutosEloquent implements ProdutosInterface
             )
             ->orderByRaw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) DESC')
             ->groupBy('produtos.id')
+            ->where('produtos.ativa', 1)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
@@ -56,7 +57,7 @@ class ProdutosEloquent implements ProdutosInterface
     }
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function paginateInativos(int $page = 1, int $totalPerPage = 15, ?string $filter = null): PaginationInterface
     {
 
         $result = $this->model->leftJoin('estoque', 'produtos.id', 'estoque.produto_id')
@@ -72,6 +73,9 @@ class ProdutosEloquent implements ProdutosInterface
                 $this->model->raw('SUM(estoque.qtde_saida) AS saida'),
                 $this->model->raw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) AS estoque'),
             )
+            ->orderByRaw('CAST((SUM(estoque.qtde_entrada) - SUM(estoque.qtde_saida)) AS DECIMAL(20, 0)) DESC')
+            ->groupBy('produtos.id')
+            ->where('produtos.ativa', 0)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('produto', 'like', "%$filter%");
@@ -81,9 +85,9 @@ class ProdutosEloquent implements ProdutosInterface
                     $query->orWhere('maximo', 'like', "%$filter%");
                 }
             })
-            ->get();
+            ->paginate($totalPerPage, ['*'], 'page', $page);
 
-        return $result->toArray();
+        return new PaginationPresenter($result);
     }
 
     //=====================================================================

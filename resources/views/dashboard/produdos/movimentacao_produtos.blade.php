@@ -4,7 +4,7 @@
     <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
         <div class="row">
             <div class="col">
-                <a href="{{route('estoque.produtos')}}" class="fs-3 text-decoration-none link-secondary">
+                <a href="{{ route('estoque.produtos') }}" class="fs-3 text-decoration-none link-secondary">
                     <i class="bi bi-skip-backward-circle align-middle"></i>
                 </a>
             </div>
@@ -99,7 +99,7 @@
                     <div class="col-12 text-center mt-5">
 
                         <button class="btn btn-danger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
-                            @if ($produto->estoque > 0) disabled @endif>
+                            @if ($produto->estoque > 0 && count($inativarVenda) > 0 && count($inativarCompra) > 0) disabled @endif>
                             Inativar
                         </button>
                         <a href="{{ route('update.produtos', $produto->id) }}" class="btn btn-primary">Editar</a>
@@ -135,14 +135,9 @@
                     Deseja inativar o produto <strong></strong> ?
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('delete.produtos') }}" method="POST">
-                        @method('PUT')
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $produto->id }}">
-                        <button type="submit" class="btn btn-danger">
-                            confirmar
-                        </button>
-                    </form>
+                    <a href="{{ route('inativar.produto', $produto->id)}}" class="btn btn-danger">
+                        confirmar
+                    </a>
                 </div>
             </div>
         </div>

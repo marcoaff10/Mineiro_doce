@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/inativar_categorias/{id}', [Categorias::class, 'inativar_categoria'])->name('inativar.categorias');
     Route::get('/reativar_categorias/{id}', [Categorias::class, 'reativar_categoria'])->name('reativar.categorias');
     Route::get('/categorias_inativas', [Categorias::class, 'categorias_inativas'])->name('categorias.inativas');
-    Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
+    // Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
 
     // Produtos
     Route::get('/estoque_produtos', [Produtos::class, 'estoque'])->name('estoque.produtos');
@@ -82,6 +82,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/movimentacao_produtos/{id}', [Produtos::class, 'movimentacao'])->name('movimentacao.produtos');
     Route::get('/update_produtos/{id}', [Produtos::class, 'update'])->name('update.produtos');
     Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
+    Route::get('/inativar_produto/{id}', [Produtos::class, 'inativar_produto'])->name('inativar.produto');
+    Route::get('/reativar_produto/{id}', [Produtos::class, 'reativar_produto'])->name('reativar.produto');
+    Route::get('/produto_inativas', [Produtos::class, 'produto_inativado'])->name('produto.inativado');
     Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
     //=============================================================================================================

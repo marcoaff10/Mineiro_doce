@@ -3,7 +3,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5 text-secondary text-center" id="saidaLabel">
+                    <h1 class="modal-title fs-5 text-danger text-center" id="saidaLabel">
                         Saída
                         <i class="bi bi-dash-circle-fill ms-1"></i>
                     </h1>

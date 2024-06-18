@@ -54,7 +54,6 @@
                         <thead>
                             <th scope="col" class="align-middle">Categorias</th>
                             <th scope="col" class="align-middle">Reativas</th>
-                            <th scope="col" class="align-middle">Excluir</th>
                         </thead>
                         <tbody>
                             @foreach ($categorias->items() as $categoria)
@@ -65,16 +64,6 @@
                                             class="text-decoration-none text-success ">
                                             <i class="bi bi-check-circle"></i>
                                         </a>
-                                    </td>
-                                    <td scope="row" class="align-middle">
-                                        <form action="{{ route('delete.categorias') }}" method="POST">
-                                            @method('PUT')
-                                            @csrf
-                                            <input type="hidden" name="id" value="{{ $categoria->id }}">
-                                            <button type="submit" class="text-decoration-none text-danger ">
-                                                <i class="bi bi-trash"></i>
-                                            </button>
-                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

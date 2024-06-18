@@ -41,7 +41,9 @@ class Categorias extends Controller
     {
         $categoria = $this->service->findOne($id);
 
-        return view('dashboard.categorias.detalhes_categorias', compact('categoria'));
+        $produtosAtivos = Produto::where('categoria_id', $id)->where('ativa', 1)->get();
+
+        return view('dashboard.categorias.detalhes_categorias', compact('categoria', 'produtosAtivos'));
     }
 
     //=========================================================================================================
@@ -100,6 +102,9 @@ class Categorias extends Controller
     //=========================================================================================================
     public function inativar_categoria(string $id)
     {
+        if (Produto::where('categoria_id', $id)->where('ativa', 1)->first()) {
+            return redirect()->route('detalhes.categorias', $id)->with('error_disable', 'Impossivel inativar. Existem produtos ativos que pertencem a essa categoria.');
+        }
         $this->model->findOrFail($id)->update(
             ['ativa' => 0]
         );
@@ -132,15 +137,15 @@ class Categorias extends Controller
     }
 
     //=========================================================================================================
-    public function delete(Request $request)
-    {
-        if (Produto::where('categoria_id', $request->id)->first()) {
-            return redirect()->route('categorias.inativas')
-                ->with('error_disable', 'Impossível inativar a categoria, pois existem produtos que pertencem a ela.');
-        }
+    // public function delete(Request $request)
+    // {
+    //     if (Produto::where('categoria_id', $request->id)->first()) {
+    //         return redirect()->route('categorias.inativas')
+    //             ->with('error_disable', 'Impossível inativar a categoria, pois existem produtos que pertencem a ela.');
+    //     }
 
-        $this->service->delete($request->id);
+    //     $this->service->delete($request->id);
 
-        return redirect()->route('show.categorias');
-    }
+    //     return redirect()->route('show.categorias');
+    // }
 }
