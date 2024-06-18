@@ -8,12 +8,12 @@
                 <h3 class="text-center mb-3 fw-bold fs-4">{{ $venda->venda }} <i
                         class="bi bi-cart-plus ms-1 align-middle"></i></h3>
                 <div class="row justify-content-center">
-                    <input type="hidden" name="venda" value="{{ $venda->id }}">
+                    <input type="hidden" name="venda" value="{{ $venda->id }}" required>
                     <div class="mb-3 row justify-content-between">
 
                         <div class="col-lg-12 col-sm-12 mb-3">
                             <label for="produto" class="form-label">Produto em estoque</label>
-                            <select name="produto" id="produto" class="form-select">
+                            <select name="produto" id="produto" class="form-select" required>
                                 <option value="" selected>Selecione um Produto</option>
                                 @foreach ($produtos as $produto)
                                     <option value="{{ $produto->id }}" data-disponivel="{{ $produto->id }}">
@@ -37,7 +37,7 @@
                         <div class="col-lg-12 col-sm-12 mb-3">
                             <label class="form-label">Quantidade</label>
                             <input type="text" name="quantidade" id="quantidadeVenda" class="form-control"
-                                placeholder="Quantidade..." value="{{ old('quantidade') }}">
+                                placeholder="Quantidade..." value="{{ old('quantidade') }}" required>
                                 <div class="d-none text-center text-danger alert-danger mt-2" id="error">
                                     Estoque insuficiente.
                                 </div>
@@ -51,7 +51,7 @@
                         <div class="col-lg-12 col-sm-12 mb-3">
                             <label for="preco_venda" class="form-label">Preço da unidade</label>
                             <input type="text" name="preco_venda" id="preco_venda" class="form-control"
-                                placeholder="Preço..." value="{{ old('preco_venda') }}">
+                                placeholder="Preço..." value="{{ old('preco_venda') }}" required>
                             @error('preco_venda')
                                 <div class="text-center text-danger alert-danger mt-2">
                                     {{ $errors->get('preco_venda')[0] }}

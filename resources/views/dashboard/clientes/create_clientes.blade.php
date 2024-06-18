@@ -2,10 +2,10 @@
 @section('title', 'Novo Cliente')
 @section('content')
     <div class="row justify-content-center align-items-center p-3">
-        <div class="col-lg-12 p-2">
+        <div class="col-lg-9 p-2">
             <form action="{{ route('store.clientes') }}" method="POST">
                 @csrf
-                <h3 class="text-center mb-3 fw-bold fs-4">Novo Cliente <i class="bi bi-people"></i></h3>
+                <h1 class="text-center mb-3 fw-bold fs-4"><i class="bi bi-people me-2 align-middle"></i>Novo Clientes </h1>
 
                 <div class="mb-4 d-lg-flex justify-content-between">
 
@@ -39,7 +39,7 @@
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
                         <label for="telefone" class="form-label">Telefone</label>
                         <input type="texy" name="telefone" id="telefone" class="form-control" placeholder="DDD + telefone..."
-                            value="{{ old('telefone') }}" required>
+                            value="{{ old('telefone') }}">
                         @error('telefone')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('telefone')[0] }}
@@ -50,7 +50,7 @@
                     <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="text" name="email" id="email" class="form-control" placeholder="Email..."
-                            value="{{ old('email') }}" required>
+                            value="{{ old('email') }}">
                         @error('email')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('email')[0] }}

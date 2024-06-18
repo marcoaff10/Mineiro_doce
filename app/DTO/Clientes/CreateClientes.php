@@ -10,13 +10,13 @@ class CreateClientes
     public function __construct(
         public int $cnpj,
         public string $cliente,
-        public string $email,
-        public int $telefone,
+        public string|null $email,
+        public int|null $telefone,
         public int $cep,
         public string $cidade,
         public string $uf,
         public string $endereco,
-        public string $bairro,
+        public string|null $bairro,
         public int|null $num
     ) {}
 

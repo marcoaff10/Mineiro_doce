@@ -11,14 +11,14 @@ class UpdateFornecedores
         public $id,
         public int $cnpj,
         public string $fornecedor,
-        public int $telefone,
-        public string $email,
+        public int|null $telefone,
+        public string|null $email,
         public int $cep,
         public string $cidade,
         public string $uf,
         public string $endereco,
-        public string $bairro,
-        public int $num
+        public string|null $bairro,
+        public int|null $num
         ){}
 
     //=====================================================================

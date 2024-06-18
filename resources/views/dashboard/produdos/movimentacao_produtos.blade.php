@@ -1,18 +1,19 @@
 @extends('dashboard.dashboard')
 @section('title', 'Detalhes do Produto')
 @section('content')
-    <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
+    <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
+        <div class="row">
+            <div class="col">
+                <a href="{{route('estoque.produtos')}}" class="fs-3 text-decoration-none link-secondary">
+                    <i class="bi bi-skip-backward-circle align-middle"></i>
+                </a>
+            </div>
+        </div>
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle"><i class="bi bi-box me-2 align-middle"></i>Detalhes </h1>
 
             </div>
-
-            {{-- <div class="col text-end">
-                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
-                    <i class="bi bi-skip-backward-fill"></i>
-                </a>
-            </div> --}}
         </div>
         <div class="col card p-3">
             <div class="row p-2">
@@ -90,10 +91,7 @@
 
                     <div class="row justify-content-start align-items-center py-4">
                         <div class="col-sm-12 col-md-6 col-lg-6">
-                            <h1 class="fw-bold fs-4 text-success">
-                                Lucro por unidade:
-                                {{ $produto->lucro == null ? '' : 'R$ ' . preco($produto->lucro) }}
-                            </h1>
+                            [Gráfico]
 
                         </div>
                     </div>

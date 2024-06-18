@@ -24,6 +24,7 @@
 
             })
             .then(data => {
+                
                 if (data.estabelecimento.nome_fantasia === null) {
                     fornecedor.value = data.razao_social
                 } else {

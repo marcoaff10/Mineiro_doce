@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100 container-fluid">
     <!-- Primary Navigation Menu -->
-    <div>
+    <div class="{{(request()->routeIs('dashboard') == true) ? 'container-fluid' : 'container'}}">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->

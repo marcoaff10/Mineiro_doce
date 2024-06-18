@@ -1,14 +1,13 @@
 @extends('dashboard.dashboard')
-@section('title', 'Editar Categorias')
+@section('title', 'Editar Categoria')
 @section('content')
 
-
     <div class="row justify-content-center align-items-center p-3">
-        <div class="col-lg-6 col-md-8 p-2">
+        <div class="col-lg-6 p-2">
             <form action="{{ route('update.submit.categorias') }}" method="POST">
                 @method('PUT')
                 @csrf
-                <h3 class="text-center mb-3 fw-bold fs-4">Editar Categoria <i class="bi bi-bookmark"></i></h3>
+                <h3 class="text-center mb-3 fw-bold fs-4"><i class="bi bi-bookmark me-2 align-middle"></i>Editar Categoria</h3>
                 <input type="hidden" name="id" value="{{ $categoria->id }}">
                 <div class="mb-4">
                     <label for="categoria" class="form-label">Categoria</label>

@@ -1,26 +1,26 @@
-<div class="w-100 col-12 my-3" style="max-width: 100%; overflow-x: auto">
-    <table class="table table-striped table-bordered " id="datatables">
-        <thead class="table-dark">
-            <th class="text-center align-middle">Venda</th>
-            <th class="text-center align-middle">Cliente</th>
-            <th class="text-center align-middle">Status</th>
-            <th class="text-center align-middle">Estoque</th>
-            <th class="text-center align-middle">Produtos</th>
-            <th class="text-center align-middle">Valor</th>
-            <th class="text-center align-middle">Detalhes</th>
+<div class="w-100 col-12 overflowTable">
+    <table class="colorTbales table-striped table table table-hover table-responsive">
+        <thead>
+            <th scope="col" class="align-middle">Venda</th>
+            <th scope="col" class="align-middle">Cliente</th>
+            <th scope="col" class="align-middle">Status</th>
+            <th scope="col" class="align-middle">Estoque</th>
+            <th scope="col" class="align-middle">Produtos</th>
+            <th scope="col" class="align-middle">Valor</th>
+            <th scope="col" class="align-middle">Detalhes</th>
         </thead>
         <tbody>
             @foreach ($vendas->items() as $venda)
                 <tr>
-                    <td class="w-25 align-middle"> {{ $venda->venda }} </td>
-                    <td class="align-middle"> {{ primeiro_nome($venda->cliente) }} </td>
-                    <td class="text-center align-middle "> {{ $venda->ativa == 1 ? 'Ativa' : 'Fechada' }} </td>
-                    <td class="text-center align-middle"> {{ $venda->saida == 1 ? 'Saiu' : 'Não Saiu' }} </td>
-                    <td class="text-center align-middle"> {{ $venda->produtos }} </td>
-                    <td class="text-center align-middle"> R$ {{ preco($venda->valor) }} </td>
-                    <td class="text-center align-middle">
+                    <td scope="row" class="w-25 align-middle"> {{ $venda->venda }} </td>
+                    <td scope="row" class="align-middle"> {{ primeiro_nome($venda->cliente) }} </td>
+                    <td scope="row" class="align-middle "> {{ $venda->ativa == 1 ? 'Ativa' : 'Fechada' }} </td>
+                    <td scope="row" class="align-middle"> {{ $venda->saida == 1 ? 'Saiu' : 'Não Saiu' }} </td>
+                    <td scope="row" class="align-middle"> {{ $venda->produtos }} </td>
+                    <td scope="row" class="align-middle"> R$ {{ preco($venda->valor) }} </td>
+                    <td scope="row" class="align-middle">
                         <a href=" {{ route('detalhes.venda', $venda->id)}} "
-                            class="text-decoration-none text-success ">
+                            class="text-decoration-none text-secondary ">
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </a>
                     </td>

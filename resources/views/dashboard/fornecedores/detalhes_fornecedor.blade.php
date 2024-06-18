@@ -1,29 +1,28 @@
 @extends('dashboard.dashboard')
 @section('title', 'Detalhes do Fornecedor')
 @section('content')
-    <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
+    <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
+        <div class="col">
+            <a href="{{route('show.fornecedores')}}" class="fs-3 text-decoration-none link-secondary">
+                <i class="bi bi-skip-backward-circle align-middle"></i>
+            </a>
+        </div>
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-shop ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle"><i class="bi bi-shop me-2"></i>Detalhes </h1>
             </div>
-
-            {{-- <div class="col text-end">
-                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
-                    <i class="bi bi-skip-backward-fill"></i>
-                </a>
-            </div> --}}
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-4 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
+                <strong class="fs-3 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                         <h2 class="mb-3 fw-bold">Informações de contato:</h2>
                         <ul>
-                            <li>E-mail: {{ $fornecedor->email }}</li>
-                            <li>Telefone: {{ telefone($fornecedor->telefone) }}</li>
+                            <li>E-mail: {{ ($fornecedor->email == null) ? 'Não informado.' : $fornecedor->email }}</li>
+                            <li>Telefone: {{ ($fornecedor->telefone == null) ? 'Não informado.' : telefone($fornecedor->telefone) }}</li>
                             <li>CNPJ: {{ cnpj($fornecedor->cnpj) }}</li>
                         </ul>
                     </div>
@@ -37,7 +36,7 @@
                             <li>Logradouro:
                                 {{ $fornecedor->endereco . ', ' . ($fornecedor->num == '' ? 'S/N' : $fornecedor->num) }}
                             </li>
-                            <li>Bairro: {{ $fornecedor->bairro }}</li>
+                            <li>Bairro: {{ ($fornecedor->bairro == null) ? 'Não informado.' : $fornecedor->bairro }}</li>
                         </ul>
                     </div>
 

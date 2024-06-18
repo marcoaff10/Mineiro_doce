@@ -24,7 +24,7 @@
 
         var quantidade = document.querySelector('#quantidadeVenda');
 
-        quantidade.addEventListener('focusout', () => {
+        quantidade.addEventListener('keyup', () => {
             var estoque = document.querySelector('#estoque');
 
             if (parseInt(quantidade.value) > estoque.value) {

@@ -6,7 +6,7 @@
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Compras Fechadas<i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-cart-plus me-2 align-middle"></i>Compras Fechadas</h1>
                 </div>
             </div>
             <div class="row py-3">
@@ -47,27 +47,27 @@
             </div>
 
             @if (count($compras->items()) > 0)
-                <div class="w-100 col-12" style="max-width: 100%; overflow-x: auto">
-                    <table class="table table-striped table-bordered " id="datatables">
-                        <thead class="table-dark">
-                            <th class="text-center align-middle">Compra</th>
-                            <th class="text-center align-middle">Fornecedor</th>
-                            <th class="text-center align-middle">Ativa</th>
-                            <th class="text-center align-middle">Fechada</th>
-                            <th class="text-center align-middle">Valor</th>
-                            <th class="text-center align-middle">Detalhes</th>
+                <div class="w-100 col-12 overflowTable">
+                    <table class="colorTbales table-striped table table table-hover table-responsive">
+                        <thead>
+                            <th scope="col" class="align-middle">Compra</th>
+                            <th scope="col" class="align-middle">Fornecedor</th>
+                            <th scope="col" class="align-middle">Ativa</th>
+                            <th scope="col" class="align-middle">Fechada</th>
+                            <th scope="col" class="align-middle">Valor</th>
+                            <th scope="col" class="align-middle">Detalhes</th>
                         </thead>
                         <tbody>
                             @foreach ($compras->items() as $compra)
                                 <tr>
-                                    <td class="w-25 align-middle"> {{ $compra->compra }} </td>
-                                    <td class="align-middle"> {{ primeiro_nome($compra->fornecedor) }} </td>
-                                    <td class="text-center align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> {{ $compra->entrada == 1 ? 'SIM' : 'NÃO' }} </td>
-                                    <td class="text-center align-middle"> R$ {{ preco($compra->valor) }} </td>
-                                    <td class="text-center align-middle">
+                                    <td scope="row" class="w-25 align-middle"> {{ $compra->compra }} </td>
+                                    <td scope="row" class="align-middle"> {{ primeiro_nome($compra->fornecedor) }} </td>
+                                    <td scope="row" class="align-middle "> {{ $compra->ativa == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td scope="row" class="align-middle"> {{ $compra->entrada == 1 ? 'SIM' : 'NÃO' }} </td>
+                                    <td scope="row" class="align-middle"> R$ {{ preco($compra->valor) }} </td>
+                                    <td scope="row" class="align-middle">
                                         <a href=" {{ route('detalhes.compra', $compra->id) }} "
-                                            class="text-decoration-none text-success ">
+                                            class="text-decoration-none text-secondary ">
                                             <i class="bi bi-arrow-right-circle-fill"></i>
                                         </a>
                                     </td>

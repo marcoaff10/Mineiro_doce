@@ -46,10 +46,22 @@ function uf($uf)
 //=========================================================================================================
 function primeiro_nome($nome)
 {
+
     // retorna o primeiro nome de uma string
     $primeiro = explode(' ', $nome);
 
-    return $primeiro[0] . ' ' . $primeiro[1];
+    if (is_numeric(substr($primeiro[0], 0, 2))) {
+        if (count($primeiro) > 1 && count($primeiro) <3 ) {
+           return $primeiro[1];
+        }
+        return $primeiro[1] . ' ' . $primeiro[2];
+    }
+
+    if (count($primeiro) < 2) {
+        return $primeiro[0];
+    } else {
+        return $primeiro[0] . ' ' . $primeiro[1];
+    }
 }
 
 //=========================================================================================================
@@ -84,14 +96,25 @@ function motivoSaida($motivo)
 }
 
 //=========================================================================================================
-function somar($array)
+function somarCompra($array)
 {
  // retorna a soma total das chaves iguais de um array
     $valor = array_reduce($array, function ($carry, $items) {
-        return $carry + ($items->preco_compra ?? $items->preco_venda * $items->quantidade) ;
+        return $carry + ($items->preco_compra * $items->quantidade) ;
     });
 
+    return [
+        'valor' => $valor,
+    ];
+}
 
+//=========================================================================================================
+function somarVenda($array)
+{
+ // retorna a soma total das chaves iguais de um array
+    $valor = array_reduce($array, function ($carry, $items) {
+        return $carry + ($items->preco_venda * $items->quantidade) ;
+    });
 
     return [
         'valor' => $valor,

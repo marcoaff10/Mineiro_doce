@@ -4,9 +4,9 @@
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
-            <div class="row py-3">
+            <div class="row mb-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Vendas Abertas<i class="bi bi-truck ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-truck me-2 align-middle"></i>Vendas Abertas</h1>
                 </div>
             </div>
             <div class="row py-3">

@@ -36,22 +36,20 @@ class RequestCreateClientes extends FormRequest
             ],
 
             'telefone' => [
-                'required',
+                'nullable',
                 'numeric',
                 'min_digits:11',
                 'max_digits:11'
             ],
             
             'email' => [
-                'required',
+                'nullable',
                 'email',
             ],
 
             'cep' => [
                 'required',
                 'numeric',
-                'min_digits:8',
-                'max_digits:8'
             ],
 
             'cidade' => [
@@ -67,7 +65,7 @@ class RequestCreateClientes extends FormRequest
             ],
 
             'bairro' => [
-                'required',
+                'nullable',
                 'min:3',
                 'max:255'
             ],
@@ -93,18 +91,14 @@ class RequestCreateClientes extends FormRequest
             'cliente.min' => 'O campo cliente deve conter no mínimo :min caracteres.',
             'cliente.max' => 'O campo cliente deve conter no máximo :max caracteres.',
 
-            'telefone.required' => 'O campo telefone é obrogátorio.',
             'telefone.numeric' => 'O campo telefone deve conter apenas números.',
             'telefone.min_digits' => 'O campo telefone deve conter no mínimo :min caracteres.', 
             'telefone.max_digits' => 'O campo telefone deve conter no máximo :max caracteres.', 
 
-            'email.required' => 'O campo email é obrogátorio.',
             'email.email' => 'O campo email deve ser um email válido.',
 
             'cep.required' => 'O campo CEP é obrigátorio.',
             'cep.numeric' => 'O campo CEP deve conter apenas números.',
-            'cep.min_digits' => 'O campo CEP deve conter no mínimo :min caracteres.',
-            'cep.max_digits' => 'O campo CEP deve conter no máximo :max caracteres.',
 
             'cidade.required' => 'O campo cidade é obrigátorio.',
             'cidade.min' => 'O campo cidade deve conter no mínimo :min caracteres.',
@@ -114,7 +108,6 @@ class RequestCreateClientes extends FormRequest
             'endereco.min' => 'O campo endereco deve conter no mínimo :min caracteres.',
             'endereco.max' => 'O campo endereco deve conter no máximo :max caracteres.',
 
-            'bairro.required' => 'O campo bairro é obrigátorio.',
             'bairro.min' => 'O campo bairro deve conter no mínimo :min caracteres.',
             'bairro.max' => 'O campo bairro deve conter no máximo :max caracteres.',
 

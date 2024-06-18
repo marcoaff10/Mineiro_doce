@@ -10,25 +10,26 @@ class UpdateClientes
         public $id,
         public int $cnpj,
         public string $cliente,
-        public int $telefone,
-        public string $email,
+        public string|null $email,
+        public int|null $telefone,
         public int $cep,
         public string $cidade,
         public string $uf,
         public string $endereco,
-        public string $bairro,
-        public int $num
+        public string|null $bairro,
+        public int|null $num
         ){}
 
     //=====================================================================
     public static function makeFromRequest(RequestUpdateClientes $request, string $id = null)
     {
+        
         return new self(
             $id ?? $request->id,
             $request->cnpj,
             $request->cliente, 
-            $request->telefone,
             $request->email,
+            $request->telefone,
             $request->cep,
             $request->cidade,
             $request->uf,

@@ -6,7 +6,7 @@
             <form action="{{ route('update.submit.compra') }}" method="POST">
                 @method('PUT')
                 @csrf
-                <h3 class="text-center mb-3 fw-bold fs-4">Editar Compra <i class="bi bi-cart-plus ms-1 align-middle"></i></h3>
+                <h3 class="text-center mb-3 fw-bold fs-4"><i class="bi bi-cart-plus me-2 align-middle"></i>Editar Compra </h3>
                 <div class="row justify-content-center">
                     <input type="hidden" name="compra" value="{{ $compra[0]->id }}">
                     <div class="mb-3 row justify-content-between">

@@ -36,17 +36,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-5 card mb-3 p-3">
-            <div class="row">
-                <h1 class="fs-4 fw-bold text-info">Fornecedores<i class="bi bi-shop ms-1 align-middle"></i></h1>
-            </div>
-        </div>
-        <div class="col-lg-5 card mb-3 p-3">
-            <div class="row">
-                <h1 class="fs-4 fw-bold text-info">Clientes<i class="bi bi-people ms-1 align-middle"></i></h1>
-            </div>
-        </div>
-
     </div>
 
 @endsection

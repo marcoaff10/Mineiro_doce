@@ -1,10 +1,15 @@
 @extends('dashboard.dashboard')
 @section('title', 'Detalhes da Compra')
 @section('content')
-    <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
+    <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
+        <div class="col">
+            <a href="{{route('show.compras')}}" class="fs-3 text-decoration-none link-secondary">
+                <i class="bi bi-skip-backward-circle align-middle"></i>
+            </a>
+        </div>
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle"><i class="bi bi-box me-2 align-middle"></i>Detalhes </h1>
             </div>
         </div>
         <div class="col card p-3">
@@ -14,7 +19,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                        <h2 class="fs-5 text-info mb-3">{{ $compra[0]->compra }}</h2>
+                        <h2 class="fs-3 text-info mb-3">{{ $compra[0]->compra }}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
                             @foreach ($compra as $item)
@@ -32,7 +37,7 @@
                                             class="ms-2 text-decoration-none fw-bold text-success">ENTRAR.</a>
                                     @endif
                                 </li>
-                                <li class="my-1 fw-bold">Valor total da compra: R$ {{ preco(somar($compra)['valor']) }}</li>
+                                <li class="my-1 fw-bold">Valor total da compra: R$ {{ preco(somarCompra($compra)['valor']) }}</li>
                             @break
                         @endforeach
 

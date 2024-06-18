@@ -98,6 +98,7 @@ class Clientes extends Controller
     //=========================================================================================================
     public function update_submit(RequestUpdateClientes $request)
     {
+        
         if (substr($request->cnpj, 0, 1) == 0) {
             $cnpj = substr($request->cnpj, 1, 13);
         } else {

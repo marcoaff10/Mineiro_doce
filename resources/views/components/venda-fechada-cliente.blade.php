@@ -35,7 +35,7 @@
                             {{ date('d/m/Y', strtotime($fechada->created_at)) }}
                         </td>
                         <td class="text-center align-middle">
-                            <a href=" {{ route('detalhes.compra', $fechada->id) }} "
+                            <a href=" {{ route('detalhes.venda', $fechada->id) }} "
                                 class="text-decoration-none text-success">
                                 <i class="bi bi-arrow-right-circle-fill"></i>
                             </a>

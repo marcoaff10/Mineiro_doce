@@ -4,12 +4,12 @@
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
-            <div class="row py-3">
+            <div class="row mb-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block">Compras Abertas<i class="bi bi-cart-plus ms-1 align-middle"></i></h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-cart-plus me-2 align-middle"></i>Compras Abertas</h1>
                 </div>
             </div>
-            <div class="row py-3">
+            <div class="row mb-3">
                 <div class="col text-end ">
                     <form action="" method="GET">
 
@@ -30,7 +30,7 @@
             </div>
 
             <div class="row p-2 justify-content-between p-1">
-                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
                     <a href=" {{ route('create.compras') }} " class="btn btn-primary w-100">
                         Comprar
                         <i class="bi bi-plus-circle ms-1"></i>
@@ -38,7 +38,7 @@
                 </div>
 
                 @if (isset($desativadas) && count($desativadas) > 0)
-                    <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
                         <a href=" {{ route('compras.desativadas') }} " class="btn btn-secondary w-100">
                             Compras Desativadas
                             <i class="bi bi-x-circle ms-1"></i>
@@ -47,7 +47,7 @@
                 @endif
 
                 @if (isset($fechadas) && count($fechadas) > 0)
-                <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
+                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
                     <a href=" {{ route('compras.fechadas') }} " class="btn btn-success w-100">
                         Compras Fechadas
                         <i class="bi bi-box-seam ms-1"></i>

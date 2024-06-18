@@ -5,7 +5,7 @@
         <div class="col-lg-12 p-2">
             <form action="{{ route('store.vendas') }}" method="POST">
                 @csrf
-                <h3 class="text-center mb-3 fw-bold fs-4">Nova Venda <i class="bi bi-truck ms-1 align-middle"></i></h3>
+                <h3 class="text-center mb-3 fw-bold fs-4"><i class="bi bi-truck me-2 align-middle"></i>Nova Venda </h3>
 
                 <div class="mb-3 d-lg-flex justify-content-center">
 

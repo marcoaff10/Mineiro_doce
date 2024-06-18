@@ -1,21 +1,22 @@
 @extends('dashboard.dashboard')
 @section('title', 'Detalhes da Categoria')
 @section('content')
-    <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
+    <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
+        <div class="row">
+            <div class="col">
+                <a href="{{route('show.categorias')}}" class="fs-3 text-decoration-none link-secondary">
+                    <i class="bi bi-skip-backward-circle align-middle"></i>
+                </a>
+            </div>
+        </div>
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle"><i class="bi bi-bookmark me-2 align-middle"></i>Detalhes</h1>
             </div>
-
-            {{-- <div class="col text-end">
-                <a href="{{route('show.fornecedores')}}" class="btn btn-dark">
-                    <i class="bi bi-skip-backward-fill"></i>
-                </a>
-            </div> --}}
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-5 text-info text-center">{{ $categoria->categoria }}</strong>
+                <strong class="fs-3 text-info text-center">{{ $categoria->categoria }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">

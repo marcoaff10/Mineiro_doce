@@ -113,30 +113,11 @@
                             </ul>
                         </div>
                     </li>
-
-                    <li class="mb-1">
-                        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse"
-                            data-bs-target="#relatorios-collapse" aria-expanded="false">
-                            <i class="bi bi-file-earmark-medical"></i>
-                            Relatórios
-                            <i class="bi bi-caret-down align-middle "></i>
-                        </button>
-                        <div class="collapse" id="relatorios-collapse" style="">
-                            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Visão Geral</a></li>
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Produtos</a></li>
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Compras</a></li>
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Vendas</a></li>
-                                <li class="ms-4"><a href="#" class="link-dark rounded">Clientes</a></li>
-                            </ul>
-                        </div>
-                    </li>
-
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container-fluid">
+    <div class="{{(request()->routeIs('dashboard') == true) ? 'container-fluid' : 'container'}}">
         <div class="row py-4  ">
             <div class="col">
                 <a class="btn btn-dark " data-bs-toggle="offcanvas" href="#offcanvasExample" role="button"
@@ -151,7 +132,7 @@
             <div>
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
-                        @yield('content')
+                            @yield('content')
                     </div>
                 </div>
             </div>

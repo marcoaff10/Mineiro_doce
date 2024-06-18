@@ -1,0 +1,8 @@
+table.colorTbales {
+    background-color: rgba(201, 208, 209, 0.2);
+}
+
+div.overflowTable {
+    max-width: 100%; 
+    overflow-x: auto;
+}

@@ -1,10 +1,15 @@
 @extends('dashboard.dashboard')
 @section('title', 'Detalhes da Venda')
 @section('content')
-    <div class="row justify-content-center p-lg-5 p-sm-3 p-md-3">
+    <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
+        <div class="col">
+            <a href="{{ route('show.vendas') }}" class="fs-3 text-decoration-none link-secondary">
+                <i class="bi bi-skip-backward-circle align-middle"></i>
+            </a>
+        </div>
         <div class="row my-2">
             <div class="col">
-                <h1 class="mb-3 fs-4 d-block align-middle">Detalhes <i class="bi bi-box ms-1"></i></h1>
+                <h1 class="mb-3 fs-4 d-block align-middle"><i class="bi bi-truck me-2 align-middle"></i>Detalhes</h1>
             </div>
 
         </div>
@@ -15,7 +20,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                        <h2 class="fs-5 text-info mb-3">{{ $venda[0]->venda}}</h2>
+                        <h2 class="fs-3 text-info mb-3">{{ $venda[0]->venda }}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
                             @foreach ($venda as $item)
@@ -24,19 +29,20 @@
                                     Frete: {{ $item->frete == 0 ? 'Frete não informado.' : 'R$ ' . preco($item->frete) }}
                                 </li>
                                 <li class="my-1">
-                                     {{ $item->ativa === 1 ? 'Venda Ativa' : 'Venda Desativada' }}
+                                    {{ $item->ativa === 1 ? 'Venda Ativa' : 'Venda Desativada' }}
                                 </li class="my-1">
                                 <li class="my-1">
-                                    {{ $item->saida === 1 ? 'Venda Fechada' : 'Peças em Estoque'   }}
+                                    {{ $item->saida === 1 ? 'Venda Fechada' : 'Peças em Estoque' }}
                                     @if ($item->saida === 0)
                                         <a href="{{ route('estoque.produtos') }}"
                                             class="ms-2 text-decoration-none fw-bold text-danger">SAIR.</a>
                                     @endif
                                 </li>
-                                <li class="my-1 fw-bold">Valor total da venda: R$ {{ preco(somar($venda)['valor']) }}</li>
+                                <li class="my-1 fw-bold">Valor total da venda: R$ {{ preco(somarVenda($venda)['valor']) }}
+                                </li>
                             @break
                         @endforeach
-                        @if ($venda[0]->frete == 0)
+                        @if ($venda[0]->frete == 0 && $venda[0]->ativa == 1)
                             <li class="my-1">
                                 <form action="{{ route('frete.venda') }}" method="POST" class="col-4">
                                     @method('PUT')
@@ -80,17 +86,21 @@
                     </div>
                 </div>
 
-                <div class="col-12 text-center mt-4">
+                @if ($venda[0]->ativa == 1)
 
-                    <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                        data-bs-toggle="modal">Inativar</a>
-                    <a href="{{ route('update.venda', $venda[0]->id) }}" class="btn btn-primary">Editar</a>
-                    @if (session('error_disable'))
-                        <div class="text-danger alert-danger mt-2 text-center">
-                            {{ session()->get('error_disable') }}
-                        </div>
-                    @endif
-                </div>
+                    <div class="col-12 text-center mt-4">
+
+                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                            data-bs-toggle="modal">Inativar</a>
+                        <a href="{{ route('update.venda', $venda[0]->id) }}" class="btn btn-primary">Editar</a>
+                        @if (session('error_disable'))
+                            <div class="text-danger alert-danger mt-2 text-center">
+                                {{ session()->get('error_disable') }}
+                            </div>
+                        @endif
+                    </div>
+
+                @endif
 
             </div>
         </div>

@@ -42,8 +42,8 @@
 
                 </div>
 
-                <div class="mb-4 d-flex justify-content-between">
-                    <div class="col-3">
+                <div class="mb-4 row justify-content-between">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="peso" class="form-label">Peso</label>
                         <input type="number" name="peso" id="peso" class="form-control" placeholder="Peso..."
                             value="{{ $produto->peso }}" required>
@@ -54,7 +54,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="minimo" class="form-label">Mínino</label>
                         <input type="number" name="minimo" id="minimo" class="form-control" placeholder="Mín..."
                             value="{{ $produto->minimo }}" required>
@@ -65,7 +65,7 @@
                         @enderror
                     </div>
 
-                    <div class="col-3">
+                    <div class="col-sm-12 col-md-3 col-lg-3">
                         <label for="maximo" class="form-label">Máximo</label>
                         <input type="number" name="maximo" id="maximo" class="form-control" placeholder="Máx..."
                             value="{{ $produto->maximo }}" required>

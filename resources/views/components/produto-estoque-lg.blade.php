@@ -1,32 +1,32 @@
-<div class="w-100 col-12" style="max-width: 100%; overflow-x: auto;">
-    <table class="table table-striped table-bordered " id="datatables">
-        <thead class="table-dark">
-            <th class="text-center">Produto</th>
-            <th class="text-center">Categoria</th>
-            <th class="text-center">Peso</th>
-            <th class="text-center">Min.</th>
-            <th class="text-center">Max.</th>
-            <th class="text-center">Estoque</th>
-            <th class="text-center">Mov.</th>
+<div class="w-100 col-12 overflowTable">
+    <table class="colorTbales colorTbales table table table-hover table-responsive ">
+        <thead>
+            <th scope="col" class="align-middle">Produto</th>
+            <th scope="col" class="align-middle">Categoria</th>
+            <th scope="col" class="align-middle">Peso</th>
+            <th scope="col" class="align-middle">Min.</th>
+            <th scope="col" class="align-middle">Max.</th>
+            <th scope="col" class="align-middle">Estoque</th>
+            <th scope="col" class="align-middle">Mov.</th>
         </thead>
         <tbody>
             @foreach ($produtos->items() as $produto)
                 <tr>
-                    <td class="w-25 align-middle"> {{ $produto->produto }} </td>
-                    <td class="align-middle"> {{ $produto->categoria }} </td>
-                    <td class="text-center align-middle ">
+                    <td scope="row" class="w-25 align-middle"> {{ $produto->produto }} </td>
+                    <td scope="row" class="align-middle"> {{ $produto->categoria }} </td>
+                    <td scope="row" class="align-middle ">
                         {{ $produto->peso >= 1000 ? $produto->peso / 1000 . 'kg' : $produto->peso . 'g' }}
                     </td>
-                    <td class="text-center align-middle">
+                    <td scope="row" class="align-middle">
                         {{ $produto->minimo }} 
                     </td>
-                    <td class="text-center align-middle">
+                    <td scope="row" class="align-middle">
                         {{ $produto->maximo }}
                     </td>
-                    <td class="text-center align-middle fw-bold ">{{ empty($produto->estoque) ? 0 : $produto->estoque }}</td>
-                    <td class="text-center align-middle">
+                    <td scope="row" class="align-middle fw-bold ">{{ empty($produto->estoque) ? 0 : $produto->estoque }}</td>
+                    <td scope="row" class="align-middle">
                         <a href=" {{ route('movimentacao.produtos', ['id' => $produto->id]) }} "
-                            class="text-decoration-none text-success ">
+                            class="text-decoration-none text-secondary">
                             <i class="bi bi-arrow-right-circle-fill"></i>
                         </a>
                     </td>

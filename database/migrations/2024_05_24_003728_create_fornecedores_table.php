@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('fornecedores', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('fornecedor');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('cnpj');
-            $table->string('telefone');
+            $table->string('telefone')->nullable();
             $table->string('cidade');
             $table->string('uf');
             $table->string('cep');
             $table->string('endereco');
-            $table->string('bairro');
+            $table->string('bairro')->nullable();
             $table->integer('num')->nullable();
             $table->timestamps();
             $table->softDeletes();

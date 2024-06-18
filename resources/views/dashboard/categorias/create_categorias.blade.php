@@ -1,13 +1,13 @@
 @extends('dashboard.dashboard')
-@section('title', 'Nova Categorias')
+@section('title', 'Nova Categoria')
 @section('content')
 
 
     <div class="row justify-content-center align-items-center p-3">
-        <div class="col-lg-12 p-2">
+        <div class="col-lg-6 p-2">
             <form action="{{ route('store.categorias') }}" method="POST">
                 @csrf
-                <h3 class="text-center mb-3 fw-bold fs-4">Nova Categoria <i class="bi bi-bookmark"></i></h3>
+                <h3 class="text-center mb-3 fw-bold fs-4"><i class="bi bi-bookmark me-2 align-middle"></i>Nova Categoria </h3>
 
                 <div class="mb-4">
                     <label for="categoria" class="form-label">Categoria</label>

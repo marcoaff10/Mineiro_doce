@@ -6,25 +6,26 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class clientesMd extends Component
+class FornecedoresLg extends Component
 {
     /**
      * Create a new component instance.
      */
-    public $clientes;
+    public $fornecedores;
     public $filters;
 
-   public function __construct($clientes, $filters)
+   public function __construct($fornecedores, $filters)
    {
-       $this->clientes = $clientes;
+       $this->fornecedores = $fornecedores;
        $this->filters = $filters;
    }
+
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.clientes-md');
+        return view('components.fornecedores-lg');
     }
 }

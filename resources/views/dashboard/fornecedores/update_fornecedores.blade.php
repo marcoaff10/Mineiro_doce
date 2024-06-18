@@ -40,7 +40,7 @@
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
                         <label for="telefone" class="form-label">Telefone</label>
                         <input type="texy" name="telefone" id="telefone" class="form-control" placeholder="DDD + telefone..."
-                            value="{{ $fornecedor->telefone }}" required>
+                            value="{{ $fornecedor->telefone }}">
                         @error('telefone')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('telefone')[0] }}
@@ -51,7 +51,7 @@
                     <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
                         <label for="email" class="form-label">Email</label>
                         <input type="text" name="email" id="email" class="form-control" placeholder="Email..."
-                            value="{{ $fornecedor->email }}" required>
+                            value="{{ $fornecedor->email }}">
                         @error('email')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('email')[0] }}
@@ -118,7 +118,7 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
                         <label for="bairro" class="form-label">Bairro</label>
                         <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro..."
-                            value="{{ $fornecedor->bairro }}" required>
+                            value="{{ $fornecedor->bairro }}">
                         @error('bairro')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('bairro')[0] }}
