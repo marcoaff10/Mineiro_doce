@@ -40,7 +40,7 @@
                 @if (isset($desativadas) && count($desativadas) > 0)
                     <div class="col-sm-12 col-md-4 col-lg-4 mb-3">
                         <a href=" {{ route('vendas.desativadas') }} " class="btn btn-secondary w-100">
-                            Vendas Desativadas
+                            Vendas Inativas
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>
                     </div>

@@ -9,10 +9,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Categoria extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids;
 
     protected $table = 'categorias';
     protected $fillable = [
-        'categoria'
+        'categoria',
+        'ativa'
     ];
 }

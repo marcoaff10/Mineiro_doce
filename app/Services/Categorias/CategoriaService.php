@@ -25,9 +25,13 @@ class CategoriaService
     }
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function paginateInativas(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->categoriaInterface->getAll();
+        return $this->categoriaInterface->paginateInativas(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
     }
 
     //=====================================================================

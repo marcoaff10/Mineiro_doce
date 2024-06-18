@@ -54,13 +54,9 @@
                         Deseja inativar a categoria <strong>{{ $categoria->categoria }}</strong> ?
                     </div>
                     <div class="modal-footer">
-                        <form action="{{ route('delete.categorias') }}" method="POST">
-                            @method('PUT')
-                            @csrf
-                            <input type="hidden" name="id" value="{{ $categoria->id }}">
-                            <button type="submit" class="btn btn-danger">
+                            <a href="{{ route('inativar.categorias', $categoria->id) }}" class="btn btn-danger">
                                 confirmar
-                            </button>
+                            </a>
                         </form>
                     </div>
                 </div>

@@ -1,12 +1,12 @@
 @extends('dashboard.dashboard')
-@section('title', 'Categorias')
+@section('title', 'Categorias Inativas')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row mb-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-bookmark me-2 align-middle"></i>Categorias </h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-bookmark me-2 align-middle"></i>Categorias Inativas</h1>
                 </div>
             </div>
 
@@ -39,14 +39,12 @@
                     </a>
                 </div>
 
-                @if (count($inativas) > 0)
-                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                        <a href=" {{ route('categorias.inativas') }} " class="btn btn-secondary w-100">
-                            Categoria Inativas
-                            <i class="bi bi-x-circle ms-1"></i>
-                        </a>
-                    </div>
-                @endif
+                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+                    <a href=" {{ route('show.categorias') }} " class="btn btn-success w-100">
+                        Categoria Ativas
+                        <i class="bi bi-x-circle ms-1"></i>
+                    </a>
+                </div>
 
             </div>
 
@@ -55,23 +53,39 @@
                     <table class="colorTbales table-striped table table table-light table-hover table-responsive">
                         <thead>
                             <th scope="col" class="align-middle">Categorias</th>
-                            <th scope="col" class="align-middle">Detalhes</th>
+                            <th scope="col" class="align-middle">Reativas</th>
+                            <th scope="col" class="align-middle">Excluir</th>
                         </thead>
                         <tbody>
                             @foreach ($categorias->items() as $categoria)
                                 <tr>
                                     <td scope="row" class="w-75 align-middle"> {{ $categoria->categoria }} </td>
                                     <td scope="row" class="align-middle">
-                                        <a href=" {{ route('detalhes.categorias', ['id' => $categoria->id]) }} "
-                                            class="text-decoration-none text-secondary">
-                                            <i class="bi bi-arrow-right-circle-fill"></i>
+                                        <a href="{{ route('reativar.categorias', $categoria->id) }}"
+                                            class="text-decoration-none text-success ">
+                                            <i class="bi bi-check-circle"></i>
                                         </a>
+                                    </td>
+                                    <td scope="row" class="align-middle">
+                                        <form action="{{ route('delete.categorias') }}" method="POST">
+                                            @method('PUT')
+                                            @csrf
+                                            <input type="hidden" name="id" value="{{ $categoria->id }}">
+                                            <button type="submit" class="text-decoration-none text-danger ">
+                                                <i class="bi bi-trash"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
+                @if (session('error_disable'))
+                    <div class="text-danger alert-danger my-2 text-center">
+                        {{ session()->get('error_disable') }}
+                    </div>
+                @endif
                 <x-pagination :paginator="$categorias" :appends="$filters" />
             @else
                 <p class=" text-center opacity-50 mt-5">Sem Categorias cadastrados.</p>

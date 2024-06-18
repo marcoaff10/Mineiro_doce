@@ -18,8 +18,8 @@ return new class extends Migration
             $table->float('peso');
             $table->integer('minimo')->default(0);
             $table->integer('maximo')->default(0);
+            $table->integer('ativa')->unsigned()->default(1);
             $table->timestamps();
-            $table->softDeletes();
 
             $table->foreign('categoria_id')->references('id')->on('categorias');
         });

@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Produto extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids;
 
     protected $table = 'produtos';
 
@@ -19,7 +19,8 @@ class Produto extends Model
         'produto',
         'peso',
         'minimo',
-        'maximo'
+        'maximo',
+        'ativa'
     ];
 
     public function categoria(): BelongsTo

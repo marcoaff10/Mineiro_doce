@@ -150,7 +150,6 @@ class VendasEloquent implements VendasInterface
             [
                 'venda' => 'Venda_' . uniqid(),
                 'cliente_id' => $dto->cliente_id,
-                'ativa' => 1,
                 'data' => date('Y-m-d')
             ]
         );

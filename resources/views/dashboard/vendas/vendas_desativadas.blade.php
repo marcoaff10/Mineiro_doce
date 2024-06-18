@@ -1,12 +1,12 @@
 @extends('dashboard.dashboard')
-@section('title', 'Vendas Desativadas')
+@section('title', 'Vendas Inativas')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row py-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-truck me-2 align-middle"></i>Vendas </h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-truck me-2 align-middle"></i>Vendas Inativas</h1>
                 </div>
             </div>
             <div class="row py-3">

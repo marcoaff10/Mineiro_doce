@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Cliente extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids;
 
     protected $table = 'clientes';
 
@@ -23,6 +23,7 @@ class Cliente extends Model
         'endereco',
         'uf',
         'bairro',
-        'num'
+        'num',
+        'ativa'
     ];
 }

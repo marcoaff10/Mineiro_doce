@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('categoria');
+            $table->integer('ativa')->unsigned()->default(1);
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 

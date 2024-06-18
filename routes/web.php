@@ -70,6 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/detalhes_categorias/{id}', [Categorias::class, 'detalhes'])->name('detalhes.categorias');
     Route::get('/update_categorias/{id}', [Categorias::class, 'update'])->name('update.categorias');
     Route::put('/update_categorias', [Categorias::class, 'update_submit'])->name('update.submit.categorias');
+    Route::get('/inativar_categorias/{id}', [Categorias::class, 'inativar_categoria'])->name('inativar.categorias');
+    Route::get('/reativar_categorias/{id}', [Categorias::class, 'reativar_categoria'])->name('reativar.categorias');
+    Route::get('/categorias_inativas', [Categorias::class, 'categorias_inativas'])->name('categorias.inativas');
     Route::put('/delete_categorias', [Categorias::class, 'delete'])->name('delete.categorias');
 
     // Produtos

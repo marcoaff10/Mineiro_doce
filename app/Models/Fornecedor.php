@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fornecedor extends Model
 {
-    use HasFactory, HasUuids, SoftDeletes;
+    use HasFactory, HasUuids;
 
     protected $table = 'fornecedores';
     protected $fillable = [
@@ -22,6 +22,7 @@ class Fornecedor extends Model
         'cep',
         'endereco',
         'bairro',
-        'num'
+        'num',
+        'ativa'
     ];
 }

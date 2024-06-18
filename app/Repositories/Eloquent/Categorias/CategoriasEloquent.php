@@ -21,6 +21,7 @@ class CategoriasEloquent implements CategoriasInterface
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
         $result = $this->model
+            ->where('ativa', 1)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('categoria', 'like', "%$filter%");
@@ -31,16 +32,17 @@ class CategoriasEloquent implements CategoriasInterface
     }
 
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function paginateInativas(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->model
+        $result = $this->model
+            ->where('ativa', 0)
             ->where(function ($query) use ($filter) {
                 if ($filter) {
                     $query->where('categoria', 'like', "%$filter%");
                 }
             })
-            ->get()
-            ->toArray();
+            ->paginate($totalPerPage, ['*'], 'page', $page);
+        return new PaginationPresenter($result);
     }
 
     //=====================================================================

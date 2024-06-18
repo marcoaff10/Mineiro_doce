@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('compra');
             $table->uuid('fornecedor_id')->index();
             $table->float('frete')->index()->default(0);
-            $table->integer('ativa')->unsigned()->default(0);
+            $table->integer('ativa')->unsigned()->default(1);
             $table->integer('entrada')->unsigned()->default(0);
             $table->date('data');
             $table->timestamps();
