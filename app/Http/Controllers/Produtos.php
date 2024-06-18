@@ -181,11 +181,11 @@ class Produtos extends Controller
     }
 
     //=========================================================================================================
-    public function delete(Request $request)
-    {
-        $this->service->delete($request->id);
+    // public function delete(Request $request)
+    // {
+    //     $this->service->delete($request->id);
 
 
-        return redirect()->route('estoque.produtos');
-    }
+    //     return redirect()->route('estoque.produtos');
+    // }
 }

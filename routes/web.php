@@ -85,7 +85,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/inativar_produto/{id}', [Produtos::class, 'inativar_produto'])->name('inativar.produto');
     Route::get('/reativar_produto/{id}', [Produtos::class, 'reativar_produto'])->name('reativar.produto');
     Route::get('/produto_inativas', [Produtos::class, 'produto_inativado'])->name('produto.inativado');
-    Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
+    // Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
     //=============================================================================================================
 
