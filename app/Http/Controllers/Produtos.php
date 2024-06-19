@@ -85,7 +85,7 @@ class Produtos extends Controller
     public function create()
     {
 
-        $categorias = Categoria::get();
+        $categorias = Categoria::where('ativa', 1)->get();
 
         return view('dashboard.produdos.create_produtos', compact('categorias'));
     }
@@ -117,7 +117,7 @@ class Produtos extends Controller
     {
 
         $produto = $this->model->where('id', $id)->first();
-        $categorias = Categoria::get();
+        $categorias = Categoria::where('ativa', 1)->get();
 
         return view('dashboard.produdos.update_produtos', compact('produto', 'categorias'));
     }

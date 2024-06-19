@@ -46,7 +46,7 @@ class Compras extends Controller
     public function create()
     {
 
-        $fornecedores = Fornecedor::all();
+        $fornecedores = Fornecedor::where('ativa', 1)->get();
 
 
         return view('dashboard.compras.create_compras', compact('fornecedores'));

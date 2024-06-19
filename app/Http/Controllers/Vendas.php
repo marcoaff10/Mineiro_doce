@@ -46,7 +46,7 @@ class Vendas extends Controller
     public function create()
     {
 
-        $clientes = Cliente::all();
+        $clientes = Cliente::where('ativa', 1)->get();
 
         return view('dashboard.vendas.create_vendas', compact('clientes'));
     }
