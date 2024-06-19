@@ -11,7 +11,7 @@ use stdClass;
 interface ClientesInterface
 {
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
-    public function getAll(string $filter = null): array;
+    public function paginateInativados(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function findOne(string $id): stdClass|null;
     public function vendasAtivasCliente(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function vendasFechadasCliente(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;

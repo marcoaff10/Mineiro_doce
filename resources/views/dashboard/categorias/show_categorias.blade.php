@@ -12,7 +12,7 @@
 
             <div class="row justify-content-between">
                 @if (count($categorias->items()) > 0)
-                    <div class="col-12">
+                    <div class="col-sm-12 {{(count($inativas) > 0 ) ? 'col-md-12 col-lg-4' : 'col-md-6 col-lg-6'}}">
                         <form action="" method="GET">
                             <div class="mb-3 d-flex">
                                 <input type="text" name="filter" id="filter"
@@ -32,7 +32,7 @@
                     </div>
                 @endif
 
-                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                     <a href=" {{ route('create.categorias') }} " class="btn btn-primary w-100">
                         Cadastrar Categoria
                         <i class="bi bi-plus-circle ms-1"></i>
@@ -40,7 +40,7 @@
                 </div>
 
                 @if (count($inativas) > 0)
-                    <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
+                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
                         <a href=" {{ route('categorias.inativas') }} " class="btn btn-secondary w-100">
                             Categoria Inativas
                             <i class="bi bi-x-circle ms-1"></i>

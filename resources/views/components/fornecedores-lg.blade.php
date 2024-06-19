@@ -7,7 +7,13 @@
             <th scope="col" class="align-middle">E-mail</th>
             <th scope="col" class="align-middle">Cidade</th>
             <th scope="col" class="align-middle">CEP</th>
-            <th scope="col" class="align-middle">Detalhes</th>
+            <th scope="col" class="align-middle">
+                @if (request()->routeIs('show.fornecedores'))
+                    Detalhes
+                @elseif (request()->routeIs('fornecedores.inativados'))
+                    Reativar
+                @endif
+            </th>
         </thead>
         <tbody>
             @foreach ($fornecedores->items() as $fornecedor)
@@ -25,12 +31,21 @@
                     </td>
                     <td scope="row" class="align-middle"> {{ $fornecedor->cidade }} </td>
                     <td scope="row" class="align-middle"> {{ cep($fornecedor->cep) }} </td>
-                    <td scope="row" class="align-middle">
-                        <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
-                            class="text-decoration-none text-secondary">
-                            <i class="bi bi-arrow-right-circle-fill"></i>
-                        </a>
-                    </td>
+                    @if (request()->routeIs('show.fornecedores'))
+                        <td scope="row" class="align-middle">
+                            <a href=" {{ route('detalhes.fornecedores', ['id' => $fornecedor->id]) }} "
+                                class="text-decoration-none text-secondary">
+                                <i class="bi bi-arrow-right-circle-fill"></i>
+                            </a>
+                        </td>
+                    @elseif (request()->routeIs('fornecedores.inativados'))
+                        <td scope="row" class="align-middle">
+                            <a href="{{ route('reativar.fornecedor', $fornecedor->id) }}"
+                                class="text-decoration-none text-success ">
+                                <i class="bi bi-check-circle"></i>
+                            </a>
+                        </td>
+                    @endif
                 </tr>
             @endforeach
         </tbody>

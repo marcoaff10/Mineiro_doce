@@ -6,6 +6,7 @@ use App\DTO\Fornecedores\CreateFornecedores;
 use App\DTO\Fornecedores\UpdateFornecedores;
 use App\Http\Requests\RequestCreateFornededores;
 use App\Http\Requests\RequestUpdateFornecedores;
+use App\Models\Compra;
 use App\Models\Fornecedor;
 use App\Services\Fornecedores\FornecedoreService;
 use Illuminate\Http\Request;
@@ -14,7 +15,6 @@ class Fornecedores extends Controller
 {
     public function __construct(protected FornecedoreService $service, protected Fornecedor $model)
     {
-        
     }
 
     //=========================================================================================================
@@ -28,15 +28,17 @@ class Fornecedores extends Controller
             filter: $request->filter
         );
 
+        $inativados = $this->model->where('ativa', 0)->get();
+
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores', 'filters'));
+        return view('dashboard.fornecedores.show_fornecedores', compact('fornecedores', 'filters', 'inativados'));
     }
 
     //=========================================================================================================
     public function detalhes(string $id, Request $request)
     {
-        
+
         $fornecedor = $this->service->findOne($id);
 
         $ativas = $this->service->comprasAtivasFornecedor(
@@ -52,10 +54,12 @@ class Fornecedores extends Controller
             totalPerPage: $request->get('per_page', 15),
             filter: $request->filter
         );
-    
+
+        $compraFornecedor = Compra::where('fornecedor_id', $id)->where('ativa', 1)->where('entrada', 0)->get();
+
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.fornecedores.detalhes_fornecedor', compact('fornecedor', 'ativas', 'fechadas', 'filters'));
+        return view('dashboard.fornecedores.detalhes_fornecedor', compact('fornecedor', 'ativas', 'fechadas', 'filters', 'compraFornecedor'));
     }
 
     //=========================================================================================================
@@ -69,7 +73,6 @@ class Fornecedores extends Controller
     {
         if (substr($request->cnpj, 0, 1) == 0) {
             $cnpj = substr($request->cnpj, 1, 13);
-
         } else {
             $cnpj = $request->cnpj;
         }
@@ -84,9 +87,8 @@ class Fornecedores extends Controller
             CreateFornecedores::makeFromRequest($request)
         );
 
-        
-        return redirect()->route('show.fornecedores');
 
+        return redirect()->route('show.fornecedores');
     }
 
     //=========================================================================================================
@@ -97,7 +99,6 @@ class Fornecedores extends Controller
         $fornecedor = $this->service->findOne($id);
 
         return view('dashboard.fornecedores.update_fornecedores', compact('fornecedor'));
-
     }
 
     //=========================================================================================================
@@ -123,11 +124,45 @@ class Fornecedores extends Controller
     }
 
     //=========================================================================================================
-    public function delete(Request $request)
+    public function inativar_fornecedor(string $id)
     {
-
-        $this->service->delete($request->id);
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 0]
+        );
 
         return redirect()->route('show.fornecedores');
     }
+
+    //=========================================================================================================
+    public function reativar_fornecedor(string $id)
+    {
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 1]
+        );
+
+        return redirect()->route('show.fornecedores');
+    }
+
+
+    //=========================================================================================================
+    public function fornecedores_inativados(Request $request)
+    {
+        
+        $fornecedores = $this->service->paginateInativados(
+
+        );
+
+        $filters = ['filter' => $request->get('filter', '')];
+
+        return view('dashboard.fornecedores.fornecedores_inativados', compact('fornecedores', 'filters'));
+    }
+
+    //=========================================================================================================
+    // public function delete(Request $request)
+    // {
+
+    //     $this->service->delete($request->id);
+
+    //     return redirect()->route('show.fornecedores');
+    // }
 }

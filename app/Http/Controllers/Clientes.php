@@ -8,6 +8,7 @@ use App\DTO\Clientes\UpdateClientes;
 use App\Http\Requests\RequestCreateClientes;
 use App\Http\Requests\RequestUpdateClientes;
 use App\Models\Cliente;
+use App\Models\Venda;
 use App\Services\Clientes\ClienteService;
 use Illuminate\Http\Request;
 
@@ -28,16 +29,18 @@ class Clientes extends Controller
             filter: $request->filter
         );
 
+        $inativados = $this->model->where('ativa', 0)->get();
+
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.clientes.show_clientes', compact('clientes', 'filters'));
+        return view('dashboard.clientes.show_clientes', compact('clientes', 'filters', 'inativados'));
     }
 
     //=========================================================================================================
     public function detalhes(string $id, Request $request)
     {
         $cliente = $this->service->findOne($id);
-    
+
         $ativas = $this->service->vendasAtivasCliente(
             id: $id,
             page: $request->get('page', 1),
@@ -52,9 +55,11 @@ class Clientes extends Controller
             filter: $request->filter
         );
 
+        $vendaCliente = Venda::where('cliente_id', $id)->where('ativa', 1)->where('saida', 0)->get();
+
         $filters = ['filter' => $request->get('filter', '')];
 
-        return view('dashboard.clientes.detalhes_clientes', compact('cliente', 'ativas', 'fechadas', 'filters'));
+        return view('dashboard.clientes.detalhes_clientes', compact('cliente', 'ativas', 'fechadas', 'filters', 'vendaCliente'));
     }
 
     //=========================================================================================================
@@ -90,7 +95,7 @@ class Clientes extends Controller
     //=========================================================================================================
     public function update(string $id)
     {
-        $cliente = $this->service->findOne($id); 
+        $cliente = $this->service->findOne($id);
 
         return view('dashboard.clientes.update_clientes', compact('cliente'));
     }
@@ -98,7 +103,7 @@ class Clientes extends Controller
     //=========================================================================================================
     public function update_submit(RequestUpdateClientes $request)
     {
-        
+
         if (substr($request->cnpj, 0, 1) == 0) {
             $cnpj = substr($request->cnpj, 1, 13);
         } else {
@@ -119,11 +124,40 @@ class Clientes extends Controller
     }
 
     //=========================================================================================================
-    public function delete(Request $request)
+    public function inativar_cliente(string $id)
     {
-        $this->service->delete($request->id);
-
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 0]
+        );
 
         return redirect()->route('show.clientes');
     }
+
+    //=========================================================================================================
+    public function reativar_cliente(string $id)
+    {
+        $this->model->findOrFail($id)->update(
+            ['ativa' => 1]
+        );
+        return redirect()->route('show.clientes');
+    }
+
+    //=========================================================================================================
+    public function clientes_inativados(Request $request)
+    {
+        $clientes = $this->service->paginateInativados();
+
+        $filters = ['filter' => $request->get('filter', '')];
+        
+        return view('dashboard.clientes.clientes_inativados', compact('clientes', 'filters'));
+    }
+
+    // //=========================================================================================================
+    // public function delete(Request $request)
+    // {
+    //     $this->service->delete($request->id);
+
+
+    //     return redirect()->route('show.clientes');
+    // }
 }

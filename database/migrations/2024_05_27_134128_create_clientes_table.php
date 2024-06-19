@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('endereco');
             $table->string('bairro')->nullable();
             $table->integer('num')->nullable();
-            $table->integer('ativa')->unsigned()->default(0);
+            $table->integer('ativa')->unsigned()->default(1);
             $table->timestamps();
         });
     }

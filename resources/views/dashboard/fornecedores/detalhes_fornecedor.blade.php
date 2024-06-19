@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
         <div class="col">
-            <a href="{{route('show.fornecedores')}}" class="fs-3 text-decoration-none link-secondary">
+            <a href="{{ route('show.fornecedores') }}" class="fs-3 text-decoration-none link-secondary">
                 <i class="bi bi-skip-backward-circle align-middle"></i>
             </a>
         </div>
@@ -21,8 +21,10 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                         <h2 class="mb-3 fw-bold">Informações de contato:</h2>
                         <ul>
-                            <li>E-mail: {{ ($fornecedor->email == null) ? 'Não informado.' : $fornecedor->email }}</li>
-                            <li>Telefone: {{ ($fornecedor->telefone == null) ? 'Não informado.' : telefone($fornecedor->telefone) }}</li>
+                            <li>E-mail: {{ $fornecedor->email == null ? 'Não informado.' : $fornecedor->email }}</li>
+                            <li>Telefone:
+                                {{ $fornecedor->telefone == null ? 'Não informado.' : telefone($fornecedor->telefone) }}
+                            </li>
                             <li>CNPJ: {{ cnpj($fornecedor->cnpj) }}</li>
                         </ul>
                     </div>
@@ -36,7 +38,7 @@
                             <li>Logradouro:
                                 {{ $fornecedor->endereco . ', ' . ($fornecedor->num == '' ? 'S/N' : $fornecedor->num) }}
                             </li>
-                            <li>Bairro: {{ ($fornecedor->bairro == null) ? 'Não informado.' : $fornecedor->bairro }}</li>
+                            <li>Bairro: {{ $fornecedor->bairro == null ? 'Não informado.' : $fornecedor->bairro }}</li>
                         </ul>
                     </div>
 
@@ -49,8 +51,10 @@
                     </div>
 
                     <div class="col-12 text-center mt-4">
-                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                            data-bs-toggle="modal">Inativar</a>
+                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
+                            @if (count($compraFornecedor) > 0) disabled @endif>
+                            Inativar
+                        </button>
                         <a href="{{ route('update.fornecedores', ['id' => $fornecedor->id]) }}"
                             class="btn btn-primary">Editar</a>
                     </div>
@@ -74,14 +78,9 @@
                     Deseja inativar o fornecedor <strong>{{ $fornecedor->fornecedor }}</strong> ?
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('delete.fornecedores') }}" method="POST">
-                        @method('PUT')
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $fornecedor->id }}">
-                        <button type="submit" class="btn btn-danger">
-                            confirmar
-                        </button>
-                    </form>
+                    <a href="{{ route('inativar.fornecedor', $fornecedor->id) }}" class="btn btn-danger">
+                        confirmar
+                    </a>
                 </div>
             </div>
         </div>

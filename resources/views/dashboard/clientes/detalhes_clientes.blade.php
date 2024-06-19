@@ -3,7 +3,7 @@
 @section('content')
     <div class="row justify-content-center p-lg-3 p-sm-3 p-md-3">
         <div class="col">
-            <a href="{{route('show.clientes')}}" class="fs-3 text-decoration-none link-secondary">
+            <a href="{{ route('show.clientes') }}" class="fs-3 text-decoration-none link-secondary">
                 <i class="bi bi-skip-backward-circle align-middle"></i>
             </a>
         </div>
@@ -21,8 +21,9 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-4">
                         <h2 class="mb-3 fw-bold">Informações de contato:</h2>
                         <ul>
-                            <li>E-mail: {{ ($cliente->email == null) ? 'Não informado.' : $cliente->email }}</li>
-                            <li>Telefone: {{ ($cliente->telefone == null) ? 'Não informado.' : telefone($cliente->telefone) }}</li>
+                            <li>E-mail: {{ $cliente->email == null ? 'Não informado.' : $cliente->email }}</li>
+                            <li>Telefone:
+                                {{ $cliente->telefone == null ? 'Não informado.' : telefone($cliente->telefone) }}</li>
                             <li>CNPJ: {{ cnpj($cliente->cnpj) }}</li>
                         </ul>
                     </div>
@@ -33,9 +34,10 @@
                             <li>Cidade: {{ $cliente->cidade }}</li>
                             <li>Estado: {{ $cliente->uf }}</li>
                             <li>CEP: {{ $cliente->cep }}</li>
-                            <li>Logradouro: {{ $cliente->endereco . ', ' . ($cliente->num == null ? 'S/N' : $cliente->num) }}
+                            <li>Logradouro:
+                                {{ $cliente->endereco . ', ' . ($cliente->num == null ? 'S/N' : $cliente->num) }}
                             </li>
-                            <li>Bairro: {{ ($cliente->bairro == null) ? 'Não informado.' : $cliente->bairro }}</li>
+                            <li>Bairro: {{ $cliente->bairro == null ? 'Não informado.' : $cliente->bairro }}</li>
                         </ul>
                     </div>
 
@@ -50,8 +52,10 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
-                            data-bs-toggle="modal">Inativar</a>
+                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                            data-bs-toggle="modal" @if (count($vendaCliente) > 0) disabled @endif>
+                            Inativar
+                        </button>
                         <a href="{{ route('update.clientes', ['id' => $cliente->id]) }}" class="btn btn-primary">Editar</a>
 
                     </div>
@@ -86,13 +90,9 @@
                     Deseja inativar o cliente <strong>{{ $cliente->cliente }}</strong> ?
                 </div>
                 <div class="modal-footer">
-                    <form action="{{ route('delete.clientes') }}" method="POST">
-                        @method('PUT')
-                        @csrf
-                        <input type="hidden" name="id" value="{{ $cliente->id }}">
-                        <button type="submit" class="btn btn-danger">
-                            confirmar
-                        </button>
+                    <a href="{{ route('inativar.cliente', $cliente->id) }}" class="btn btn-danger">
+                        confirmar
+                    </a>
                     </form>
                 </div>
             </div>

@@ -10,7 +10,7 @@ use stdClass;
 interface FornecedoresInterface
 {
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
-    public function getAll(string $filter = null): array;
+    public function paginateInativados(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function findOne(string $id): stdClass|null;
     public function comprasAtivasFornecedor(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;
     public function comprasFechadasFornecedor(string $id, int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface;

@@ -115,7 +115,7 @@
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
                         <label for="bairro" class="form-label">Bairro</label>
                         <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro..."
-                            value="{{ old('bairro') }}" required>
+                            value="{{ old('bairro') }}">
                         @error('bairro')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('bairro')[0] }}
@@ -126,7 +126,7 @@
                     <div class="col-lg-2 col-sm-12">
                         <label for="num" class="form-label">N°</label>
                         <input type="number" name="num" id="num" class="form-control" placeholder="N°..."
-                            value="{{ old('num') }}" required>
+                            value="{{ old('num') }}" >
                         @error('num')
                             <div class="text-danger text-center alert-danger mt-2">
                                 {{ $errors->get('num')[0] }}

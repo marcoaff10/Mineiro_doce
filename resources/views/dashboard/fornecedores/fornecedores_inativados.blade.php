@@ -1,19 +1,20 @@
 @extends('dashboard.dashboard')
-@section('title', 'Fornecedores Ativos')
+@section('title', 'Fornecedores Inativados')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row mb-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-shop me-2 align-middle"></i>Fornecedores Ativos</h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-shop me-2 align-middle"></i>Fornecedores Inativados</h1>
                 </div>
             </div>
 
             <div class="row justify-content-between">
                 @if (count($fornecedores->items()) > 0)
-                    <div class="col-sm-12 {{(count($inativados) > 0 ) ? 'col-md-12 col-lg-4' : 'col-md-6 col-lg-6'}}">
+                    <div class="col-sm-12 col-md-6 col-lg-6">
                         <form action="" method="GET">
+
                             <div class="mb-3 d-flex">
                                 <input type="text" name="filter" id="filter"
                                     class="form-control me-3 h-25 rounded-pill" placeholder="Pesquisar"
@@ -32,21 +33,13 @@
                     </div>
                 @endif
 
-                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                    <a href=" {{ route('create.fornecedores') }} " class="btn btn-primary w-100">
-                        Cadastrar Fornecedor
-                        <i class="bi bi-plus-circle ms-1"></i>
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <a href=" {{ route('show.fornecedores') }} " class="btn btn-success w-100">
+                        Fornecedores Ativos
+                        <i class="bi bi-check-circle ms-1"></i>
                     </a>
                 </div>
 
-                @if (count($inativados) > 0)
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <a href=" {{ route('fornecedores.inativados') }} " class="btn btn-secondary w-100">
-                            Fornecedores Inativados
-                            <i class="bi bi-x-circle ms-1"></i>
-                        </a>
-                    </div>
-                @endif
             </div>
 
             @if (count($fornecedores->items()) > 0)

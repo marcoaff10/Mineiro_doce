@@ -1,18 +1,19 @@
 @extends('dashboard.dashboard')
-@section('title', 'Fornecedores Ativos')
+@section('title', 'Clientes Inativos')
 @section('content')
     <div class="row align-items-center justify-content-center">
         <div class="col">
 
             <div class="row mb-3">
                 <div class="col">
-                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-shop me-2 align-middle"></i>Fornecedores Ativos</h1>
+                    <h1 class="mb-3 fs-4 d-block"><i class="bi bi-people me-2 align-middle"></i>Clientes Inativos</h1>
                 </div>
             </div>
 
             <div class="row justify-content-between">
-                @if (count($fornecedores->items()) > 0)
-                    <div class="col-sm-12 {{(count($inativados) > 0 ) ? 'col-md-12 col-lg-4' : 'col-md-6 col-lg-6'}}">
+
+                @if (count($clientes->items()) > 0)
+                    <div class="col-sm-12 col-md-12 col-lg-6">
                         <form action="" method="GET">
                             <div class="mb-3 d-flex">
                                 <input type="text" name="filter" id="filter"
@@ -22,7 +23,7 @@
                                     <strong><i class="bi bi-search"></i></strong>
                                 </button>
                                 @if ($filters['filter'] != '')
-                                    <a href="{{ route('show.fornecedores') }}"
+                                    <a href="{{ route('show.clientes') }}"
                                         class="fw-bold text-danger ms-3 fs-5 align-middle">
                                         <strong><i class="bi bi-x-lg align-middle"></i></strong>
                                     </a>
@@ -32,27 +33,19 @@
                     </div>
                 @endif
 
-                <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                    <a href=" {{ route('create.fornecedores') }} " class="btn btn-primary w-100">
-                        Cadastrar Fornecedor
-                        <i class="bi bi-plus-circle ms-1"></i>
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <a href=" {{ route('show.clientes') }} " class="btn btn-success w-100">
+                        Clientes Ativos
+                        <i class="bi bi-check-circle ms-1"></i>
                     </a>
                 </div>
 
-                @if (count($inativados) > 0)
-                    <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <a href=" {{ route('fornecedores.inativados') }} " class="btn btn-secondary w-100">
-                            Fornecedores Inativados
-                            <i class="bi bi-x-circle ms-1"></i>
-                        </a>
-                    </div>
-                @endif
             </div>
 
-            @if (count($fornecedores->items()) > 0)
-                <x-fornecedores-lg :fornecedores="$fornecedores" :filters="$filters" />
+            @if (count($clientes->items()) > 0)
+                <x-clientes-lg :clientes="$clientes" :filters="$filters" />
             @else
-                <p class=" text-center opacity-50 mt-5">Sem fornecedores cadastrados.</p>
+                <p class=" text-center opacity-50 mt-5">Sem clientes cadastrados.</p>
             @endif
         </div>
     </div>

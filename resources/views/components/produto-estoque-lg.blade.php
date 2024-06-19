@@ -7,7 +7,13 @@
             <th scope="col" class="align-middle">Min.</th>
             <th scope="col" class="align-middle">Max.</th>
             <th scope="col" class="align-middle">Estoque</th>
-            <th scope="col" class="align-middle">Mov.</th>
+            <th scope="col" class="align-middle">
+                @if (request()->routeIs('estoque.produtos'))
+                    Mov.
+                @elseif (request()->routeIs('produto.inativado'))
+                    Reativar
+                @endif
+            </th>
         </thead>
         <tbody>
             @foreach ($produtos->items() as $produto)

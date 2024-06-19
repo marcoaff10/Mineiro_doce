@@ -59,7 +59,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/detalhes_fornecedor/{id}', [Fornecedores::class, 'detalhes'])->name('detalhes.fornecedores');
     Route::get('/update_fornecedor/{id}', [Fornecedores::class, 'update'])->name('update.fornecedores');
     Route::put('/update_submit_fornecedor', [Fornecedores::class, 'update_submit'])->name('update.submit.fornecedores');
-    Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
+    Route::get('/inativar_fornecedor/{id}', [Fornecedores::class, 'inativar_fornecedor'])->name('inativar.fornecedor');
+    Route::get('/reativar_fornecedor/{id}', [Fornecedores::class, 'reativar_fornecedor'])->name('reativar.fornecedor');
+    Route::get('/fornecedores_inativados', [Fornecedores::class, 'fornecedores_inativados'])->name('fornecedores.inativados');
+    // Route::put('/delete_fornecedor', [Fornecedores::class, 'delete'])->name('delete.fornecedores');
 
     //=============================================================================================================
 
@@ -84,7 +87,7 @@ Route::middleware('auth')->group(function () {
     Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::get('/inativar_produto/{id}', [Produtos::class, 'inativar_produto'])->name('inativar.produto');
     Route::get('/reativar_produto/{id}', [Produtos::class, 'reativar_produto'])->name('reativar.produto');
-    Route::get('/produto_inativas', [Produtos::class, 'produto_inativado'])->name('produto.inativado');
+    Route::get('/produto_inativado', [Produtos::class, 'produto_inativado'])->name('produto.inativado');
     // Route::put('/delete_produtos', [Produtos::class, 'delete'])->name('delete.produtos');
 
     //=============================================================================================================
@@ -109,7 +112,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/detalhes_clientes/{id}', [Clientes::class, 'detalhes'])->name('detalhes.clientes');
     Route::get('/update_cliente/{id}', [Clientes::class, 'update'])->name('update.clientes');
     Route::put('/update_submit_clientes', [Clientes::class, 'update_submit'])->name('update.submit.clientes');
-    Route::put('/delete_clientes', [Clientes::class, 'delete'])->name('delete.clientes');
+    Route::get('/inativar_cliente/{id}', [Clientes::class, 'inativar_cliente'])->name('inativar.cliente');
+    Route::get('/reativar_cliente/{id}', [Clientes::class, 'reativar_cliente'])->name('reativar.cliente');
+    Route::get('/clientes_inativados', [Clientes::class, 'clientes_inativados'])->name('clientes.inativados');
+    // Route::put('/delete_clientes', [Clientes::class, 'delete'])->name('delete.clientes');
 
     // Vendas
     Route::get('/show_vendas', [Vendas::class, 'show'])->name('show.vendas');

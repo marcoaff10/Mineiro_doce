@@ -9,11 +9,11 @@
                     <h1 class="mb-3 fs-4 d-block"><i class="bi bi-box me-2 align-middle"></i>Produtos Inativos </h1>
                 </div>
             </div>
-            @if (count($produtos->items()) > 0)
-                <div class="row py-3">
-                    <div class="col text-end ">
-                        <form action="" method="GET">
+            <div class="row justify-content-between">
 
+                @if (count($produtos->items()) > 0)
+                    <div class="col-sm-12 col-md-12 col-lg-6">
+                        <form action="" method="GET">
                             <div class="mb-3 d-flex">
                                 <input type="text" name="filter" id="filter"
                                     class="form-control me-3 h-25 rounded-pill" placeholder="Pesquisar"
@@ -23,29 +23,22 @@
                                 </button>
                                 @if ($filters['filter'] != '')
                                     <a href="{{ route('estoque.produtos') }}"
-                                        class=" fw-bold text-danger ms-3 fs-5 align-middle">
+                                        class="fw-bold text-danger ms-3 fs-5 align-middle">
                                         <strong><i class="bi bi-x-lg align-middle"></i></strong>
                                     </a>
                                 @endif
                             </div>
                         </form>
                     </div>
-                </div>
-            @endif
+                @endif
 
-            <div class="row p-2 justify-content-between p-1">
-                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                    <a href=" {{ route('create.produtos') }} " class="btn btn-primary w-100">
-                        Cadastrar Produto
-                        <i class="bi bi-plus-circle ms-1"></i>
-                    </a>
-                </div>
-                <div class="col-sm-12 col-md-12 col-lg-4 mb-3">
-                    <a href="{{ route('estoque.produtos')}}" class="btn btn-success w-100">
+                <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
+                    <a href=" {{ route('estoque.produtos') }} " class="btn btn-success w-100">
                         Produtos Ativos
-                        <i class="bi bi-plus-circle ms-1"></i>
+                        <i class="bi bi-check-circle ms-1"></i>
                     </a>
                 </div>
+
             </div>
 
 

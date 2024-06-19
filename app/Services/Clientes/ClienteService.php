@@ -24,9 +24,13 @@ class ClienteService
         );
     }
     //=====================================================================
-    public function getAll(string $filter = null): array
+    public function paginateInativados(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
-        return $this->clientes_interface->getAll();
+        return $this->clientes_interface->paginateInativados(
+            page: $page,
+            totalPerPage: $totalPerPage,
+            filter: $filter
+        );
     }
 
     //=====================================================================
