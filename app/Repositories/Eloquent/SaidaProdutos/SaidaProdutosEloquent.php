@@ -58,23 +58,23 @@ class SaidaProdutosEloquent implements SaidaProdutosInterface
     //=========================================================================================================
     public function saida_venda(string $id)
     {
-        
+
         $vendas = VendaProduto::where('venda_id', $id)->select('venda_id', 'produto_id', 'quantidade')->get();
-       
-        foreach ($vendas as $venda) {
+
+        for ($i = 0; $i < count($vendas); $i++) {
             $this->model->create(
                 [
-                    'venda_id' => $venda->venda_id,
-                    'produto_id' => $venda->produto_id,
-                    'quantidade' => $venda->quantidade
+                    'venda_id' => $vendas[$i]->venda_id,
+                    'produto_id' => $vendas[$i]->produto_id,
+                    'quantidade' => $vendas[$i]->quantidade
                 ]
             );
 
-            $estoque = $this->modelEstoque->where('produto_id', $venda->produto_id)->first();
+            $estoque = $this->modelEstoque->where('produto_id', $vendas[$i]->produto_id)->first();
 
             if ($estoque) {
 
-                $quantidade = $estoque->qtde_saida + $venda->quantidade;
+                $quantidade = $estoque->qtde_saida + $vendas[$i]->quantidade;
 
                 $this->modelEstoque->where('id', $estoque->id)->update(
                     [
@@ -83,7 +83,7 @@ class SaidaProdutosEloquent implements SaidaProdutosInterface
                 );
             } 
 
-            Venda::where('id', $venda->venda_id)->update(
+            Venda::where('id', $vendas[$i]->venda_id)->update(
                 [
                     'saida' => 1,
                     'ativa' => 0

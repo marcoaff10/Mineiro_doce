@@ -11,8 +11,8 @@
                 <div class="mb-4 d-lg-flex justify-content-between">
 
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3" id="div_cnpj">
-                        <label for="cnpj" class="form-label">CNPJ</label>
-                        <input type="text" name="cnpj" class="form-control" placeholder="CNPJ..."
+                        <label class="form-label">CNPJ</label>
+                        <input type="text" name="cnpj" id="cnpjCliente" class="form-control" placeholder="CNPJ..."
                             value="{{ $cliente->cnpj }}" required>
                         @error('cnpj')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
-                        <label for="cliente" class="form-label">Cliente</label>
+                        <label class="form-label">Cliente</label>
                         <input type="text" name="cliente" id="cliente" class="form-control"
                             placeholder="Cliente..." value="{{ $cliente->cliente }}" required>
                         @error('cliente')
@@ -36,8 +36,8 @@
 
                 <div class="mb-4 d-lg-flex justify-content-between">
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                        <input type="texy" name="telefone" id="telefone" class="form-control" placeholder="DDD + telefone..."
+                        <label class="form-label">Telefone</label>
+                        <input type="texy" name="telefone" id="telefoneCliente" class="form-control" placeholder="DDD + telefone..."
                             value="{{ $cliente->telefone }}">
                         @error('telefone')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -47,8 +47,8 @@
                     </div>
 
                     <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Email..."
+                        <label class="form-label">Email</label>
+                        <input type="text" name="email" id="emailCliente" class="form-control" placeholder="Email..."
                             value="{{ $cliente->email }}">
                         @error('email')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -62,8 +62,8 @@
                 <div class="mb-4 d-lg-flex justify-content-between">
 
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="cep" class="form-label">CEP</label>
-                        <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP..."
+                        <label class="form-label">CEP</label>
+                        <input type="text" name="cep" id="cepCliente" class="form-control" placeholder="CEP..."
                             value="{{ $cliente->cep }}" required>
                         @error('cep')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -73,8 +73,8 @@
                     </div>
 
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-                        <label for="cidade" class="form-label">Cidade</label>
-                        <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade..."
+                        <label class="form-label">Cidade</label>
+                        <input type="text" name="cidade" id="cidadeCliente" class="form-control" placeholder="Cidade..."
                             value="{{ $cliente->cidade }}" required>
                         @error('cidade')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -84,8 +84,8 @@
                     </div>
 
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="uf" class="form-label">UF</label>
-                        <input type="text" name="uf" id="uf" class="form-control" placeholder="UF..."
+                        <label class="form-label">UF</label>
+                        <input type="text" name="uf" id="ufCliente" class="form-control" placeholder="UF..."
                             value="{{ $cliente->uf }}" required>
                         @error('uf')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -101,8 +101,8 @@
                 <div class="mb-4 d-lg-flex justify-content-between">
 
                     <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
-                        <label for="endereco" class="form-label">Endereço</label>
-                        <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Endereço..."
+                        <label class="form-label">Endereço</label>
+                        <input type="text" name="endereco" id="enderecoCliente" class="form-control" placeholder="Endereço..."
                             value="{{ $cliente->endereco }}" required>
                         @error('endereco')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -112,8 +112,8 @@
                     </div>
 
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                        <label for="bairro" class="form-label">Bairro</label>
-                        <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro..."
+                        <label class="form-label">Bairro</label>
+                        <input type="text" name="bairro" id="bairroCliente" class="form-control" placeholder="Bairro..."
                             value="{{ $cliente->bairro }}">
                         @error('bairro')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -123,8 +123,8 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <label for="num" class="form-label">N°</label>
-                        <input type="number" name="num" id="num" class="form-control" placeholder="N°..."
+                        <label class="form-label">N°</label>
+                        <input type="number" name="num" id="numCliente" class="form-control" placeholder="N°..."
                             value="{{ $cliente->num }}">
                         @error('num')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -148,6 +148,4 @@
             </form>
         </div>
     </div>
-
-    <x-script-cnpj />
 @endsection

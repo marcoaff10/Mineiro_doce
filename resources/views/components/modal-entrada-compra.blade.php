@@ -25,7 +25,7 @@
     </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btn-success" @if (count($entradas) < 1) disabled @endif>
             Entrar
         </button>
     </div>

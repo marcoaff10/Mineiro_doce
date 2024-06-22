@@ -33,8 +33,6 @@
                         <x-modal-saidas :produtos="$produtos" />
                     </div>
 
-
-
                 </div>
 
             </div>

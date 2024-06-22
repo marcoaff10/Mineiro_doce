@@ -1,15 +1,14 @@
-<script>
+window.addEventListener("DOMContentLoaded", (event) => {
     const fornecedor = document.querySelector('#fornecedor');
-    const cep = document.querySelector('#cep');
-    const cidade = document.querySelector('#cidade');
-    const bairro = document.querySelector('#bairro');
-    const uf = document.querySelector('#uf');
-    const endereco = document.querySelector('#endereco');
-    const numero = document.querySelector('#num');
+    const cep = document.querySelector('#cepFornecedor');
+    const cidade = document.querySelector('#cidadeFornecedor');
+    const bairro = document.querySelector('#bairroFornecedor');
+    const uf = document.querySelector('#ufFornecedor');
+    const endereco = document.querySelector('#enderecoFornecedor');
+    const numero = document.querySelector('#numFornecedor');
 
-    const cnpj = document.querySelector('#cnpj');
-
-    cnpj.addEventListener('change', () => {
+    const cnpj = document.querySelector('#cnpjFornecedor');
+    cnpj.addEventListener('focusout', () => {
         const valor_cnpj = cnpj.value;
         const url = 'https://publica.cnpj.ws/cnpj/' + valor_cnpj
 
@@ -24,7 +23,6 @@
 
             })
             .then(data => {
-                
                 if (data.estabelecimento.nome_fantasia === null) {
                     fornecedor.value = data.razao_social
                 } else {
@@ -53,4 +51,4 @@
 
             });
     });
-</script>
+})

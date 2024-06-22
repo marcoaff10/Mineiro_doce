@@ -1,11 +1,12 @@
-<script>
+$(document).ready(() => {
     editarCompra();
-    
+
     function editarCompra() {
-        var select = document.querySelector('#produtoCompra');
-        select.onchange = function(event) {
-            var id = event.target.options[event.target.selectedIndex].dataset.produto;
-            url = "{{ route('itens.compra', ':id') }}";
+        var produto = $('#produtoCompra')
+        produto.change((e) => {
+            e.preventDefault();
+            var id = produto.find(':selected').attr('data-produto');
+            url = "/itens_compra/" + id;
             url = url.replace(':id', id)
             $.ajax({
                 url: url,
@@ -14,6 +15,7 @@
                     $('#precoCompra').val(data.preco_compra);
                 }
             }, 'json');
-        }
+        });
+
     }
-</script>
+});

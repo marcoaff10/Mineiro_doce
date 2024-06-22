@@ -12,7 +12,7 @@
                     <div class="mb-3 row justify-content-between">
 
                         <div class="col-lg-12 col-sm-12 mb-3">
-                            <label for="produto" class="form-label">Qual produto deseja alterar ?</label>
+                            <label class="form-label">Qual produto deseja alterar ?</label>
                             <select name="produto" id="produtoCompra" class="form-select" required>
                                 <option value="" selected>Selecione um Produto</option>
                                 @foreach ($compra as $item)
@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="col-lg-12 col-sm-12 mb-3">
-                            <label for="quantidade" class="form-label">Quantidade</label>
+                            <label class="form-label">Quantidade</label>
                             <input type="text" name="quantidade" id="quantidadeCompra" class="form-control "
                                 placeholder="Quantidade..." value="{{ old('quantidade') }}" required>
                             @error('quantidade')
@@ -39,7 +39,7 @@
                         </div>
 
                         <div class="col-lg-12 col-sm-12 mb-3">
-                            <label for="preco_compra" class="form-label">Preço da unidade</label>
+                            <label class="form-label">Preço da unidade</label>
                             <input type="text" name="preco_compra" id="precoCompra" class="form-control "
                                 placeholder="Mín..." value="{{ old('preco_compra') }}" required>
                             @error('preco_compra')
@@ -73,5 +73,4 @@
             </form>
         </div>
     </div>
-    <x-script-compra />
 @endsection

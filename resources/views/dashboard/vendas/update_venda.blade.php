@@ -29,14 +29,14 @@
 
                         <div class="mb-3">
                             <span id="estoqueDisponivel"></span>
-                            <input type="hidden" id="estoque">
+                            <input type="hidden" id="estoqueUpdate" value="">
                         </div>
 
                         <div class="col-lg-12 col-sm-12 mb-3">
                             <label for="quantidade" class="form-label">Quantidade</label>
                             <input type="text" name="quantidade" id="quantidadeVenda" class="form-control "
                                 placeholder="Quantidade..." value="{{ old('quantidade') }}" required>
-                            <div class="d-none text-center text-danger alert-danger mt-2" id="error">
+                            <div class="d-none text-center text-danger alert-danger mt-2" id="errorUpdate">
                                 Estoque insuficiente.
                             </div>
                             @error('quantidade')
@@ -80,5 +80,4 @@
             </form>
         </div>
     </div>
-    <x-script-venda-update />
 @endsection

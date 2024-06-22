@@ -17,10 +17,38 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="{{ asset('assets/DataTables/datatables.min.css') }}">
-    <!-- Scripts -->
+    <!-- Scripts Fornecedo -->
+    @if (request()->routeIs('create.fornecedores') || request()->routeIs('update.fornecedores'))
+        <script src="{{ asset('assets/js/cnpjFornecedor.js') }}"></script>
+    @endif
+    <!-- Scripts Clientes -->
+    @if (request()->routeIs('create.clientes') || request()->routeIs('update.clientes'))
+        <script src="{{ asset('assets/js/cnpjCliente.js') }}"></script>
+    @endif
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="{{asset('assets/js/jquery-3.7.1.min.js')}}"></script>
-    <script src="{{ asset('assets/js/app.js') }}"></script>
+    <script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
+
+    <!-- Scripts Dashboard -->
+    @if (request()->routeIs('dashboard'))
+        <script src="{{ asset('assets/js/app.js') }}"></script>
+    @endif
+
+    <!-- Scripts atualizar compras -->
+    @if (request()->routeIs('update.compra'))
+        <script src="{{ asset('assets/js/compras.js') }}"></script>
+    @endif
+
+    <!-- Scripts entrada de produtos no estoque -->
+    @if (request()->routeIs('estoque.produtos'))
+        <script src="{{ asset('assets/js/entradaProduto.js') }}"></script>
+        <script src="{{ asset('assets/js/saidaProduto.js') }}"></script>
+    @endif
+
+    @if (request()->routeIs('produtos.venda') || request()->routeIs('update.venda'))
+        <script src="{{ asset('assets/js/vendas.js') }}"></script>
+    @endif
+
+
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -45,10 +73,9 @@
     </div>
 
     <!-- Bootstrap JS -->
-    
-    <script src="{{ asset('assets/DataTables/datatables.min.js') }}"></script>
+
     <script src="{{ asset('assets/js/bootstrap.bundle.min.js') }}"></script>
-    
+
 </body>
 
 </html>

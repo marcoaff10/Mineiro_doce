@@ -2,7 +2,7 @@
 @section('title', 'Editar Fornecedor')
 @section('content')
     <div class="row justify-content-center align-items-center p-3">
-        <div class="col-lg-12 p-2">
+        <div class="col-lg-8 p-2">
             <form action="{{ route('update.submit.fornecedores') }}" method="POST">
                 @method('PUT')
                 @csrf
@@ -10,9 +10,9 @@
                 <input type="hidden" name="id" value="{{ $fornecedor->id }}" required>
                 <div class="mb-4 d-lg-flex justify-content-between">
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3" id="div_cnpj">
-                        <label for="cnpj" class="form-label">CNPJ</label>
-                        <input type="text" name="cnpj" id="cnpj" class="form-control" placeholder="CNPJ..."
+                    <div class="col-lg-3 col-md-12 col-sm-12 mb-3" id="div_cnpj">
+                        <label class="form-label">CNPJ</label>
+                        <input type="text" name="cnpj" id="cnpjFornecedor" class="form-control" placeholder="CNPJ..."
                             value="{{ $fornecedor->cnpj }}" required>
                         @error('cnpj')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -21,8 +21,8 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
-                        <label for="fornecedor" class="form-label">Fornecedor</label>
+                    <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+                        <label class="form-label">Fornecedor</label>
                         <input type="text" name="fornecedor" id="fornecedor" class="form-control"
                             placeholder="Fornecedor..." value="{{ $fornecedor->fornecedor }}" required>
                         @error('fornecedor')
@@ -37,9 +37,9 @@
                 </div>
 
                 <div class="mb-4 d-lg-flex justify-content-between">
-                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="telefone" class="form-label">Telefone</label>
-                        <input type="texy" name="telefone" id="telefone" class="form-control" placeholder="DDD + telefone..."
+                    <div class="col-lg-3 col-md-12 col-sm-12 mb-3">
+                        <label class="form-label">Telefone</label>
+                        <input type="texy" name="telefone" id="telefoneFornecedor" class="form-control" placeholder="DDD + telefone..."
                             value="{{ $fornecedor->telefone }}">
                         @error('telefone')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -48,9 +48,9 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-9 col-md-12 col-sm-12 mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Email..."
+                    <div class="col-lg-8 col-md-12 col-sm-12 mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="text" name="email" id="emailFornecedor" class="form-control" placeholder="Email..."
                             value="{{ $fornecedor->email }}">
                         @error('email')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -65,9 +65,9 @@
 
                 <div class="mb-4 d-lg-flex justify-content-between">
 
-                    <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="cep" class="form-label">CEP</label>
-                        <input type="text" name="cep" id="cep" class="form-control" placeholder="CEP..."
+                    <div class="col-lg-3 col-md-12 col-sm-12 mb-3">
+                        <label class="form-label">CEP</label>
+                        <input type="text" name="cep" id="cepFornecedor" class="form-control" placeholder="CEP..."
                             value="{{ $fornecedor->cep }}" required>
                         @error('cep')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -76,9 +76,9 @@
                         @enderror
                     </div>
 
-                    <div class="col-lg-6 col-md-12 col-sm-12 mb-3">
-                        <label for="cidade" class="form-label">Cidade</label>
-                        <input type="text" name="cidade" id="cidade" class="form-control" placeholder="Cidade..."
+                    <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
+                        <label class="form-label">Cidade</label>
+                        <input type="text" name="cidade" id="cidadeFornecedor" class="form-control" placeholder="Cidade..."
                             value="{{ $fornecedor->cidade }}" required>
                         @error('cidade')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -88,8 +88,8 @@
                     </div>
 
                     <div class="col-lg-2 col-md-12 col-sm-12 mb-3">
-                        <label for="uf" class="form-label">UF</label>
-                        <input type="text" name="uf" id="uf" class="form-control" placeholder="UF..."
+                        <label class="form-label">UF</label>
+                        <input type="text" name="uf" id="ufFornecedor" class="form-control" placeholder="UF..."
                             value="{{ $fornecedor->uf }}" required>
                         @error('uf')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -105,8 +105,8 @@
                 <div class="mb-4 d-lg-flex justify-content-between">
 
                     <div class="col-lg-5 col-md-12 col-sm-12 mb-3">
-                        <label for="endereco" class="form-label">Endereço</label>
-                        <input type="text" name="endereco" id="endereco" class="form-control" placeholder="Endereço..."
+                        <label class="form-label">Endereço</label>
+                        <input type="text" name="endereco" id="enderecoFornecedor" class="form-control" placeholder="Endereço..."
                             value="{{ $fornecedor->endereco }}" required>
                         @error('endereco')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -116,8 +116,8 @@
                     </div>
 
                     <div class="col-lg-4 col-md-12 col-sm-12 mb-3">
-                        <label for="bairro" class="form-label">Bairro</label>
-                        <input type="text" name="bairro" id="bairro" class="form-control" placeholder="Bairro..."
+                        <label class="form-label">Bairro</label>
+                        <input type="text" name="bairro" id="bairroFornecedor" class="form-control" placeholder="Bairro..."
                             value="{{ $fornecedor->bairro }}">
                         @error('bairro')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -127,8 +127,8 @@
                     </div>
 
                     <div class="col-lg-2 col-sm-12">
-                        <label for="num" class="form-label">N°</label>
-                        <input type="number" name="num" id="num" class="form-control" placeholder="N°..."
+                        <label class="form-label">N°</label>
+                        <input type="number" name="num" id="numFornecedor" class="form-control" placeholder="N°..."
                             value="{{ $fornecedor->num }}" required>
                         @error('num')
                             <div class="text-danger text-center alert-danger mt-2">
@@ -152,6 +152,4 @@
             </form>
         </div>
     </div>
-
-    <x-script-cnpj />
 @endsection

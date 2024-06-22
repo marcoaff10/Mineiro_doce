@@ -19,7 +19,7 @@ class EntradaProdutosEloquent implements EntradaProdutosInterface
     //=========================================================================================================
     public function store(CreateEntradaProdutos $dto): stdClass
     {
-        
+
         $entrada = $this->model->create(
             (array) $dto
         );
@@ -36,12 +36,12 @@ class EntradaProdutosEloquent implements EntradaProdutosInterface
         } else {
 
             $quantidade = $estoque->qtde_entrada + $dto->quantidade;
-         
+
             $this->modelEstoque->where('id', $estoque->id)->update(
                 [
                     'qtde_entrada' => $quantidade
                 ]
-                );
+            );
         }
 
         return (object) $entrada->toArray();
@@ -51,60 +51,58 @@ class EntradaProdutosEloquent implements EntradaProdutosInterface
     public function produtosEntrada(string $id)
     {
         $data = CompraProduto::leftJoin('produtos', 'compra_produto.produto_id', 'produtos.id')
-                    ->select(
-                        'produtos.produto',
-                        'compra_produto.quantidade',
-                    )
-                    ->where('compra_id', $id)
-                    ->get();
-        
+            ->select(
+                'produtos.produto',
+                'compra_produto.quantidade',
+            )
+            ->where('compra_id', $id)
+            ->get();
+
         return response()->json($data);
-                    
     }
 
     //=========================================================================================================
     public function entrada_compra(string $id): stdClass
     {
         $compras = CompraProduto::where('compra_id', $id)->select('compra_id', 'produto_id', 'quantidade')->get();
-        
-        foreach ($compras as $compra) {
+    
+        for ($i = 0; $i < count($compras); $i++) {
             $this->model->create(
                 [
-                    'compra_id' => $compra->compra_id,
-                    'produto_id' => $compra->produto_id,
-                    'quantidade' => $compra->quantidade
+                    'compra_id' => $compras[$i]->compra_id,
+                    'produto_id' => $compras[$i]->produto_id,
+                    'quantidade' => $compras[$i]->quantidade
                 ]
             );
 
-            $estoque = $this->modelEstoque->where('produto_id', $compra->produto_id)->first();
+            $estoque = $this->modelEstoque->where('produto_id', $compras[$i]->produto_id)->first();
 
             if (!$estoque) {
                 $this->modelEstoque->create(
                     [
-                        'produto_id' => $compra->produto_id,
-                        'qtde_entrada' => $compra->quantidade,
+                        'produto_id' => $compras[$i]->produto_id,
+                        'qtde_entrada' => $compras[$i]->quantidade,
                     ]
                 );
-
             } else {
-    
-                $quantidade = $estoque->qtde_entrada + $compra->quantidade;
-             
+
+                $quantidade = $estoque->qtde_entrada + $compras[$i]->quantidade;
+
                 $this->modelEstoque->where('id', $estoque->id)->update(
                     [
                         'qtde_entrada' => $quantidade
                     ]
-                    );
+                );
             }
 
-            Compra::where('id', $compra->compra_id)->update(
+            Compra::where('id', $compras[$i]->compra_id)->update(
                 [
                     'entrada' => 1,
                     'ativa' => 0
-                    ]
+                ]
             );
         }
-        
+
         return (object) $compras->toArray();
     }
 }

@@ -94,6 +94,4 @@
             </form>
         </div>
     </div>
-
-    <x-script-venda />
 @endsection
