@@ -1,5 +1,5 @@
 <div class="w-100 col-12 overflowTable">
-    <table class="colorTbales table-striped table table table-hover table-responsive">
+    <table class="colorTables table-striped table table table-hover table-responsive">
         <thead>
             <th scope="col" class="align-middle">Venda</th>
             <th scope="col" class="align-middle">Cliente</th>

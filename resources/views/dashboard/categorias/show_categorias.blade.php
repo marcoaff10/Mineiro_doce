@@ -33,7 +33,7 @@
                 @endif
 
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                    <a href=" {{ route('create.categorias') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.categorias') }} " class="btn btnPrimary w-100">
                         Cadastrar Categoria
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
@@ -41,7 +41,7 @@
 
                 @if (count($inativas) > 0)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <a href=" {{ route('categorias.inativas') }} " class="btn btn-secondary w-100">
+                        <a href=" {{ route('categorias.inativas') }} " class="btn btnSecondary w-100">
                             Categoria Inativas
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>
@@ -52,7 +52,7 @@
 
             @if (count($categorias->items()) > 0)
                 <div class="w-100 col-12">
-                    <table class="colorTbales table-striped table table table-light table-hover table-responsive">
+                    <table class="colorTables table-striped table table table-light table-hover table-responsive">
                         <thead>
                             <th scope="col" class="align-middle">Categorias</th>
                             <th scope="col" class="align-middle">Detalhes</th>

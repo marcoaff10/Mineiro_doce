@@ -35,7 +35,7 @@
 
             <div class="row p-2 justify-content-between p-1">
                 <div class="col-sm-12 col-md-12 {{(count($inativados) > 0) ? 'col-lg-6' : 'col-lg-4'}} mb-3">
-                    <a href=" {{ route('create.produtos') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.produtos') }} " class="btn btnPrimary w-100">
                         Cadastrar Produto
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
@@ -43,7 +43,7 @@
 
                 @if (count($inativados) > 0)
                     <div class="col-sm-12 col-md-12 col-lg-6 mb-3">
-                        <a href=" {{ route('produto.inativado') }} " class="btn btn-secondary w-100">
+                        <a href=" {{ route('produto.inativado') }} " class="btn btnSecondary w-100">
                             Produtos Inativados
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>
@@ -51,14 +51,14 @@
                 @endif
                 @if (count($produtos->items()) > 0)
                     <div class="col-sm-12 col-md-12 {{(count($inativados) > 0) ? 'col-lg-6' : 'col-lg-4'}} mb-3">
-                        <a href="" class="btn btn-success w-100" data-bs-target="#entrada" data-bs-toggle="modal">
+                        <a href="" class="btn btnSuccess w-100" data-bs-target="#entrada" data-bs-toggle="modal">
                             Entrada
                             <i class="bi bi-plus-circle ms-1"></i>
                         </a>
                     </div>
 
                     <div class="col-sm-12 col-md-12 {{(count($inativados) > 0) ? 'col-lg-6' : 'col-lg-4'}} mb-3">
-                        <a href="" class="btn btn-danger w-100" data-bs-target="#saida" data-bs-toggle="modal">
+                        <a href="" class="btn btnDanger w-100" data-bs-target="#saida" data-bs-toggle="modal">
                             Saida
                             <i class="bi bi-dash-circle ms-1"></i>
                         </a>

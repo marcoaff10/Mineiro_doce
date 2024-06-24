@@ -4,14 +4,18 @@ namespace App\Services\Produtos;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
+use App\Http\Requests\RequestAnaliseProdutos;
 use App\Repositories\Contracts\PaginationInterface;
 use App\Repositories\Contracts\Produtos\ProdutosInterface;
+use Illuminate\Http\Request;
 use stdClass;
 
 class ProdutoService
 {
 
-    public function __construct(protected ProdutosInterface $produto_interface){}
+    public function __construct(protected ProdutosInterface $produto_interface)
+    {
+    }
 
     //=====================================================================
     public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
@@ -22,7 +26,7 @@ class ProdutoService
             filter: $filter
         );
     }
-    
+
     //=====================================================================
     public function paginateInativos(int $page = 1, int $totalPerPage = 15, string $filter = null): PaginationInterface
     {
@@ -37,6 +41,18 @@ class ProdutoService
     public function findOne(string $id): stdClass|null
     {
         return $this->produto_interface->findOne($id);
+    }
+
+    //=====================================================================
+    public function analiseProduto(string $id)
+    {
+        return $this->produto_interface->analiseProduto($id);
+    }
+
+    //=====================================================================
+    public function analiseProdutoFiltro(RequestAnaliseProdutos $request)
+    {
+        return $this->produto_interface->analiseProdutoFiltro($request);
     }
 
     //=====================================================================
@@ -62,7 +78,7 @@ class ProdutoService
     }
 
     //=====================================================================
-    public function store(CreateProdutos $dto):stdClass
+    public function store(CreateProdutos $dto): stdClass
     {
         return $this->produto_interface->store($dto);
     }
@@ -74,7 +90,7 @@ class ProdutoService
     }
 
     //=====================================================================
-    public function delete(string $id):void
+    public function delete(string $id): void
     {
         $this->produto_interface->delete($id);
     }

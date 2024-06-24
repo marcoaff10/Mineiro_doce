@@ -27,7 +27,7 @@
     </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-danger" @if (count($saidas) < 1) disabled @endif>
+        <button type="submit" class="btn btnDanger" @if (count($saidas) < 1) disabled @endif>
             Baixar
         </button>
     </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTO\Produtos\CreateProdutos;
 use App\DTO\Produtos\UpdateProdutos;
+use App\Http\Requests\RequestAnaliseProdutos;
 use App\Http\Requests\RequestProdutos;
 use App\Models\Categoria;
 use App\Models\Cliente;
@@ -67,20 +68,34 @@ class Produtos extends Controller
         $inativarCompra = CompraProduto::leftJoin('compras', 'compras.id', 'compra_produto.compra_id')
             ->where('compra_produto.produto_id', $id)
             ->where('compras.ativa', 1)
-            ->where('compras.entrada',)
+            ->where('compras.entrada', 0)
             ->get();
 
         $inativarVenda = VendaProduto::leftJoin('vendas', 'vendas.id', 'venda_produto.venda_id')
             ->where('venda_produto.produto_id', $id)
             ->where('vendas.ativa', 1)
-            ->where('vendas.saida',)
+            ->where('vendas.saida', 0)
             ->get();
 
         $filters = ['filter' => $request->get('filter', '')];
 
         return view('dashboard.produdos.movimentacao_produtos', compact('produto', 'entradas', 'saidas', 'filters', 'inativarCompra', 'inativarVenda'));
     }
+    //=========================================================================================================
+    public function analise_produto(string $id)
+    {
+        $data = $this->service->analiseProduto($id);
 
+        return (object) $data;
+    }
+
+    //=========================================================================================================
+    public function analise_produto_filtro(RequestAnaliseProdutos $request)
+    {
+        $data = $this->service->analiseProdutoFiltro($request);
+
+        return (object) $data;
+    }
     //=========================================================================================================
     public function create()
     {
@@ -93,6 +108,7 @@ class Produtos extends Controller
     //=========================================================================================================
     public function store(RequestProdutos $request)
     {
+
         if (!Categoria::where('id', $request->categoria)->first()) {
             return redirect()->route('create.produtos')
                 ->withInput()

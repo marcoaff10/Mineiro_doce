@@ -1,5 +1,5 @@
 <div class="w-100 col-12 overflowTable">
-    <table class="colorTbales colorTbales table table table-light table-hover table-responsive">
+    <table class="colorTables colorTables table table table-light table-hover table-responsive">
         <thead>
             <th scope="col" class="align-middle">Fornecedor</th>
             <th scope="col" class="align-middle">CNPJ</th>

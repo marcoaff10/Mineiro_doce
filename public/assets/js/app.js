@@ -623,64 +623,6 @@ $(document).ready(function () {
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-    function converterMesAno(data, ano) {
-        var month = [];
-        for (let i = 0; i < data.length; i++) {
-            switch (data[i]) {
-                case 1:
-                    month.push("Janeiro" + "/" + ano[i]);
-                    break;
-                case 2:
-                    month.push("Fevereiro" + "/" + ano[i]);
-                    break;
-                case 3:
-                    month.push("Março" + "/" + ano[i]);
-                    break;
-                case 4:
-                    month.push("Abril" + "/" + ano[i]);
-                    break;
-                case 5:
-                    month.push("Maio" + "/" + ano[i]);
-                    break;
-                case 6:
-                    month.push("Junho" + "/" + ano[i]);
-                    break;
-                case 7:
-                    month.push("Julho" + "/" + ano[i]);
-                    break;
-                case 8:
-                    month.push("Agosto" + "/" + ano[i]);
-                    break;
-                case 9:
-                    month.push("Setembro" + "/" + ano[i]);
-                    break;
-                case 10:
-                    month.push("Outubro" + "/" + ano[i]);
-                    break;
-                case 11:
-                    month.push("Novembro" + "/" + ano[i]);
-                    break;
-                case 12:
-                    month.push("Dezembro" + "/" + ano[i]);
-                    break;
-                default:
-                    month.push("Mês inválido." + "/" + ano[i]);
-            }
-
-        }
-        return month;
-
-    }
 });
 
 

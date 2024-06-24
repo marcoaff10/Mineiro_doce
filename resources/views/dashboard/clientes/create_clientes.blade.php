@@ -137,8 +137,8 @@
                 </div>
 
                 <div class="mb-3 text-center ">
-                    <a href="{{ route('show.clientes') }}" class="btn btn-secondary me-2">Cancelar</a>
-                    <button type="submit" class="btn btn-primary ms-2">Cadastrar</button>
+                    <a href="{{ route('show.clientes') }}" class="btn btnSecondary me-2">Cancelar</a>
+                    <button type="submit" class="btn btnPrimary ms-2">Cadastrar</button>
                 </div>
 
                 @if (session('error_create'))

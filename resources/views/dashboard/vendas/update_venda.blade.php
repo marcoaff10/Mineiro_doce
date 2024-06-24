@@ -66,8 +66,8 @@
                     @endif
 
                     <div class="mt-3 text-center ">
-                        <a href="{{ route('detalhes.venda', $venda[0]->id) }}" class="btn btn-secondary mx-2">Cancelar</a>
-                        <button type="submit" class="btn btn-primary mx-2" id="editarVenda">Editar</button>
+                        <a href="{{ route('detalhes.venda', $venda[0]->id) }}" class="btn btnSecondary mx-2">Cancelar</a>
+                        <button type="submit" class="btn btnPrimary mx-2" id="editarVenda">Editar</button>
                     </div>
 
                     @if (session('error_create'))

@@ -19,7 +19,7 @@
     </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-success">
+        <button type="submit" class="btn btnSuccess">
             Entrar
         </button>
     </div>

@@ -14,7 +14,7 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-3 text-info text-center">{{ $cliente->cliente }}</strong>
+                <strong class="fs-3 titleGraph text-center">{{ $cliente->cliente }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -52,11 +52,11 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                        <button href="" class="btn btnDanger" data-bs-target="#confirmDelete"
                             data-bs-toggle="modal" @if (count($vendaCliente) > 0) disabled @endif>
                             Inativar
                         </button>
-                        <a href="{{ route('update.clientes', ['id' => $cliente->id]) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('update.clientes', ['id' => $cliente->id]) }}" class="btn btnPrimary">Editar</a>
 
                     </div>
 
@@ -90,7 +90,7 @@
                     Deseja inativar o cliente <strong>{{ $cliente->cliente }}</strong> ?
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('inativar.cliente', $cliente->id) }}" class="btn btn-danger">
+                    <a href="{{ route('inativar.cliente', $cliente->id) }}" class="btn btnDanger">
                         confirmar
                     </a>
                     </form>

@@ -14,12 +14,12 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-5 text-info text-center"> </strong>
+                <strong class="fs-5 titleGraph text-center"> </strong>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-6 col-md-12 col-sm-12 mb-4">
-                        <h2 class="fs-3 text-info mb-3">{{ $compra[0]->compra }}</h2>
+                        <h2 class="fs-3 titleGraph mb-3">{{ $compra[0]->compra }}</h2>
                         <h2 class="mb-3 fw-bold">Informações:</h2>
                         <ul>
                             @foreach ($compra as $item)
@@ -49,7 +49,7 @@
                                     <input type="hidden" name="compra" value="{{ $compra[0]->id }}">
                                     <input type="text" name="frete" class="form-control form-control-sm mt-4 mb-2"
                                         placeholder="Frete" required>
-                                    <button type="submit" class="btn btn-success align-middle"
+                                    <button type="submit" class="btn btnSuccess align-middle"
                                         style="max-height: 35px">
                                         Salvar
                                     </button>
@@ -87,9 +87,9 @@
 
                 @if ($compra[0]->ativa == 1)
                     <div class="col-12 text-center mt-4">
-                        <a href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                        <a href="" class="btn btnDanger" data-bs-target="#confirmDelete"
                             data-bs-toggle="modal">Inativar</a>
-                        <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('update.compra', $compra[0]->id) }}" class="btn btnPrimary">Editar</a>
                         @if (session('error_disable'))
                             <div class="text-danger alert-danger mt-2 text-center">
                                 {{ session()->get('error_disable') }}
@@ -123,7 +123,7 @@
                     @method('PUT')
                     @csrf
                     <input type="hidden" name="id" value="{{ $compra[0]->id }}">
-                    <button type="submit" class="btn btn-danger">
+                    <button type="submit" class="btn btnDanger">
                         confirmar
                     </button>
                 </form>

@@ -17,7 +17,7 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-3 text-info text-center">{{ $produto->produto }}</strong>
+                <strong class="fs-3 titleGraph text-center">{{ $produto->produto }}</strong>
             </div>
             <div class="card-body">
                 <div class="row justify-content-center">
@@ -89,21 +89,22 @@
                         </div>
                     </div>
 
-                    <div class="row justify-content-start align-items-center py-4">
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            [Gráfico]
+                    <div class="col-12 text-center my-5">
 
-                        </div>
-                    </div>
-
-                    <div class="col-12 text-center mt-5">
-
-                        <button class="btn btn-danger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
-                            @if ($produto->estoque > 0 && count($inativarVenda) > 0 && count($inativarCompra) > 0) disabled @endif>
+                        <button class="btn btnDanger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
+                            @if ($produto->estoque > 0 && count($inativarVenda) > 0 || $produto->estoque > 0 && count($inativarCompra) > 0) disabled @endif>
                             Inativar
                         </button>
-                        <a href="{{ route('update.produtos', $produto->id) }}" class="btn btn-primary">Editar</a>
+                        <a href="{{ route('update.produtos', $produto->id) }}" class="btn btnPrimary">Editar</a>
 
+                    </div>
+
+                    <div class="row justify-content-center align-items-center py-4">
+                        <div class="col-sm-12 col-md-8 col-lg-8 text-center">
+                            
+                            <x-analise-produtos :id="$produto->id" />
+
+                        </div>
                     </div>
 
                     @if (count($entradas->items()) > 0)
@@ -135,7 +136,7 @@
                     Deseja inativar o produto <strong></strong> ?
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('inativar.produto', $produto->id)}}" class="btn btn-danger">
+                    <a href="{{ route('inativar.produto', $produto->id)}}" class="btn btnDanger">
                         confirmar
                     </a>
                 </div>

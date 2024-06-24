@@ -35,14 +35,14 @@
                 @endif
 
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                    <a href=" {{ route('create.clientes') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.clientes') }} " class="btn btnPrimary w-100">
                         Cadastrar Cliente
                         <i class="bi bi-plus-circle ms-1"></i></a>
                 </div>
 
                 @if (count($inativados) > 0)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <a href=" {{ route('clientes.inativados') }} " class="btn btn-secondary w-100">
+                        <a href=" {{ route('clientes.inativados') }} " class="btn btnSecondary w-100">
                             Clientes Inativados
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>

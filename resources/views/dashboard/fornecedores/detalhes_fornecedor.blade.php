@@ -14,7 +14,7 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-3 text-info text-center">{{ $fornecedor->fornecedor }}</strong>
+                <strong class="fs-3 titleGraph text-center">{{ $fornecedor->fornecedor }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -51,12 +51,12 @@
                     </div>
 
                     <div class="col-12 text-center mt-4">
-                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
+                        <button href="" class="btn btnDanger" data-bs-target="#confirmDelete" data-bs-toggle="modal"
                             @if (count($compraFornecedor) > 0) disabled @endif>
                             Inativar
                         </button>
                         <a href="{{ route('update.fornecedores', ['id' => $fornecedor->id]) }}"
-                            class="btn btn-primary">Editar</a>
+                            class="btn btnPrimary">Editar</a>
                     </div>
 
                 </div>
@@ -78,7 +78,7 @@
                     Deseja inativar o fornecedor <strong>{{ $fornecedor->fornecedor }}</strong> ?
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('inativar.fornecedor', $fornecedor->id) }}" class="btn btn-danger">
+                    <a href="{{ route('inativar.fornecedor', $fornecedor->id) }}" class="btn btnDanger">
                         confirmar
                     </a>
                 </div>

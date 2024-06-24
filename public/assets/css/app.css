@@ -1,8 +1,74 @@
-table.colorTbales {
+/* Estilização das tabelas */
+table.colorTables {
     background-color: rgba(201, 208, 209, 0.2);
 }
 
 div.overflowTable {
-    max-width: 100%; 
+    max-width: 100%;
     overflow-x: auto;
+}
+
+/* Personalização dos botões */
+.btnPrimary {
+    color: rgb(235, 238, 238);
+    background-image: -webkit-linear-gradient(95deg, #64c7fd 20%, #1393e8 60%);
+}
+
+.btnPrimary:hover {
+    transition: .4s;
+    color: rgb(181, 184, 184);
+}
+
+/* ===========================================================================================*/
+
+.btnSecondary {
+    color: rgb(235, 238, 238);
+    background-image: -webkit-linear-gradient(95deg, #a8a5a5 20%, #5c5c5c 60%);
+}
+
+.btnSecondary:hover {
+    transition: .4s;
+    color: rgb(181, 184, 184);
+}
+
+/* ===========================================================================================*/
+
+.btnSuccess {
+    color: rgb(235, 238, 238);
+    background-image: -webkit-linear-gradient(95deg, #69e075 20%, #058512 60%);
+}
+
+.btnSuccess:hover {
+    transition: .4s;
+    color: rgb(181, 184, 184);
+}
+
+/* ===========================================================================================*/
+
+.btnDanger {
+    color: rgb(235, 238, 238);
+    background-image: -webkit-linear-gradient(95deg, #e8756f 20%, #ed0e0e 60%);
+}
+
+.btnDanger:hover {
+    transition: .4s;
+    color: rgb(181, 184, 184);
+}
+
+/* ===========================================================================================*/
+
+.btnInfo {
+    color: rgb(235, 238, 238);
+    background-image: -webkit-linear-gradient(95deg, #48c2c2 20%, #027878 60%);
+
+}
+
+.btnInfo:hover {
+    transition: .4s;
+    color: rgb(181, 184, 184);
+}
+
+
+.titleGraph{
+    color: #48c2c2;
 }

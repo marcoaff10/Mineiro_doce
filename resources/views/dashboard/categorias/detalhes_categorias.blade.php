@@ -16,7 +16,7 @@
         </div>
         <div class="col card p-3">
             <div class="row p-2">
-                <strong class="fs-3 text-info text-center">{{ $categoria->categoria }}</strong>
+                <strong class="fs-3 titleGraph text-center">{{ $categoria->categoria }}</strong>
             </div>
             <div class="card-body">
                 <div class="row">
@@ -30,7 +30,7 @@
 
                     <div class="col-12 text-center mt-4">
 
-                        <button href="" class="btn btn-danger" data-bs-target="#confirmDelete"
+                        <button href="" class="btn btnDanger" data-bs-target="#confirmDelete"
                             data-bs-toggle="modal"
                             @if (count($produtosAtivos) > 0)
                                 disabled
@@ -38,7 +38,7 @@
                             Inativar
                         </button>
                         <a href="{{ route('update.categorias', ['id' => $categoria->id]) }}"
-                            class="btn btn-primary">
+                            class="btn btnPrimary">
                             Editar
                         </a>
 
@@ -66,7 +66,7 @@
                         Deseja inativar a categoria <strong>{{ $categoria->categoria }}</strong> ?
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ route('inativar.categorias', $categoria->id) }}" class="btn btn-danger">
+                        <a href="{{ route('inativar.categorias', $categoria->id) }}" class="btn btnDanger">
                             confirmar
                         </a>
                         </form>

@@ -33,7 +33,7 @@
                 @endif
 
                 <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                    <a href=" {{ route('create.fornecedores') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.fornecedores') }} " class="btn btnPrimary w-100">
                         Cadastrar Fornecedor
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
@@ -41,7 +41,7 @@
 
                 @if (count($inativados) > 0)
                     <div class="col-sm-12 col-md-6 col-lg-4 mb-3">
-                        <a href=" {{ route('fornecedores.inativados') }} " class="btn btn-secondary w-100">
+                        <a href=" {{ route('fornecedores.inativados') }} " class="btn btnSecondary w-100">
                             Fornecedores Inativados
                             <i class="bi bi-x-circle ms-1"></i>
                         </a>

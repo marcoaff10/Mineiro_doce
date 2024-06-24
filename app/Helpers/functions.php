@@ -143,6 +143,7 @@ function preco($preco)
 //=========================================================================================================
 function arrayToObject($items)
 {
+
     // transforma um array em um array de objeto
     $response = [];
     foreach ($items as $item) {

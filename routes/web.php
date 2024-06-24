@@ -83,6 +83,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/create_produtos', [Produtos::class, 'create'])->name('create.produtos');
     Route::post('/store_produtos', [Produtos::class, 'store'])->name('store.produtos');
     Route::get('/movimentacao_produtos/{id}', [Produtos::class, 'movimentacao'])->name('movimentacao.produtos');
+    Route::get('/analise_produto/{id}', [Produtos::class, 'analise_produto'])->name('analise.produtos');
+    Route::get('/analise_produto_filtro', [Produtos::class, 'analise_produto_filtro'])->name('analise.produtos.filtro');
     Route::get('/update_produtos/{id}', [Produtos::class, 'update'])->name('update.produtos');
     Route::put('/update_submit_produtos', [Produtos::class, 'update_submit'])->name('update.submit.produtos');
     Route::get('/inativar_produto/{id}', [Produtos::class, 'inativar_produto'])->name('inativar.produto');

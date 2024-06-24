@@ -32,7 +32,7 @@
     </div>
 
     <div class="mb-3">
-        <button type="submit" class="btn btn-danger" id="baixar">
+        <button type="submit" class="btn btnDanger" id="baixar">
             Baixar
         </button>
     </div>

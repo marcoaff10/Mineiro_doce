@@ -11,7 +11,7 @@
         </div>
 
         <div class="col-sm-12 col-md-2 col-lg-2 mb-3 pt-4">
-            <button id="lucroFilter" class="btn btn-info text-white fw-bold">Filtrar</button>
+            <button id="lucroFilter" class="btn btnInfo text-white fw-bold">Filtrar</button>
         </div>
     </div>
 </div>

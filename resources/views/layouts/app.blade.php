@@ -48,6 +48,10 @@
         <script src="{{ asset('assets/js/vendas.js') }}"></script>
     @endif
 
+    @if (request()->routeIs('movimentacao.produtos'))
+        <script src="{{ asset('assets/js/analiseProdutos.js') }}"></script>
+    @endif
+
 
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])

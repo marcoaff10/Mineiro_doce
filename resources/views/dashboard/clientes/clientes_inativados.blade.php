@@ -34,7 +34,7 @@
                 @endif
 
                 <div class="col-sm-12 col-md-6 col-lg-6 mb-3">
-                    <a href=" {{ route('show.clientes') }} " class="btn btn-success w-100">
+                    <a href=" {{ route('show.clientes') }} " class="btn btnSuccess w-100">
                         Clientes Ativos
                         <i class="bi bi-check-circle ms-1"></i>
                     </a>

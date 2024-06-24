@@ -32,14 +32,14 @@
 
             <div class="row p-2 justify-content-between p-1">
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
-                    <a href=" {{ route('create.compras') }} " class="btn btn-primary w-100">
+                    <a href=" {{ route('create.compras') }} " class="btn btnPrimary w-100">
                         Comprar
                         <i class="bi bi-plus-circle ms-1"></i>
                     </a>
                 </div>
 
                 <div class="col-sm-12 col-md-4 col-lg-6 mb-3">
-                    <a href=" {{ route('show.compras') }} " class="btn btn-success w-100">
+                    <a href=" {{ route('show.compras') }} " class="btn btnSuccess w-100">
                         Compras Ativas
                         <i class="bi bi-check-circle ms-1"></i>
                     </a>
@@ -48,7 +48,7 @@
 
             @if (count($compras->items()) > 0)
                 <div class="w-100 col-12 overflowTable">
-                    <table class="colorTbales table-striped table table table-hover table-responsive">
+                    <table class="colorTables table-striped table table table-hover table-responsive">
                         <thead>
                             <th scope="col" class="align-middle">Compra</th>
                             <th scope="col" class="align-middle">Fornecedor</th>
