@@ -4,6 +4,6 @@
 
 <div class="row">
 
-    <canvas id="lucroChart" style="height: 300px; width: 100%"></canvas>
+    <canvas id="lucroChart" style="height: 300px; width: 100%;"></canvas>
 
 </div>

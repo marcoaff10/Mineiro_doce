@@ -63,6 +63,19 @@ $(document).ready(() => {
                     y: {
                         beginAtZero: true
                     }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
+                    }
                 }
             }
         });
@@ -162,6 +175,19 @@ $(document).ready(() => {
                     y: {
                         beginAtZero: true
                     }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
+                    }
                 }
             }
         });
@@ -226,7 +252,7 @@ $(document).ready(() => {
 
         } else if (data.tipo == 'compra' && data.por == 'preco') {
             return `Valores de compras de ${data.de} até ${data.ate}.`
-            
+
         } else if (data.tipo == 'compra' && data.por == 'quantidade') {
             return `Quantidade de compras de ${data.de} até ${data.ate}.`
         }

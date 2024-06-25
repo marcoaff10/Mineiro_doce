@@ -52,6 +52,19 @@ $(document).ready(function () {
                             y: {
                                 beginAtZero: true
                             }
+                        },
+                        animation: {
+                            onComplete: () => {
+                                delayed: true
+                            },
+                            delay: (context) => {
+                                let delay = 0;
+
+                                if (context.type === 'data' && context.mode === 'default') {
+                                    delay = context.dataIndex * 300;
+                                }
+                                return delay;
+                            }
                         }
                     }
                 });
@@ -110,6 +123,19 @@ $(document).ready(function () {
                             scales: {
                                 y: {
                                     beginAtZero: true
+                                }
+                            },
+                            animation: {
+                                onComplete: () => {
+                                    delayed: true
+                                },
+                                delay: (context) => {
+                                    let delay = 0;
+
+                                    if (context.type === 'data' && context.mode === 'default') {
+                                        delay = context.dataIndex * 300;
+                                    }
+                                    return delay;
                                 }
                             }
                         }
@@ -196,6 +222,19 @@ $(document).ready(function () {
 
                     y: {
                         stacked: true
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
                     }
                 }
             }
@@ -284,6 +323,19 @@ $(document).ready(function () {
                     y: {
                         beginAtZero: true
                     }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
+                    }
                 }
             }
         });
@@ -360,6 +412,19 @@ $(document).ready(function () {
 
                     y: {
                         stacked: true
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
                     }
                 }
             }
@@ -452,6 +517,19 @@ $(document).ready(function () {
                     y: {
                         stacked: true
                     }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
+                    }
                 }
             }
         });
@@ -526,6 +604,19 @@ $(document).ready(function () {
 
                     y: {
                         stacked: true
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
                     }
                 }
             }
@@ -618,6 +709,19 @@ $(document).ready(function () {
 
                     y: {
                         stacked: true
+                    }
+                },
+                animation: {
+                    onComplete: () => {
+                        delayed: true
+                    },
+                    delay: (context) => {
+                        let delay = 0;
+
+                        if (context.type === 'data' && context.mode === 'default') {
+                            delay = context.dataIndex * 300;
+                        }
+                        return delay;
                     }
                 }
             }
