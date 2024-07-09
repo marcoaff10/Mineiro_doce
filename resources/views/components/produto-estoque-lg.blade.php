@@ -1,5 +1,5 @@
 <div class="w-100 col-12 overflowTable">
-    <table class="colorTables colorTables table table table-hover table-responsive ">
+    <table class="colorTables table table-hover table-responsive ">
         <thead>
             <th scope="col" class="align-middle">Produto</th>
             <th scope="col" class="align-middle">Categoria</th>
@@ -51,5 +51,5 @@
             @endforeach
         </tbody>
     </table>
-    <x-pagination :paginator="$produtos" :appends="$filters" />
 </div>
+<x-pagination :paginator="$produtos" :appends="$filters" />
